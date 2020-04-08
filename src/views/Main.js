@@ -22,7 +22,7 @@ class Main extends Component {
 
         return (
             state.isLogedIn ?
-                <Container>
+                <React.Fragment>
                     <Menu />
                     <Router>
                         <Dashboard default />
@@ -31,7 +31,7 @@ class Main extends Component {
                         <InventoryTab path="/warehouse" />
                         <Tools path="/tools" />
                     </Router>
-                </Container> : <Login />
+                </React.Fragment> : <Login />
         )
     }
 

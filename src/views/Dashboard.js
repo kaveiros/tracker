@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import LineChart from "@rsuite/charts/lib/charts/LineChart";
 import PieChart from "@rsuite/charts/lib/charts/PieChart"
+import {backgroundStyle} from '../style/Style'
+import { Container } from 'rsuite';
 
 const colors = [
     '#34c3ff',
@@ -21,10 +23,10 @@ export default class Dashboard extends Component {
 
     render() {
         return (
-            <React.Fragment>
+            <Container style={backgroundStyle}>
                 <LineChart name="Βλάβες βράδυ" data={data} />
                 <PieChart name="Κατηγορίες έργων" colors={colors} data={data}/>
-            </React.Fragment>
+                </Container>
 
         )
     }

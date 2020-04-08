@@ -1,17 +1,65 @@
 import React, { Component } from 'react'
 import {Container, Header, Navbar, Content, FlexboxGrid, Panel, ButtonToolbar, Button,
 Form, FormGroup, ControlLabel, FormControl, Footer} from 'rsuite'
+import {backgroundStyle} from '../style/Style'
+import * as LoginActions from '../actions/LoginActions'
+import {connect} from 'react-redux'
 
-import backgd from '../img/b.jpg'
 
+class Login extends Component{
 
-export default class Login extends Component{
+  state = {
+    username : "",
+    password : ""
+  }
+// var username = ""
+// var pass = ""
 
+//   constructor(props) {
+//     super(props);
+//     this.wrapper = React.createRef();
+
+//   }
+  
+//   componentDidMount() {
+//     this.props.onLoadAuthState()
+//   }
+
+  handleCode = (e) => {
+  
+    //console.log(e)
+    
+    this.setState({username : e})
+  
+  }
+
+  handlePassword = (e) => {
+    console.log(e.name)
+    this.setState({password : e})
+    //pass += e 
+    
+  }
+
+  submitForm = (e) => {
+    //e.preventDefault
+    // if (this.state.pass == "admin" && this.state.username === "admin") {
+    //   this.props.onLogin()
+    // }
+    // else {
+    //   username= "",
+    //   pass= ""
+
+    // }
+    // console.log(e)
+    // console.log("submit")
+    // console.log(this.state)
+    this.props.onLogin(this.state)
+ }
     render(){
+
         return(
             
-            <Container style={{backgroundImage: 'url('+backgd+')', backgroundSize:'cover',
-             minHeight:'100vh'}}>
+            <Container ref={this.wrapper} style={backgroundStyle}>
               <Header>
                 <Navbar>
                   <Navbar.Header>
@@ -21,21 +69,21 @@ export default class Login extends Component{
               </Header>
               <Content style={{paddingTop:'20vh'}}>
                 <FlexboxGrid justify="center">
-                  <FlexboxGrid.Item colspan={12}>
-                    <Panel header={<h3>Login</h3>} bodyFill>
-                      <Form fluid>
+                  <FlexboxGrid.Item colspan={4}>
+                    <Panel header={<h3>Σύνδεση</h3>} bodyFill>
+                      <Form fluid onSubmit={(e) => this.submitForm(e)}>
                         <FormGroup>
-                          <ControlLabel>Username or email address</ControlLabel>
-                          <FormControl name="name" />
+                          <ControlLabel>Όνομα χρήστη ή email</ControlLabel>
+                          <FormControl name="name" onChange={(e)=>{this.handlePassword(e)}} />
                         </FormGroup>
                         <FormGroup>
-                          <ControlLabel>Password</ControlLabel>
-                          <FormControl name="password" type="password" />
+                          <ControlLabel>κωδικός</ControlLabel>
+                          <FormControl name="password" type="password" onChange={(e)=>{this.handleCode(e)}} />
                         </FormGroup>
                         <FormGroup>
                           <ButtonToolbar>
-                            <Button appearance="primary">Sign in</Button>
-                            <Button appearance="link">Forgot password?</Button>
+                            <Button id="submit" appearance="primary" type="submit" >Συνδεθείτε</Button>
+                            <Button id="forgot" appearance="link">Ξεχασατε τον κωδικό σας;</Button>
                           </ButtonToolbar>
                         </FormGroup>
                       </Form>
@@ -48,3 +96,18 @@ export default class Login extends Component{
         )
     }
 }
+
+const mapLoginStateToProps = state => {
+  return{
+    isLogedIn : state.isLogedIn
+  }
+}
+
+const mapDispatchStateToProps = dispatch => {
+  return{
+    onLogin: (user) => dispatch(LoginActions.isLoggedIn(user)),
+    onLoadAuthState: () => dispatch(LoginActions.fetchAthState())
+  }
+}
+
+export default connect(null, mapDispatchStateToProps) (Login)

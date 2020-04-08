@@ -6,13 +6,15 @@ import * as serviceWorker from './serviceWorker';
 import { Provider } from 'react-redux'
 import { createStore } from 'redux'
 import AppReducer from './reducers/AppReducer'
+import AuthReducer from './reducers/AuthReducer'
 import 'rsuite/lib/styles/index.less';
+import thunk from 'redux-thunk'
 
 import { applyMiddleware, compose } from 'redux';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-const store = createStore(AppReducer, composeEnhancers())
+const store = createStore(AuthReducer, composeEnhancers(applyMiddleware(thunk)))
 
 ReactDOM.render(
   <Provider store={store}>
