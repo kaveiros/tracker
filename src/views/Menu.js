@@ -1,43 +1,26 @@
 import React, { Component } from 'react'
-import { Navbar, Nav, Icon, Dropdown } from 'rsuite';
-import { Router, Link } from '@reach/router'
-import * as APPACTIONS from '../actionTypes/AppActionTypes'
-import ReactDOM from "react-dom";
+import {Avatar, Navbar, Nav, Icon, Dropdown } from 'rsuite';
+import * as LoginActions from '../actions/LoginActions'
+import {connect} from 'react-redux'
 
 
 
-export default class Menu extends Component {
+class Menu extends Component {
 
-  // constructor(){
-  //     super()
-  // }
-
-  componentDidMount = () => {
-    // const node = ReactDOM.findDOMNode(this);
+  handle = () => {
+    alert("Clicked")
   }
 
-  // toggleDrawer = () => {
-
-  //     var isOpen = this.props.isOpen
-  //     if (!isOpen) {
-
-  //         this.props.onOpenDrawer()
-  //     }
-  //     else {
-
-  //         this.props.onCloseDrawer()
-  //     }
-
-  // }
-
+  logOff = () => {
+    this.props.onLogOff()
+  }
 
   render() {
-    // const classes =  this.props.useStyles()
     return (
       <Navbar>
         <Navbar.Header>
           <Icon icon="tasks" size="2x" />
-          <a href="/" className="navbar-brand logo">Εργολήπτης</a>
+          {/* <a href="/" className="navbar-brand logo">Εργολήπτης</a> */}
         </Navbar.Header>
         <Navbar.Body>
           <Nav>
@@ -52,11 +35,18 @@ export default class Menu extends Component {
             <Nav.Item href="/tools" icon={<Icon icon="file-text" />}>Καρτέλα εξοπλισμού</Nav.Item>
             <Nav.Item href="/warehouse" icon={<Icon icon="file-text" />}>Καρτέλα αποθήκης</Nav.Item>
             <Nav.Item href="#" icon={<Icon icon="file-text" />}>Παρατηρήσεις</Nav.Item>
+            <Nav.Item href="/personelTable" icon={<Icon icon="file-text" />}>Προσωπικο</Nav.Item>
+
 
 
           </Nav>
-          <Nav pullRight>
-            <Nav.Item icon={<Icon icon="cog" />} >Ρυθμίσεις</Nav.Item>
+          <Nav pullRight> 
+          <Avatar size="lg" onClick={this.handle}><Icon icon="cog"/></Avatar>
+          <Nav.Item icon={<Icon icon="cog" />} onClick={(e)=>this.handle}>Ρυθμίσεις</Nav.Item>
+            {/* <Avatar></Avatar>
+            <Nav.Item icon={<Icon icon="cog" />} onSelect={(e)=>this.handleSelect(e)}>Ρυθμίσεις</Nav.Item>
+            {/* <Nav.Item href="/logout" icon={ <Icon icon="sign-out"/>}>Έξοδος</Nav.Item> */}
+            {/*<Nav.Item><Button size="lg" appearance="link" onClick={this.logOff}><Icon icon="sign-out"/></Button></Nav.Item> */}
           </Nav>
         </Navbar.Body>
       </Navbar>
@@ -65,20 +55,10 @@ export default class Menu extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    isOpen: state.drawrerOpen
-  }
-}
-
 const mapDispatchToProps = dispatch => {
-
   return {
-    // onFetchState: () => dispatch(APPACTIONS.fetchDrawerState()),
-    // onOpenDrawer: () => dispatch(APPACTIONS.openDrawer()),
-    //onCloseDrawer: () => dispatch(APPACTIONS.closeDrawer())
+    onLogOff: () => dispatch(LoginActions.destroyAuthentication())
   }
-
 }
 
-// export default connect(mapStateToProps, mapDispatchToProps)(Menu)
+export default connect(null, mapDispatchToProps)(Menu)

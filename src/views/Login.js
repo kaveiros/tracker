@@ -12,49 +12,21 @@ class Login extends Component{
     username : "",
     password : ""
   }
-// var username = ""
-// var pass = ""
 
-//   constructor(props) {
-//     super(props);
-//     this.wrapper = React.createRef();
-
-//   }
-  
-//   componentDidMount() {
-//     this.props.onLoadAuthState()
-//   }
 
   handleCode = (e) => {
-  
-    //console.log(e)
-    
     this.setState({username : e})
-  
   }
 
   handlePassword = (e) => {
     console.log(e.name)
-    this.setState({password : e})
-    //pass += e 
-    
+    this.setState({password : e})    
   }
 
   submitForm = (e) => {
-    //e.preventDefault
-    // if (this.state.pass == "admin" && this.state.username === "admin") {
-    //   this.props.onLogin()
-    // }
-    // else {
-    //   username= "",
-    //   pass= ""
-
-    // }
-    // console.log(e)
-    // console.log("submit")
-    // console.log(this.state)
     this.props.onLogin(this.state)
  }
+ 
     render(){
 
         return(
@@ -99,14 +71,14 @@ class Login extends Component{
 
 const mapLoginStateToProps = state => {
   return{
-    isLogedIn : state.isLogedIn
+    isLoggedIn : state.isLoggedIn
   }
 }
 
 const mapDispatchStateToProps = dispatch => {
   return{
-    onLogin: (user) => dispatch(LoginActions.isLoggedIn(user)),
-    onLoadAuthState: () => dispatch(LoginActions.fetchAthState())
+    onLogin: (user) => dispatch(LoginActions.authenticate(user)),
+    onLoadAuthState: () => dispatch(LoginActions.fetchAuthState())
   }
 }
 

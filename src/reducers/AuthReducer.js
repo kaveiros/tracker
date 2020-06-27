@@ -2,7 +2,7 @@ import * as ACTION from '../actionTypes/LoginActionTypes'
 
 const authState = {
 
-    isLogedIn:false
+    isLoggedIn:false
 }
 
 
@@ -12,13 +12,13 @@ const AuthReducer = (state = authState , action) =>{
         case ACTION.LOGIN:{
             return {
                 ...authState,
-                isLogedIn: true
+                isLoggedIn: true
             }
         }
         case ACTION.LOGOUT:{
             return{
                 ...authState,
-                isLogedIn: false
+                isLoggedIn: false
             }
         }
         case ACTION.LOGSTATE:{

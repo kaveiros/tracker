@@ -3,6 +3,7 @@ import LineChart from "@rsuite/charts/lib/charts/LineChart";
 import PieChart from "@rsuite/charts/lib/charts/PieChart"
 import {backgroundStyle} from '../style/Style'
 import { Container } from 'rsuite';
+import PersonelTable from './PersonelTable';
 
 const colors = [
     '#34c3ff',
@@ -26,7 +27,7 @@ export default class Dashboard extends Component {
             <Container style={backgroundStyle}>
                 <LineChart name="Βλάβες βράδυ" data={data} />
                 <PieChart name="Κατηγορίες έργων" colors={colors} data={data}/>
-                </Container>
+            </Container>
 
         )
     }

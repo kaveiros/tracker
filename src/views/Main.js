@@ -7,21 +7,24 @@ import InventoryTab from './WarehouseTab'
 import Dashboard from './Dashboard'
 import Tools from './Tools'
 import Login from './Login'
-import { Container } from 'rsuite'
+import LogoutPanel from './LogoutPanel'
+import {connect} from 'react-redux'
+import * as LoginActions from '../actions/LoginActions'
+import PersonelTable from './PersonelTable'
 
-const state = {
-    isLogedIn: false
-}
+
 
 
 class Main extends Component {
 
+    componentDidMount(){
+        this.props.onFetchAuthState()
+    }
+
 
     render() {
-
-
         return (
-            state.isLogedIn ?
+            this.props.isAuthenticated ?
                 <React.Fragment>
                     <Menu />
                     <Router>
@@ -30,11 +33,25 @@ class Main extends Component {
                         <EmployeeTab path="/employeetab" />
                         <InventoryTab path="/warehouse" />
                         <Tools path="/tools" />
+                        <LogoutPanel path="/logout"/>
+                        <PersonelTable path="/personelTable"/>
                     </Router>
-                </React.Fragment> : <Login />
+                </React.Fragment> : <Login path="/login"/>
         )
     }
 
 }
 
-export default Main
+const mapDispatchToProps = dispatch => {
+    return {
+        onFetchAuthState: () => dispatch(LoginActions.getAuthenticationStatus())
+    }
+}
+
+const mapStateToProps = state => {
+    return {
+        isAuthenticated: state.isLoggedIn
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps) (Main)

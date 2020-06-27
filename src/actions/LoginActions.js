@@ -1,14 +1,14 @@
 import * as LOGINACTIONS from '../actionTypes/LoginActionTypes'
 
-export const isLoggedIn = (user) => {
+export const authenticate = (user) => {
 
     return (dispatch) => {
         
         console.log("THUNK!!")
         console.log(user)
-        if (user.username=="admin" && user.password=="admin") {
+        if (user.username==="admin" && user.password==="admin") {
             console.log("loggedin")
-            dispatch(login(user))
+            dispatch(login())
             localStorage.setItem("Tracker", "sdasdasdsadadasdadadaadsd")
         }
         else {
@@ -18,7 +18,28 @@ export const isLoggedIn = (user) => {
     }
 }
 
-export const login = (user) =>{
+export const getAuthenticationStatus = () => {
+    
+    return (dispatch) => {
+       const hasCookie =  localStorage.getItem('Tracker')
+       if(hasCookie != null && hasCookie === "sdasdasdsadadasdadadaadsd") {
+           dispatch(login())
+       }
+    }
+}
+
+export const destroyAuthentication = () => {
+    return (dispatch) => {
+        const hasCookie =  localStorage.getItem('Tracker')
+        if(hasCookie != null && hasCookie === "sdasdasdsadadasdadadaadsd") {
+            localStorage.removeItem('Tracker')
+            dispatch(logout())
+        }
+     }
+}
+
+
+export const login = () =>{
     
     return {
         type: LOGINACTIONS.LOGIN
