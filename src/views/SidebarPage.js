@@ -1,5 +1,5 @@
-import React, {Component} from 'react'
-import {Container, Content, Nav, Navbar,Sidenav,Sidebar, Header, Icon, Dropdown, Drawer} from 'rsuite'
+import React, { useState} from 'react'
+import {Nav, Navbar,Sidenav,Sidebar, Icon, Dropdown, } from 'rsuite'
 
 
 const headerStyles = {
@@ -22,21 +22,7 @@ const headerStyles = {
   const NavToggle = ({ expand, onChange }) => {
     return (
       <Navbar appearance="subtle" className="nav-toggle">
-        <Navbar.Body>
-          <Nav>
-            <Dropdown
-              placement="topStart"
-              trigger="click"
-              renderTitle={children => {
-                return <Icon style={iconStyles} icon="cog" />;
-              }}
-            >
-              <Dropdown.Item>Help</Dropdown.Item>
-              <Dropdown.Item>Settings</Dropdown.Item>
-              <Dropdown.Item>Sign out</Dropdown.Item>
-            </Dropdown>
-          </Nav>
-  
+        <Navbar.Body>  
           <Nav pullRight>
             <Nav.Item onClick={onChange} style={{ width: 56, textAlign: 'center' }}>
               <Icon icon={expand ? 'angle-left' : 'angle-right'} />
@@ -47,21 +33,17 @@ const headerStyles = {
     );
   };
   
-  class SidabarPage extends Component {
-    constructor(props) {
-      super(props);
-      this.state = {
-        expand: true
-      };
-      this.handleToggle = this.handleToggle.bind(this);
+  const SidabarPage = () =>  {
+
+    const [expand, setExpand]  = useState(true)
+
+    const handleToggle = () =>  {
+      setExpand(!expand)
     }
-    handleToggle() {
-      this.setState({
-        expand: !this.state.expand
-      });
-    }
-    render() {
-      const { expand } = this.state;
+
+
+
+    
       return (
             <Sidenav expanded={expand}
             defaultOpenKeys={['3']}
@@ -69,6 +51,7 @@ const headerStyles = {
               width={expand ? 260 : 56}
               collapsible
             >
+              <Sidebar width={expand ? 260 : 56}>
               <Sidenav.Header>
                 <div style={headerStyles}>
                   <Icon icon="logo-analytics" size="lg" style={{ verticalAlign: 0 }} />
@@ -79,7 +62,7 @@ const headerStyles = {
                 <Sidenav.Body>
                   <Nav>
                     <Nav.Item eventKey="1" active icon={<Icon icon="dashboard" />}>
-                      Dashboard
+                      Αρχική
                     </Nav.Item>
                     <Nav.Item eventKey="2" icon={<Icon icon="group" />}>
                       User Group
@@ -112,10 +95,11 @@ const headerStyles = {
                     </Dropdown>
                   </Nav>
                 </Sidenav.Body>
-              <NavToggle expand={expand} onChange={this.handleToggle} />
+              <NavToggle expand={expand} onChange={handleToggle} />
+              </Sidebar>
             </Sidenav>
       );
-    }
+    
   }
   
 export default SidabarPage

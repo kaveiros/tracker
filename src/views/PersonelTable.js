@@ -3,6 +3,7 @@ import { Table, Column, HeaderCell, Cell } from 'rsuite-table';
 import 'rsuite-table/dist/css/rsuite-table.css'
 import axios from 'axios';
 import TablePagination from 'rsuite/lib/Table/TablePagination';
+import {baseUrl} from '../settings/ApiSettings'
 
 const PersonelTable = () => {
 
@@ -26,7 +27,7 @@ const PersonelTable = () => {
 
   useEffect(() => {
     const fetchPesonel = async () => {
-      axios.get("http://localhost:4000/personel/all/" + currentPage)
+      axios.get(baseUrl + "/personel/all/" + currentPage)
         .then(response => {
           const data = response.data
           setPersons(data.persons)
