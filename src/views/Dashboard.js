@@ -20,22 +20,24 @@ const data = [
     ['07:00', Math.random() * 10]
 ];
 
-export default class Dashboard extends Component {
+const Dashboard = () =>  {
 
-    render() {
         return (
-            <Container style={backgroundStyle}>
+            <div>
+      
                 <Header>
                     <Breadcrumb>
                         <Breadcrumb.Item href="/" active>Αρχική</Breadcrumb.Item>
-                    </Breadcrumb>                </Header>
+                    </Breadcrumb>
+                </Header>
                 <Content>
                     <LineChart name="Βλάβες βράδυ" data={data} />
                     <PieChart name="Κατηγορίες έργων" colors={colors} data={data} />
                 </Content>
                 <Footer style={footerStyle}> Footer</Footer>
-            </Container>
+            </div>
 
         )
     }
-}
+
+export default Dashboard

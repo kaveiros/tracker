@@ -11,10 +11,13 @@ import LogoutPanel from './LogoutPanel'
 import {connect} from 'react-redux'
 import * as LoginActions from '../actions/LoginActions'
 import PersonelTable from './PersonelTable'
-import { Sidebar, Container, Header, Content, Footer } from 'rsuite'
+import {Container} from 'rsuite'
 import SidebarPage from './SidebarPage'
+import { backgroundStyle, footerStyle } from '../style/Style'
 
-
+const st = {
+    overflowY:'hidden'
+}
 
 
 class Main extends Component {
@@ -26,12 +29,9 @@ class Main extends Component {
 
     render() {
         return (
-            <Container>
+            <Container width={{width:'100vw'}} style={backgroundStyle}>
             <SidebarPage/>
             <Container>
-              {/* <Header>Header</Header>
-              <Content>Content</Content>
-              <Footer>Footer</Footer> */}
             <Router>
                  <Dashboard default />
                  <WorkTab path="/worktab" />
