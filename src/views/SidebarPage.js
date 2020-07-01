@@ -28,7 +28,7 @@ const NavToggle = ({ expand, onChange }) => {
     <Navbar appearance="subtle" className="nav-toggle">
       <Navbar.Body>
         <Nav pullRight>
-          <Nav.Item onClick={onChange} style={{ width: 56, textAlign: 'center' }}>
+          <Nav.Item onClick={onChange} style={{ width: 50, textAlign: 'center' }}>
             <Icon icon={expand ? 'angle-left' : 'angle-right'} />
           </Nav.Item>
         </Nav>
@@ -53,14 +53,14 @@ const SidabarPage = () => {
       <Sidenav expanded={expand}
         defaultOpenKeys={['3']}
         style={{ display: 'flex', flexDirection: 'column' }}
-        width={expand ? 260 : 56}
+        width={expand ? 260 : 50}
         style={{ height: '100vh' }}
 
       >
         <Sidenav.Header>
           <div style={headerStyles}>
             <Icon icon="logo-analytics" size="lg" style={{ verticalAlign: 0 }} />
-            <span style={{ marginLeft: 12 }}> BRAND</span>
+            <span style={{ marginLeft: 12 }}>Tracker</span>
           </div>
         </Sidenav.Header>
 

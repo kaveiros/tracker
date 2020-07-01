@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import LineChart from "@rsuite/charts/lib/charts/LineChart";
 import PieChart from "@rsuite/charts/lib/charts/PieChart"
-import { backgroundStyle, footerStyle } from '../style/Style'
+import { backgroundStyle, footerStyle, graphWidth } from '../style/Style'
 import { Container, Header, Footer, Content, Breadcrumb } from 'rsuite';
 import PersonelTable from './PersonelTable';
 
@@ -31,10 +31,9 @@ const Dashboard = () =>  {
                     </Breadcrumb>
                 </Header>
                 <Content>
-                    <LineChart name="Βλάβες βράδυ" data={data} />
-                    <PieChart name="Κατηγορίες έργων" colors={colors} data={data} />
+                    <LineChart name="Βλάβες βράδυ" data={data} style={graphWidth} />
+                    <PieChart name="Κατηγορίες έργων" colors={colors} data={data} style={graphWidth}/>
                 </Content>
-                <Footer style={footerStyle}> Footer</Footer>
             </div>
 
         )

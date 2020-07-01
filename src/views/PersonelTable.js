@@ -48,7 +48,7 @@ const PersonelTable = () => {
     <div>
       {error != null && <div>{error.message}</div>}
       {persons && <div>
-        <Table height={600} data={persons} loading={loading}>
+        <Table height={800} data={persons} loading={loading}>
           <Column width={100} align="center" fixed>
             <HeaderCell>Id</HeaderCell>
             <Cell dataKey="code" />

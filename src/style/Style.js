@@ -6,6 +6,16 @@ width:'100vw',
 overflowY:'hidden'}
 
 export const footerStyle = {
-    height: '50px',
+    height: '10px',
     marginTop: '-50px'
+}
+
+export const mandatory = {
+    color: 'red',
+    width: '5px'
+}
+
+export const graphWidth = {
+    width:'70vw',
+    height: '30vh'
 }
