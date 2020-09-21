@@ -12,16 +12,7 @@ const headerStyles = {
   overflow: 'hidden'
 };
 
-const iconStyles = {
-  width: 56,
-  height: 56,
-  lineHeight: '56px',
-  textAlign: 'center'
-};
 
-const navBarHeight = {
-  height: '100vh'
-}
 
 const NavToggle = ({ expand, onChange }) => {
   return (
@@ -83,6 +74,7 @@ const SidabarPage = () => {
               <Dropdown.Item href="/employeetab" eventKey="3-2">προσωπικό</Dropdown.Item>
               <Dropdown.Item href="/warehouse" eventKey="3-3">αποθήκη</Dropdown.Item>
               <Dropdown.Item href="/tools" eventKey="3-4">εργαλεία</Dropdown.Item>
+              <Dropdown.Item href="/materialsTab" eventKey="3-4">υλικά</Dropdown.Item>
               <Dropdown.Item href="/personelTable" eventKey="3-5">πινακας προσωπικό</Dropdown.Item>
             </Dropdown>
             <Dropdown

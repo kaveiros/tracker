@@ -14,6 +14,7 @@ import PersonelTable from './PersonelTable'
 import {Container} from 'rsuite'
 import SidebarPage from './SidebarPage'
 import { backgroundStyle, footerStyle } from '../style/Style'
+import MaterialTab from './Materials'
 
 const st = {
     overflowY:'hidden'
@@ -29,7 +30,7 @@ class Main extends Component {
 
     render() {
         return (
-            <Container width={{width:'100vw'}} style={backgroundStyle}>
+            <Container style={backgroundStyle}>
             <SidebarPage/>
             <Container>
             <Router>
@@ -40,6 +41,7 @@ class Main extends Component {
                  <Tools path="/tools" />
                  <LogoutPanel path="/logout"/>
                  <PersonelTable path="/personelTable"/>
+                 <MaterialTab path="/materialsTab" />
              </Router>
             </Container>
           </Container>

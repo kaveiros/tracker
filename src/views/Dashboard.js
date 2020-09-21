@@ -1,9 +1,8 @@
-import React, { Component } from 'react'
+import React from 'react'
 import LineChart from "@rsuite/charts/lib/charts/LineChart";
 import PieChart from "@rsuite/charts/lib/charts/PieChart"
-import { backgroundStyle, footerStyle, graphWidth } from '../style/Style'
-import { Container, Header, Footer, Content, Breadcrumb } from 'rsuite';
-import PersonelTable from './PersonelTable';
+import {  graphWidth } from '../style/Style'
+import {  Header, Content, Breadcrumb } from 'rsuite';
 
 const colors = [
     '#34c3ff',
