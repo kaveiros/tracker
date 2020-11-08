@@ -43,7 +43,6 @@ const SidabarPage = () => {
     <Sidebar width={expand ? 260 : 56} >
       <Sidenav expanded={expand}
         defaultOpenKeys={['3']}
-        style={{ display: 'flex', flexDirection: 'column' }}
         width={expand ? 260 : 50}
         style={{ height: '100vh' }}
 

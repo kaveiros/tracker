@@ -4,6 +4,8 @@ import {
     FormControl, ButtonToolbar, Button, Panel, Icon, Steps, FlexboxGrid, Row, Col
 } from 'rsuite'
 import { mandatory } from '../style/Style'
+import {useDispatch, useSelector} from 'react-redux'
+import {saveMaterial} from '../actions/MaterialActions'
 
 const MaterialTab = () => {
 
@@ -19,7 +21,7 @@ const MaterialTab = () => {
     const [hasAllMandatoryFields, setAllMandatoryFields] = useState(true)
 
 
-    const [aa, setAA] = useState(0)
+    const [numberCode, setAA] = useState(0)
     const [code, setCode] = useState('')
     const [kind, setKind] = useState('')
     const [description, setDescription] = useState('')
@@ -38,7 +40,7 @@ const MaterialTab = () => {
         setStep(nextStep < 0 ? 0 : nextStep > 3 ? 3 : nextStep);
     };
     const onNext = () => {
-        if (aa === 0 || code === "" || kind === "" || description === "" || quantity === "") {
+        if (numberCode === 0 || code === "" || kind === "" || description === "" || quantity === "") {
             setAllMandatoryFields(false)
         }
         else {
@@ -51,14 +53,14 @@ const MaterialTab = () => {
         setAllMandatoryFields(true)
     }
 
-
+    const dispatch = useDispatch();
 
     /**
      *  Handle events
      */
     const handleAABlur = (e1) => {
         console.log("blur" + e1.target.value)
-        if (aa == null || aa === 0) {
+        if (numberCode == null || numberCode === 0) {
             setAAMandatory(1)
             setNextButtonDisabled(true)
         }
@@ -151,9 +153,8 @@ const MaterialTab = () => {
 
     const handleSubmit = (submitEvent) => {
 
-        console.log(submitEvent)
-        console.log({
-            aa: aa,
+        let material = {
+            numberCode: numberCode,
             code: code,
             kind: kind,
             description: description,
@@ -162,7 +163,10 @@ const MaterialTab = () => {
             section: section,
             restDetails: restDetails,
             sector: sector
-        })
+        }
+
+        console.log(material)
+        dispatch(saveMaterial(material))
     }
 
     /**

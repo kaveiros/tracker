@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import { Table, Column, HeaderCell, Cell } from 'rsuite-table';
+import { Panel, Header, Content, Breadcrumb } from 'rsuite'
 import 'rsuite-table/dist/css/rsuite-table.css'
 import axios from 'axios';
 import TablePagination from 'rsuite/lib/Table/TablePagination';
-import {baseUrl} from '../settings/ApiSettings'
+import { baseUrl } from '../settings/ApiSettings'
 
 const PersonelTable = () => {
 
+  const height = { height: '100vh' }
   const [currentPage, setCurrentPage] = useState(1)
   const [persons, setPersons] = useState([])
   const [records, setRecords] = useState(1)
@@ -45,60 +47,62 @@ const PersonelTable = () => {
 
 
   return (
-    <div>
+    <Panel>
+      <Header>
+        <Breadcrumb>
+          <Breadcrumb.Item href="/">Αρχική</Breadcrumb.Item>
+          <Breadcrumb.Item href="/materials" active>πινακας προσωπικού</Breadcrumb.Item>
+        </Breadcrumb>
+      </Header>
       {error != null && <div>{error.message}</div>}
-      {persons && <div>
-        <Table height={600} minHeight={600} data={persons} loading={loading} >
-          <Column width={100} align="center" fixed>
-            <HeaderCell>Id</HeaderCell>
-            <Cell dataKey="code" />
-          </Column>
+      {persons && <Content>
+        {/* <div style={{ height: '70vh' }}> */}
+          <Table autoHeight={true} data={persons} loading={loading} >
+            <Column width={100} align="center" fixed>
+              <HeaderCell>Id</HeaderCell>
+              <Cell dataKey="code" />
+            </Column>
 
-          <Column width={150} fixed>
-            <HeaderCell>Διεύθυνση</HeaderCell>
-            <Cell dataKey="address" />
-          </Column>
+            <Column width={150} fixed>
+              <HeaderCell>Διεύθυνση</HeaderCell>
+              <Cell dataKey="address" />
+            </Column>
 
-          <Column width={100} fixed>
-            <HeaderCell>Όνομα</HeaderCell>
-            <Cell dataKey="name" />
-          </Column>
+            <Column width={100} fixed>
+              <HeaderCell>Όνομα</HeaderCell>
+              <Cell dataKey="name" />
+            </Column>
 
-          <Column width={100}>
-            <HeaderCell>Τμήμα</HeaderCell>
-            <Cell dataKey="department" />
-          </Column>
+            <Column width={100}>
+              <HeaderCell>Τμήμα</HeaderCell>
+              <Cell dataKey="department" />
+            </Column>
 
-          <Column width={200}>
-            <HeaderCell>City</HeaderCell>
-            <Cell dataKey="section" />
-          </Column>
-          <Column width={200} flexGrow={1}>
-            <HeaderCell>Company Name</HeaderCell>
-            <Cell dataKey="attribute1" />
-          </Column>
-        </Table>
-
+            <Column width={200}>
+              <HeaderCell>City</HeaderCell>
+              <Cell dataKey="section" />
+            </Column>
+            <Column width={200} flexGrow={1}>
+              <HeaderCell>Company Name</HeaderCell>
+              <Cell dataKey="attribute1" />
+            </Column>
+          </Table>
+        {/* </div> */}
         <TablePagination
-            activePage={Number(currentPage)}
-            first={true}
-            last={true}
-            next={true}
-            prev={true}
-            pages={pages}
-            total={records}
-            showInfo = {false}
-            boundaryLinks={true}
-            showLengthMenu = {false}
-            onChangePage={handleChangePage}
-            onChangeLength={handleChangeLength}
-        
-        
-        />
-
-      </div>}
-
-    </div>
+          activePage={Number(currentPage)}
+          first={true}
+          last={true}
+          next={true}
+          prev={true}
+          pages={pages}
+          total={records}
+          showInfo={false}
+          boundaryLinks={true}
+          showLengthMenu={false}
+          onChangePage={handleChangePage}
+          onChangeLength={handleChangeLength}/>
+      </Content>}
+    </Panel>
   )
 
 }

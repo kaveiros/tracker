@@ -1,37 +1,31 @@
-import * as MaterialActions from './AppActions/MaterialActions'
+import * as MaterialActions from '../actionTypes/MaterialTypes'
+import axios from 'axios'
 
-export const saveMaterial = (material) =>{
+let config = {
+    headers: {
+        "Content-Type": "application/json"
+    }
+  }
 
-    return dispatch => {
+export const saveMaterial = (material) => {
+
+    return dispatch  => {
         //dispatch(setIsLoading());
-     
-         axios.post(baseUrl + "invoice/create", payment)
-         .then(response => {
-             const invoices = response.data
-             console.log("Created")
-             console.log(invoices)
-             //dispatch(setInvoices(invoices))
-     
-         }).catch(error=> {
-             console.log(error)
-            // dispatch(hasApiError(error.message))
-     
-         })   
+        console.log("DISPATCH" + material)
+        console.log(material)
 
-}
+        axios.post("http://localhost:4000/material/create", material, config)
+            .then(response => {
+                const invoices = response.data
+                console.log("Created")
+                console.log(invoices)
+                //dispatch(setInvoices(invoices))
 
-export const openDrawer = () =>{
+            }).catch(error => {
+                console.log(error.payload)
+                // dispatch(hasApiError(error.message))
 
-    return {
-        type: ACTIONS.OPEN_DRAWER
+            })
+
     }
-
-}
-
-export const closeDrawer = () =>{
-
-    return {
-        type: ACTIONS.CLOSE_DRAWER
-    }
-
 }

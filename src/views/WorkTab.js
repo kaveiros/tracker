@@ -101,7 +101,7 @@ const WorkTab = () => {
                 </Steps>
                 <hr />
                 <Form layout="horizontal">
-                    {step + 1 == 1 ?
+                    {step + 1 === 1 ?
                         <Panel>
                             <FormGroup>
                                 <ControlLabel>Α/Α</ControlLabel>
