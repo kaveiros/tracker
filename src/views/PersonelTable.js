@@ -8,7 +8,6 @@ import { baseUrl } from '../settings/ApiSettings'
 
 const PersonelTable = () => {
 
-  const height = { height: '100vh' }
   const [currentPage, setCurrentPage] = useState(1)
   const [persons, setPersons] = useState([])
   const [records, setRecords] = useState(1)
@@ -25,6 +24,10 @@ const PersonelTable = () => {
   const handleChangeLength = (evt) => {
     console.log(evt)
   }
+
+  const handleRow = (eve) => {
+    console.log(eve)
+  } 
 
 
   useEffect(() => {
@@ -56,8 +59,7 @@ const PersonelTable = () => {
       </Header>
       {error != null && <div>{error.message}</div>}
       {persons && <Content>
-        {/* <div style={{ height: '70vh' }}> */}
-          <Table autoHeight={true} data={persons} loading={loading} >
+          <Table autoHeight={true} data={persons} loading={loading} onRowClick={handleRow}>
             <Column width={100} align="center" fixed>
               <HeaderCell>Id</HeaderCell>
               <Cell dataKey="code" />
@@ -87,7 +89,6 @@ const PersonelTable = () => {
               <Cell dataKey="attribute1" />
             </Column>
           </Table>
-        {/* </div> */}
         <TablePagination
           activePage={Number(currentPage)}
           first={true}
