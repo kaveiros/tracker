@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import * as LoginActions from '../actions/LoginActions'
-import {navigate,Redirect} from '@reach/router'
+import {Redirect} from '@reach/router'
 
 
 
@@ -16,7 +16,6 @@ class LogoutPanel extends Component{
         <div>
         <Redirect from="/logout" to="/" />
         </div>
-       // navigate("/worktab")
       )
     }
 

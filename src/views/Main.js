@@ -11,8 +11,14 @@ import LogoutPanel from './LogoutPanel'
 import {connect} from 'react-redux'
 import * as LoginActions from '../actions/LoginActions'
 import PersonelTable from './PersonelTable'
+import {Container} from 'rsuite'
+import SidebarPage from './SidebarPage'
+import { backgroundStyle, footerStyle } from '../style/Style'
+import MaterialTab from './Materials'
 
-
+const st = {
+    overflowY:'hidden'
+}
 
 
 class Main extends Component {
@@ -24,19 +30,36 @@ class Main extends Component {
 
     render() {
         return (
-            this.props.isAuthenticated ?
-                <React.Fragment>
-                    <Menu />
-                    <Router>
-                        <Dashboard default />
-                        <WorkTab path="/worktab" />
-                        <EmployeeTab path="/employeetab" />
-                        <InventoryTab path="/warehouse" />
-                        <Tools path="/tools" />
-                        <LogoutPanel path="/logout"/>
-                        <PersonelTable path="/personelTable"/>
-                    </Router>
-                </React.Fragment> : <Login path="/login"/>
+            <Container style={backgroundStyle}>
+            <SidebarPage/>
+            <Container>
+            <Router>
+                 <Dashboard default />
+                 <WorkTab path="/worktab" />
+                 <EmployeeTab path="/employeetab" />
+                 <InventoryTab path="/warehouse" />
+                 <Tools path="/tools" />
+                 <LogoutPanel path="/logout"/>
+                 <PersonelTable path="/personelTable"/>
+                 <MaterialTab path="/materialsTab" />
+             </Router>
+            </Container>
+          </Container>
+
+            
+            // this.props.isAuthenticated ?
+            //     <React.Fragment>
+            //         <Menu />
+            //         <Router>
+            //             <Dashboard default />
+            //             <WorkTab path="/worktab" />
+            //             <EmployeeTab path="/employeetab" />
+            //             <InventoryTab path="/warehouse" />
+            //             <Tools path="/tools" />
+            //             <LogoutPanel path="/logout"/>
+            //             <PersonelTable path="/personelTable"/>
+            //         </Router>
+            //     </React.Fragment> : <Login path="/login"/>
         )
     }
 
