@@ -15,6 +15,7 @@ import {Container} from 'rsuite'
 import SidebarPage from './SidebarPage'
 import { backgroundStyle, footerStyle } from '../style/Style'
 import MaterialTab from './Materials'
+import NotFound from './NotFound'
 
 const st = {
     overflowY:'hidden'
@@ -34,7 +35,7 @@ class Main extends Component {
             <SidebarPage/>
             <Container>
             <Router>
-                 <Dashboard default />
+                 <Dashboard path="/" />
                  <WorkTab path="/worktab" />
                  <EmployeeTab path="/employeetab" />
                  <InventoryTab path="/warehouse" />
@@ -42,6 +43,7 @@ class Main extends Component {
                  <LogoutPanel path="/logout"/>
                  <PersonelTable path="/personelTable"/>
                  <MaterialTab path="/materialsTab" />
+                 <NotFound default/>
              </Router>
             </Container>
           </Container>

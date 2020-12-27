@@ -77,7 +77,7 @@ const SidabarPage = () => {
         <Drawer.Body>
           <Sidenav>
             <Nav>
-              <Nav.Item href="/dashboard" eventKey="1" active icon={<Icon icon="dashboard" />}>
+              <Nav.Item href="/" eventKey="1" active icon={<Icon icon="dashboard" />}>
                 Αρχική
                     </Nav.Item>
               <Dropdown
