@@ -50,7 +50,7 @@ const PersonelTable = () => {
 
 
   return (
-    <Panel>
+    <Panel bodyFill={true}>
       <Header>
         <Breadcrumb>
           <Breadcrumb.Item href="/">Αρχική</Breadcrumb.Item>

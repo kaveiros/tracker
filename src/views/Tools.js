@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
 import {
     Col, Row, Grid, Panel, Container, ButtonToolbar, Breadcrumb, InputPicker,
-    Button, Icon, Content, ControlLabel, FormControl, HelpBlock, FormGroup, Form
+    Button, Icon, Content, ControlLabel, FormControl, HelpBlock, FormGroup, Form,
+    Steps
 } from 'rsuite'
+import AdditionalInfo from './AdditionalInfo';
 
 const data = [{
     "label": "Σταθερός",
@@ -23,6 +25,59 @@ export default class WarehouseTab extends Component {
         return (
             <Container>
                 <Content>
+                <Steps current={1}>
+  <Steps.Item title="first" >
+      <Panel>
+          hhkjhhkjhkjkkjhkjh
+          <Row className="show-grid">
+                                    <Col xs={12}>
+                                        <FormGroup>
+                                            <ControlLabel>A/A</ControlLabel>
+                                            <FormControl name="name" type="number" />
+                                            <HelpBlock>Υποχρεωτικό</HelpBlock>
+                                        </FormGroup>
+                                        <FormGroup>
+                                            <ControlLabel>Είδος</ControlLabel>
+                                            <FormControl ref={this.wrapper} name="inputPicker"  accepter={InputPicker} 
+                                             data={data}/>
+                                        </FormGroup>
+                                        <FormGroup>
+                                            <ControlLabel>Κωδικός</ControlLabel>
+                                            <FormControl name="name"/>
+                                            <HelpBlock>Υποχρεωτικό</HelpBlock>
+                                        </FormGroup>
+                                        <FormGroup>
+                                            <ControlLabel>Περιγραφή εξοπλισμού</ControlLabel>
+                                            <FormControl rows={2} name="name" />
+                                            <HelpBlock>Υποχρεωτικό</HelpBlock>
+                                        </FormGroup>
+                                    </Col>
+                                    <Col xs={12}>
+                                        <FormGroup>
+                                            <ControlLabel>Περιγραφή προϊόντος</ControlLabel>
+                                            <FormControl rows={5} name="textarea" componentClass="textarea" />
+                                            <HelpBlock tooltip>Υποχρεωτικό</HelpBlock>
+                                        </FormGroup>
+                                        <FormGroup>
+                                        <AdditionalInfo/>
+ 
+                                            {/* <ControlLabel>Παρατηρήσεις</ControlLabel>
+                                            <FormControl rows={5} name="textarea" componentClass="textarea" />
+                                            <HelpBlock tooltip>Υποχρεωτικό</HelpBlock> */}
+                                        </FormGroup>
+                                        <FormGroup>
+                                            <ButtonToolbar>
+                                                <Button appearance="primary"  color="green"> <Icon icon="save" /> Υποβολή</Button>
+                                                <Button appearance="primary" color="red"><Icon icon="ban" /> Ακύρωση</Button>
+                                            </ButtonToolbar>
+                                        </FormGroup>
+                                    </Col>
+                                </Row>
+      </Panel>
+  </Steps.Item>
+  <Steps.Item title="second" />
+  <Steps.Item title="third" />
+</Steps>
                     <Panel>
                         <Breadcrumb>
                             <Breadcrumb.Item href="/">Αρχική</Breadcrumb.Item>
@@ -60,9 +115,11 @@ export default class WarehouseTab extends Component {
                                             <HelpBlock tooltip>Υποχρεωτικό</HelpBlock>
                                         </FormGroup>
                                         <FormGroup>
-                                            <ControlLabel>Παρατηρήσεις</ControlLabel>
+                                        <AdditionalInfo/>
+ 
+                                            {/* <ControlLabel>Παρατηρήσεις</ControlLabel>
                                             <FormControl rows={5} name="textarea" componentClass="textarea" />
-                                            <HelpBlock tooltip>Υποχρεωτικό</HelpBlock>
+                                            <HelpBlock tooltip>Υποχρεωτικό</HelpBlock> */}
                                         </FormGroup>
                                         <FormGroup>
                                             <ButtonToolbar>
