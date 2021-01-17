@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import Menu from './Menu'
 import { Router } from '@reach/router'
-import WorkTab from './WorkTab'
-import EmployeeTab from './EmployeeTab'
+import WorkTab from '../views/work/WorkTab'
+import EmployeeTab from '../views/employee/EmployeeTab'
 import InventoryTab from './WarehouseTab'
 import Dashboard from './Dashboard'
 import Tools from './Tools'
@@ -16,6 +16,8 @@ import SidebarPage from './SidebarPage'
 import { backgroundStyle, footerStyle } from '../style/Style'
 import MaterialTab from './Materials'
 import NotFound from './NotFound'
+import AdminPage from './admin/AdminPage'
+import Sector from './sector/Sector'
 
 const st = {
     overflowY:'hidden'
@@ -43,6 +45,8 @@ class Main extends Component {
                  <LogoutPanel path="/logout"/>
                  <PersonelTable path="/personelTable"/>
                  <MaterialTab path="/materialsTab" />
+                 <AdminPage path="/adminPage" />
+                 <Sector path="/sector" />
                  <NotFound default/>
              </Router>
             </Container>

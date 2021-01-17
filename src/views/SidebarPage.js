@@ -136,8 +136,8 @@ const SidabarPage = () => {
                 icon={<Icon icon="gear-circle" />}
                 placement="rightStart"
               >
-                <Dropdown.Item eventKey="4-1">Applications</Dropdown.Item>
-                <Dropdown.Item eventKey="4-2">Websites</Dropdown.Item>
+                <Dropdown.Item href="/adminPage" eventKey="4-1">Διαχείριση</Dropdown.Item>
+                <Dropdown.Item href="/sector" eventKey="4-2">Τομείς</Dropdown.Item>
                 <Dropdown.Item eventKey="4-3">Channels</Dropdown.Item>
                 <Dropdown.Item eventKey="4-4">Tags</Dropdown.Item>
                 <Dropdown.Item eventKey="4-5">Versions</Dropdown.Item>
