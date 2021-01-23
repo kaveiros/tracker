@@ -1,7 +1,11 @@
 import React from 'react'
 import { Row, Grid, Col, FormControl, FormGroup, HelpBlock, ControlLabel, Icon, ButtonToolbar, Button, Form } from 'rsuite'
 
-const EmployeeStep2 = () => {
+const EmployeeStep2 = (props) => {
+
+    const {property, handleChange} = props
+    console.log(props)
+
 
     return (
         <Form fluid={true}>
@@ -11,7 +15,7 @@ const EmployeeStep2 = () => {
                     <Col xs={24} sm={12} md={8} lg={12}>
                         <FormGroup>
                             <ControlLabel>Ιδιότητα</ControlLabel>
-                            <FormControl name="property" />
+                            <FormControl name="property" value={property} onChange={handleChange('property')} />
                             <HelpBlock>Υποχρεωτικό</HelpBlock>
                         </FormGroup>
                         <FormGroup>
