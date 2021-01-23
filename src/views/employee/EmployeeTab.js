@@ -6,13 +6,11 @@ import {
 } from 'rsuite'
 import EmployeeStep1 from './EmployeeStep1'
 import EmployeeStep2 from './EmployeeStep2'
-import {navigate} from '@reach/router'
-import { AuthContext } from '../../context/Context'
+// import {navigate} from '@reach/router'
 
 
 const EmployeeTab = () => {
 
-  const authContext = useContext(AuthContext)
   const [step, setStep] = React.useState(1);
   const [employeeState, setEmployeeState] = useState({
     aa: 0,
@@ -22,9 +20,6 @@ const EmployeeTab = () => {
     property: ''
   })
 
-  if(!authContext.token) {
-    navigate('/',{replace:true})
-  }
 
 
   //will be later used for update purposes

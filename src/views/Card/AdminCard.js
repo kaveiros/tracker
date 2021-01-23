@@ -1,6 +1,6 @@
 import React from 'react'
-import {Button, Panel,Icon} from 'rsuite'
-import sector from '../../img/sector.png'
+import {Button, Panel} from 'rsuite'
+import {Link} from 'react-router-dom'
 
 
 const Card = (props) => {
@@ -13,7 +13,7 @@ const Card = (props) => {
         <Panel header={headerTitle}>
           <p>
             <small>{description}
-            <Button appearance="ghost" ><a href={navigationLink}>{buttonTitle}</a></Button>
+            <Button appearance="ghost" ><Link to={navigationLink}>{buttonTitle}</Link></Button>
             </small>
           </p>
         </Panel>

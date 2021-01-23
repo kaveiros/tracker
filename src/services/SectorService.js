@@ -1,9 +1,9 @@
-import http from 'http'
+import http from './http'
 
 class SectorService {
 
-    getAllSectors() {
-        return null
+    getAllSectors(page) {
+        return http.get('/sector/all/'+page)
     }
 
     getSector(id){

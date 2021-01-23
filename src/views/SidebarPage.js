@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react'
 import { Nav, Navbar, Sidenav, Sidebar, Icon, Dropdown, Drawer, } from 'rsuite'
 import { AuthContext } from '../context/Context'
-import { navigate } from "@reach/router"
+import { NavLink, Link } from 'react-router-dom';
 
 
 const headerStyles = {
@@ -36,9 +36,6 @@ const SidabarPage = () => {
   const [expand, setExpand] = useState(false)
   const authContext = useContext(AuthContext)
 
-  if (!authContext.token) {
-    navigate('/')
-  }
 
   const handleToggle = () => {
     setExpand(!expand)
@@ -46,7 +43,7 @@ const SidabarPage = () => {
 
   const logoutHandler = () => {
     authContext.logout();
-    navigate('/')  
+    // navigate('/')  
   };
 
 
@@ -87,106 +84,97 @@ const SidabarPage = () => {
         </Drawer.Header>
         <Drawer.Body>
           <Sidenav>
-            <Nav>
-              <Nav.Item href="/" eventKey="1" active icon={<Icon icon="dashboard" />}>
-                Αρχική
-                    </Nav.Item>
-              <Dropdown
-                trigger="hover"
-                eventKey="2"
-                icon={<Icon icon="user-o" />}
-                placement="rightStart"
-                title="Χρήστες εφαρμογής">
-                <Dropdown.Item>Προσθήκη χρήστη</Dropdown.Item>
-                <Dropdown.Item>Πίνακας Χρηστών</Dropdown.Item>
-              </Dropdown>
-              <Dropdown
-                eventKey="31"
-                trigger="hover"
-                title="Προσωπικό"
-                icon={<Icon icon="vcard" />}
-                placement="rightStart"
-              >
-                <Dropdown.Item href="/employeetab" eventKey="3-2">Προσθήκη εργαζομένου</Dropdown.Item>
-                <Dropdown.Item href="/personelTable" eventKey="3-5">Πίνακας εργαζομένων</Dropdown.Item>
-              </Dropdown>
-              <Dropdown
-                eventKey="3"
-                trigger="hover"
-                title="Έργο"
-                icon={<Icon icon="weapp" />}
-                placement="rightStart"
-              >
-                <Dropdown.Item href="/worktab" eventKey="3-1">Προσθήκη έργου</Dropdown.Item>
-                <Dropdown.Item href="/worktab" eventKey="3-1">Πίνακας έργων</Dropdown.Item>
-              </Dropdown>
-              <Dropdown
-                eventKey="36"
-                trigger="hover"
-                title="Έργαλεία"
-                icon={<Icon icon="wrench" />}
-                placement="rightStart"
-              >
-                <Dropdown.Item href="/tools" eventKey="3-4">Προσθήκη εργαλείου</Dropdown.Item>
-                <Dropdown.Item href="/tools" eventKey="3-4">Πίνακας εργαλειών</Dropdown.Item>
-              </Dropdown>
-              <Dropdown
-                eventKey="365"
-                trigger="hover"
-                title="Αποθήκη"
-                icon={<Icon icon="building" />}
-                placement="rightStart"
-              >
-                <Dropdown.Item href="/warehouse" eventKey="3-3">Προσθήκη υλικών αποθήκης</Dropdown.Item>
-                <Dropdown.Item href="/materialsTab" eventKey="3-4">υλικά</Dropdown.Item>
-              </Dropdown>
-              <Dropdown
-                eventKey="4"
-                trigger="hover"
-                title="Ρυθμίσεις"
-                icon={<Icon icon="gear-circle" />}
-                placement="rightStart"
-              >
-                <Dropdown.Item href="/adminPage" eventKey="4-1">Διαχείριση</Dropdown.Item>
-                <Dropdown.Item href="/sector" eventKey="4-2">Τομείς</Dropdown.Item>
-                <Dropdown.Item eventKey="4-3">Channels</Dropdown.Item>
-                <Dropdown.Item eventKey="4-4">Tags</Dropdown.Item>
-                <Dropdown.Item eventKey="4-5">Versions</Dropdown.Item>
-              </Dropdown>
-            </Nav>
 
+            <Sidenav.Body>
+              {/* <ul className="rs-nav">
+              <li className="rs-nav-item">
+                <NavLink to="/employeetab" className="rs-nav-item-content"><Icon icon="dashboard" />Arxiki</NavLink>
+              </li>
+            </ul> */}
+              <Nav>
+                <Nav.Item componentClass="div" icon={<Icon icon="dashboard" />} onClick={handleToggle}>
+                  <Link className="rs-dropdown-item-content" style={{ textDecoration: 'none' }} to="/">Αρχική</Link>
+                </Nav.Item>
+                <Dropdown
+                  eventKey="31"
+                  trigger="hover"
+                  title="Προσωπικό"
+                  icon={<Icon icon="vcard" />}
+                  placement="rightStart"
+                >
+                  <Dropdown.Item componentClass="div" onSelect={handleToggle}>
+                    <Link className="rs-dropdown-item-content" style={{ textDecoration: 'none' }} to="/employeetab">Προσθήκη εργαζομένου</Link>
+                  </Dropdown.Item>
+                  <Dropdown.Item componentClass="div" onSelect={handleToggle}>
+                    <Link className="rs-dropdown-item-content" style={{ textDecoration: 'none' }} to="/personelTable">Προσθήκη εργαζομένου</Link>
+                  </Dropdown.Item>
+                </Dropdown>
+                <Dropdown
+                  eventKey="3"
+                  trigger="hover"
+                  title="Έργο"
+                  icon={<Icon icon="weapp" />}
+                  placement="rightStart"
+                >
+                  <Dropdown.Item componentClass="div" eventKey="3-1">
+                    <Link className="rs-dropdown-item-content" style={{ textDecoration: 'none' }} to="/worktab">
+                      Προσθήκη έργου
+                  </Link>
+                  </Dropdown.Item>
+                  <Dropdown.Item componentClass="div" eventKey="3-1">
+                    <Link className="rs-dropdown-item-content" style={{ textDecoration: 'none' }} to="/worktab">
+                      Πίνακας έργων
+                    </Link>
+                  </Dropdown.Item>
+                </Dropdown>
+                <Dropdown
+                  eventKey="36"
+                  trigger="hover"
+                  title="Έργαλεία"
+                  icon={<Icon icon="wrench" />}
+                  placement="rightStart"
+                >
+                  <Dropdown.Item href="/tools" eventKey="3-4">Προσθήκη εργαλείου</Dropdown.Item>
+                  <Dropdown.Item href="/tools" eventKey="3-4">Πίνακας εργαλειών</Dropdown.Item>
+                </Dropdown>
+                <Dropdown
+                  eventKey="365"
+                  trigger="hover"
+                  title="Αποθήκη"
+                  icon={<Icon icon="building" />}
+                  placement="rightStart"
+                >
+                  <Dropdown.Item href="/warehouse" eventKey="3-3">Προσθήκη υλικών αποθήκης</Dropdown.Item>
+                  <Dropdown.Item href="/materialsTab" eventKey="3-4">υλικά</Dropdown.Item>
+                </Dropdown>
+                <Dropdown
+                  eventKey="4"
+                  trigger="hover"
+                  title="Ρυθμίσεις"
+                  icon={<Icon icon="gear-circle" />}
+                  placement="rightStart"
+                >
+                  <Dropdown.Item componentClass="div" onSelect={handleToggle}>
+                    <Link className="rs-dropdown-item-content" style={{ textDecoration: 'none' }} to="/adminPage">
+                      Διαχείριση
+                    </Link>
+                  </Dropdown.Item>
+                  <Dropdown.Item componentClass="div" onSelect={handleToggle}>
+                    <Link className="rs-dropdown-item-content" style={{ textDecoration: 'none' }} to="/sector">Τομείς</Link></Dropdown.Item>
+                  <Dropdown.Item eventKey="4-3">Channels</Dropdown.Item>
+                  <Dropdown.Item eventKey="4-4">Tags</Dropdown.Item>
+                  <Dropdown.Item eventKey="4-5">Versions</Dropdown.Item>
+                </Dropdown>
+              </Nav>
 
+            </Sidenav.Body>
           </Sidenav>
-          <Sidenav.Body>
-
-          </Sidenav.Body>
 
 
         </Drawer.Body>
       </Drawer>
 
     </React.Fragment>
-
-    // <Sidebar width={expand ? 260 : 56} >
-    // <Sidenav expanded={expand}
-    //   defaultOpenKeys={['3']}
-    //   width={expand ? 260 : 50}
-    //   style={{ height: '100vh' }}
-
-    // >
-    //   <Sidenav.Header>
-    //     <div style={headerStyles}>
-    //       <Icon icon="logo-analytics" size="lg" style={{ verticalAlign: 0 }} />
-    //       <span style={{ marginLeft: 12 }}>Tracker</span>
-    //     </div>
-    //   </Sidenav.Header>
-
-    //   <Sidenav.Body>
-
-    //   </Sidenav.Body>
-    //   <NavToggle expand={expand} onChange={handleToggle} />
-    // </Sidenav>
-    // </Sidebar>
   );
 
 }
