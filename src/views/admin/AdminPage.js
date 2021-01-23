@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
 import {
     Panel, Header, Breadcrumb, Content, Row, Col,
-    Icon
+    Icon, FlexboxGrid
 } from 'rsuite'
 import AdminCard from '../../views/Card/AdminCard'
-import sector from '../../img/share-2.svg'
-import users from '../../img/users.svg'
+import sector from '../../img/sector.jpg'
+import users from '../../img/people.jpg'
 
 const AdminPage = () => {
 
@@ -20,29 +20,57 @@ const AdminPage = () => {
                 </Breadcrumb>
             </Header>
             <Content>
-                <Row>
-                    <Col md={6} sm={12}>
+                <FlexboxGrid justify="space-around">
+                    <FlexboxGrid.Item componentClass={Col} colspan={24} md={6}>
                         <AdminCard imgIcon={sector}
                             headerTitle={"Τομείς"}
                             description={"Παρουσίαση όλων των τομέων"}
                             buttonTitle={"Περισσότερα..."}
-                            navigationLink={"/sector"} />
-                    </Col>
-                    <Col md={6} sm={12}>
+                            navigationLink={"/sectorTable"} />
+                    </FlexboxGrid.Item>
+                    <FlexboxGrid.Item componentClass={Col} colspan={24} md={6}>
                         <AdminCard
-                        imgIcon={users}
-                        headerTitle={"Χρήστες"}
-                        description={"Παρουσίαση όλων των χρηστών"}
-                        buttonTitle={"Περισσότερα..."}
-                        navigationLink={"/sector"}  />
-                    </Col>
-                    {/* <Col md={6} sm={12}>
-                        <AdminCard />
-                    </Col>
-                    <Col md={6} sm={12}>
-                        <AdminCard />
-                    </Col> */}
-                </Row>
+                            imgIcon={users}
+                            headerTitle={"Χρήστες"}
+                            description={"Παρουσίαση όλων των χρηστών"}
+                            buttonTitle={"Περισσότερα..."}
+                            navigationLink={"/sector"} />
+                    </FlexboxGrid.Item>
+                    <FlexboxGrid.Item componentClass={Col} colspan={24} md={6} smHidden>
+                        <AdminCard
+                            imgIcon={users}
+                            headerTitle={"Χρήστες"}
+                            description={"Παρουσίαση όλων των χρηστών"}
+                            buttonTitle={"Περισσότερα..."}
+                            navigationLink={"/sector"} />
+                    </FlexboxGrid.Item>
+                </FlexboxGrid>
+                <FlexboxGrid justify="space-around">
+                    <FlexboxGrid.Item componentClass={Col} colspan={24} md={6}>
+                        <AdminCard imgIcon={sector}
+                            headerTitle={"Τομείς"}
+                            description={"Παρουσίαση όλων των τομέων"}
+                            buttonTitle={"Περισσότερα..."}
+                            navigationLink={"/sectorTable"} />
+                    </FlexboxGrid.Item>
+                    <FlexboxGrid.Item componentClass={Col} colspan={24} md={6}>
+                        <AdminCard
+                            imgIcon={users}
+                            headerTitle={"Χρήστες"}
+                            description={"Παρουσίαση όλων των χρηστών"}
+                            buttonTitle={"Περισσότερα..."}
+                            navigationLink={"/sector"} />
+                    </FlexboxGrid.Item>
+                    <FlexboxGrid.Item componentClass={Col} colspan={24} md={6} smHidden>
+                        <AdminCard
+                            imgIcon={users}
+                            headerTitle={"Χρήστες"}
+                            description={"Παρουσίαση όλων των χρηστών"}
+                            buttonTitle={"Περισσότερα..."}
+                            navigationLink={"/sector"} />
+                    </FlexboxGrid.Item>
+                </FlexboxGrid>
+
 
             </Content>
         </Panel>
