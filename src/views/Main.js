@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, useContext, useState } from 'react'
 import Menu from './Menu'
 import { Router } from '@reach/router'
 import WorkTab from '../views/work/WorkTab'
@@ -6,81 +6,53 @@ import EmployeeTab from '../views/employee/EmployeeTab'
 import InventoryTab from './WarehouseTab'
 import Dashboard from './Dashboard'
 import Tools from './Tools'
-import Login from './Login'
+//import Login from './Login'
+import Login from '../views/login/Login'
 import LogoutPanel from './LogoutPanel'
-import {connect} from 'react-redux'
+import { connect } from 'react-redux'
 import * as LoginActions from '../actions/LoginActions'
 import PersonelTable from './PersonelTable'
-import {Container} from 'rsuite'
+import { Container } from 'rsuite'
 import SidebarPage from './SidebarPage'
 import { backgroundStyle, footerStyle } from '../style/Style'
 import MaterialTab from './Materials'
 import NotFound from './NotFound'
 import AdminPage from './admin/AdminPage'
 import Sector from './sector/Sector'
-
-const st = {
-    overflowY:'hidden'
-}
+import { AuthContext } from '../context/Context'
 
 
-class Main extends Component {
 
-    componentDidMount(){
-        this.props.onFetchAuthState()
-    }
+const Main = () => {
+
+    const authContext = useContext(AuthContext)
 
 
-    render() {
-        return (
-            <Container style={backgroundStyle}>
-            <SidebarPage/>
+
+    return (
+        <Container style={backgroundStyle}>
+            <SidebarPage />
             <Container>
-            <Router>
-                 <Dashboard path="/" />
-                 <WorkTab path="/worktab" />
-                 <EmployeeTab path="/employeetab" />
-                 <InventoryTab path="/warehouse" />
-                 <Tools path="/tools" />
-                 <LogoutPanel path="/logout"/>
-                 <PersonelTable path="/personelTable"/>
-                 <MaterialTab path="/materialsTab" />
-                 <AdminPage path="/adminPage" />
-                 <Sector path="/sector" />
-                 <NotFound default/>
-             </Router>
+                {authContext.isLoggedIn ?
+                    (<Router>
+                        <Dashboard path="/" />
+                        <WorkTab path="/worktab" />
+                        <EmployeeTab path="/employeetab" />
+                        <InventoryTab path="/warehouse" />
+                        <Tools path="/tools" />
+                        <LogoutPanel path="/logout" />
+                        <PersonelTable path="/personelTable" />
+                        <MaterialTab path="/materialsTab" />
+                        <AdminPage path="/adminPage" />
+                        <Sector path="/sector" />
+                        <NotFound default />
+                    </Router>) : (<Router>
+                        <Login path="/" />
+                    </Router>)}
             </Container>
-          </Container>
-
-            
-            // this.props.isAuthenticated ?
-            //     <React.Fragment>
-            //         <Menu />
-            //         <Router>
-            //             <Dashboard default />
-            //             <WorkTab path="/worktab" />
-            //             <EmployeeTab path="/employeetab" />
-            //             <InventoryTab path="/warehouse" />
-            //             <Tools path="/tools" />
-            //             <LogoutPanel path="/logout"/>
-            //             <PersonelTable path="/personelTable"/>
-            //         </Router>
-            //     </React.Fragment> : <Login path="/login"/>
-        )
-    }
+        </Container>
+    )
 
 }
 
-const mapDispatchToProps = dispatch => {
-    return {
-        onFetchAuthState: () => dispatch(LoginActions.getAuthenticationStatus())
-    }
-}
-
-const mapStateToProps = state => {
-    return {
-        isAuthenticated: state.isLoggedIn
-    }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps) (Main)
+export default Main
