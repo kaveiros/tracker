@@ -1,5 +1,7 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { Nav, Navbar, Sidenav, Sidebar, Icon, Dropdown, Drawer, } from 'rsuite'
+import { AuthContext } from '../context/Context'
+
 
 
 const headerStyles = {
@@ -11,6 +13,7 @@ const headerStyles = {
   whiteSpace: 'nowrap',
   overflow: 'hidden'
 };
+
 
 
 
@@ -31,12 +34,16 @@ const NavToggle = ({ expand, onChange }) => {
 const SidabarPage = () => {
 
   const [expand, setExpand] = useState(false)
-  const [isClosed, setClose] = useState(false)
+  const authContext = useContext(AuthContext)
+
 
   const handleToggle = () => {
     setExpand(!expand)
-    console.log(expand)
   }
+
+  const logoutHandler = () => {
+    authContext.logout();
+  };
 
 
 
@@ -54,7 +61,7 @@ const SidabarPage = () => {
             <Nav.Item >
               <Icon icon="bell-o" />
             </Nav.Item>
-            <Nav.Item>
+            <Nav.Item onClick={logoutHandler}>
               <Icon icon="sign-out" />
             </Nav.Item>
           </Nav>

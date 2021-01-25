@@ -17,11 +17,11 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(AuthReducer, composeEnhancers(applyMiddleware(thunk)))
 
 ReactDOM.render(
-  <Provider store={store}>
+  // <Provider store={store}>
   <React.StrictMode>
     <App />
-  </React.StrictMode>
-  </Provider>,
+  </React.StrictMode>,
+  // </Provider>,
   document.getElementById('root')
 );
 
