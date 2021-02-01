@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react'
 import { Nav, Navbar, Sidenav, Sidebar, Icon, Dropdown, Drawer, } from 'rsuite'
 import { AuthContext } from '../context/Context'
-
+import { navigate } from "@reach/router"
 
 
 const headerStyles = {
@@ -36,6 +36,9 @@ const SidabarPage = () => {
   const [expand, setExpand] = useState(false)
   const authContext = useContext(AuthContext)
 
+  if (!authContext.token) {
+    navigate('/')
+  }
 
   const handleToggle = () => {
     setExpand(!expand)
@@ -43,6 +46,7 @@ const SidabarPage = () => {
 
   const logoutHandler = () => {
     authContext.logout();
+    navigate('/')  
   };
 
 
