@@ -15,7 +15,7 @@ export default class WarehouseTab extends Component {
                             <Breadcrumb.Item>Components</Breadcrumb.Item>
                             <Breadcrumb.Item active>Breadcrumb</Breadcrumb.Item>
                         </Breadcrumb>
-                        <Form layout="fluid">
+                        <Form fluid>
                             <Grid>
                                 <Row className="show-grid">
                                     <Col xs={12}>
@@ -53,8 +53,8 @@ export default class WarehouseTab extends Component {
                                         </FormGroup>
                                         <FormGroup>
                                             <ButtonToolbar>
-                                                <Button primary color="green"> <Icon icon="save" /> Υποβολή</Button>
-                                                <Button primary color="red"><Icon icon="ban" /> Ακύρωση</Button>
+                                                <Button appearance="primary" color="green"> <Icon icon="save" /> Υποβολή</Button>
+                                                <Button appearance="primary" color="red"><Icon icon="ban" /> Ακύρωση</Button>
                                             </ButtonToolbar>
                                         </FormGroup>
                                     </Col>

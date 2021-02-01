@@ -3,7 +3,7 @@ import {
     Panel, Header, Breadcrumb, Content, Row, Col,
     Icon
 } from 'rsuite'
-import AdminCard from '../card/AdminCard'
+import AdminCard from '../../views/Card/AdminCard'
 import sector from '../../img/share-2.svg'
 import users from '../../img/users.svg'
 

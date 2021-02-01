@@ -3,6 +3,7 @@ import { Grid, Panel, Row, Col, Input, InputGroup, Icon, Form, FormGroup, Button
 import './login.css'
 import { useNavigate } from "@reach/router"
 import {AuthContext} from '../../context/Context'
+import LoginService from '../../services/LoginService'
 
 
 
@@ -26,15 +27,6 @@ const Login = () => {
     })
 
     const authContext = useContext(AuthContext)
-
-    const loginHandler = () => {
-        //API call to server...
-        //response from server
-        const userResponse = {
-            token: "abjd2323jb443jbbb"
-        };
-        authContext.login(userResponse.token);//setAuthContext       
-    };
 
 
 
@@ -63,13 +55,12 @@ const Login = () => {
     const handleSubmit = (ev) => {
         ev.preventDefault()
         console.log(loginForm)
-        loginHandler()
-        // if (loginForm.username == loginForm.password) {
-        //     localStorage.setItem("Tracker", "authenticated")
-        //     setIsAuthenticated(true)
-        //     navigate('/', { replace: false })
-
-        // }
+        LoginService.signIn(loginForm).then((response)=>{
+            console.log(response)
+            authContext.login(response.data.user, response.data.token)
+        }).catch((err)=>{
+            console.log(err)
+        })
     }
 
 

@@ -1,20 +1,16 @@
-import React, { Component, useContext, useState } from 'react'
-import Menu from './Menu'
+import React, { useContext } from 'react'
 import { Router } from '@reach/router'
 import WorkTab from '../views/work/WorkTab'
 import EmployeeTab from '../views/employee/EmployeeTab'
 import InventoryTab from './WarehouseTab'
 import Dashboard from './Dashboard'
 import Tools from './Tools'
-//import Login from './Login'
 import Login from '../views/login/Login'
 import LogoutPanel from './LogoutPanel'
-import { connect } from 'react-redux'
-import * as LoginActions from '../actions/LoginActions'
 import PersonelTable from './PersonelTable'
 import { Container } from 'rsuite'
 import SidebarPage from './SidebarPage'
-import { backgroundStyle, footerStyle } from '../style/Style'
+import { backgroundStyle } from '../style/Style'
 import MaterialTab from './Materials'
 import NotFound from './NotFound'
 import AdminPage from './admin/AdminPage'
@@ -27,13 +23,11 @@ const Main = () => {
 
     const authContext = useContext(AuthContext)
 
-
-
     return (
         <Container style={backgroundStyle}>
             <SidebarPage />
             <Container>
-                {authContext.isLoggedIn ?
+                {authContext.token ?
                     (<Router>
                         <Dashboard path="/" />
                         <WorkTab path="/worktab" />
