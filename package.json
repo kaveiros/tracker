@@ -21,7 +21,8 @@
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
     "rsuite": "^4.7.5",
-    "rsuite-table": "^3.13.1"
+    "rsuite-table": "^3.13.1",
+    "validator": "^13.5.2"
   },
   "scripts": {
     "start": "react-scripts start",
