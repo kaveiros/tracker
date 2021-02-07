@@ -20,7 +20,6 @@ export const AuthHook = () => {
         setUsername(user.username)
         localStorage.setItem('userData',
             JSON.stringify({
-                username: username,
                 token: token,
                 expiration: expirationDate.toISOString()
             }))

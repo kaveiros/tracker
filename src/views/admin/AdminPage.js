@@ -3,13 +3,11 @@ import {
     Panel, Header, Breadcrumb, Content, Row, Col,
     Icon, FlexboxGrid
 } from 'rsuite'
-import AdminCard from '../../views/Card/AdminCard'
+import AdminCard from '../card/AdminCard'
 import sector from '../../img/sector.jpg'
 import users from '../../img/people.jpg'
 
 const AdminPage = () => {
-
-
 
     return (
         <Panel>

@@ -1,7 +1,8 @@
 import React, { useState, useContext } from 'react'
-import { Nav, Navbar, Sidenav, Sidebar, Icon, Dropdown, Drawer, } from 'rsuite'
+import { Nav, Navbar, Sidenav, Icon, Dropdown, Drawer, } from 'rsuite'
 import { AuthContext } from '../context/Context'
-import { NavLink, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import AvatarHook from '../views/avatar/AvatarHook'
 
 
 const headerStyles = {
@@ -12,23 +13,6 @@ const headerStyles = {
   color: ' #fff',
   whiteSpace: 'nowrap',
   overflow: 'hidden'
-};
-
-
-
-
-const NavToggle = ({ expand, onChange }) => {
-  return (
-    <Navbar appearance="subtle" className="nav-toggle">
-      <Navbar.Body>
-        <Nav pullRight>
-          <Nav.Item onClick={onChange} style={{ width: 50, textAlign: 'center' }}>
-            <Icon icon={expand ? 'angle-left' : 'angle-right'} />
-          </Nav.Item>
-        </Nav>
-      </Navbar.Body>
-    </Navbar>
-  );
 };
 
 const SidabarPage = () => {
@@ -59,6 +43,9 @@ const SidabarPage = () => {
             </Nav.Item>
           </Nav>
           <Nav pullRight>
+            <Nav.Item>
+              <AvatarHook/>
+            </Nav.Item>
             <Nav.Item >
               <Icon icon="bell-o" />
             </Nav.Item>
