@@ -3,7 +3,9 @@ import { Grid, Panel, Row, Col, Input, InputGroup, Icon, Button, Message } from 
 import './login.css'
 import { AuthContext } from '../../context/Context'
 import LoginService from '../../services/LoginService'
-import { VALIDATOR_REQUIRED, validate } from '../../validator/Validators'
+import { VALIDATOR_REQUIRED, validate, hasErrors } from '../../validator/Validators'
+import {REQUIRED_FIELD, LOGIN_ERROR} from '../../settings/MessageSettings'
+import TrackerMessage from '../utils/TrackerMessage'
 
 
 
@@ -23,11 +25,9 @@ const Login = () => {
     })
 
     const [loginErrors, setLogingErrors] = useState({
-        hasUsernameError: false,
-        hasPasswordError: false
+        validUsername:'unknown',
+        validPassword:'unknown'
     })
-
-    const [disabledLogin, setDisableLogin] = useState(false)
 
     const [loginError, setLoginError]=useState(null)
 
@@ -43,14 +43,7 @@ const Login = () => {
 
         console.log(ev)
         let result = validate(ev.target.value, types)
-        setLogingErrors({ ...loginErrors, [name]: result })
-
-        // if(loginErrors.hasPasswordError || loginErrors.hasUsernameError) {
-        //     setDisableLogin(true)
-        // }
-        // if(!loginErrors.hasPasswordError && !loginErrors.hasUsernameError) {
-        //     setDisableLogin(false)
-        // }
+        setLogingErrors({...loginErrors, [name]: result})
     }
 
     const handleSubmit = (ev) => {
@@ -69,7 +62,7 @@ const Login = () => {
 
     return (
         <div className="html">
-               {loginError&&<Message showIcon type="error" closable description="Αποτυχία σύνδεσης. Προσπαθήστε ξανά." />}
+               {loginError&&<TrackerMessage type="error" description={LOGIN_ERROR}/>}
             <Grid fluid>
                 <Row className="show-grid">
                     <Col xs={8} xsOffset={16}></Col>
@@ -81,29 +74,23 @@ const Login = () => {
                                     <InputGroup.Addon>
                                         <Icon icon="avatar" />
                                     </InputGroup.Addon>
-                                    <Input name="username" onChange={handleChange('username')} onBlur={handleBlur('hasUsernameError', VALIDATOR_REQUIRED)} />
+                                    <Input name="username" onChange={handleChange('username')} onBlur={handleBlur('validUsername', VALIDATOR_REQUIRED)} />
                                 </InputGroup>
-                                {loginErrors.hasUsernameError&&<Message
-                                        showIcon
+                                {!loginErrors.validUsername&&<TrackerMessage
                                         type="error"
-                                        title="Σφάλμα"
-                                        closable
-                                        description="Το πεδίο απαιτείται"
+                                        description={REQUIRED_FIELD}
                                     />}
                                 <InputGroup style={styles}>
                                     <InputGroup.Addon>
                                         <Icon icon="key" />
                                     </InputGroup.Addon>
-                                    <Input name="password" type="password" onChange={handleChange('password')} onBlur={handleBlur('hasPasswordError', VALIDATOR_REQUIRED)} />
+                                    <Input name="password" type="password" onChange={handleChange('password')} onBlur={handleBlur('validPassword', VALIDATOR_REQUIRED)} />
                                 </InputGroup>
-                                {loginErrors.hasPasswordError&&<Message
-                                        showIcon
+                                {!loginErrors.validPassword &&<TrackerMessage
                                         type="error"
-                                        title="Σφάλμα"
-                                        closable
-                                        description="Το πεδίο απαιτείται"
+                                        description={REQUIRED_FIELD}
                                     />}
-                                <Button color="blue" type="submit" style={styles} disabled={disabledLogin} >Eίσοδος</Button>
+                                <Button color="blue" type="submit" style={styles} disabled={!hasErrors(loginErrors)} >Eίσοδος</Button>
                             </form>
                         </Panel>
                     </Col>
