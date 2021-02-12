@@ -47,7 +47,6 @@ const Sector = () => {
                                 {sectorError&&<Message
                                         showIcon
                                         type="error"
-                                        title="Σφάλμα"
                                         closable
                                         description="Το πεδίο απαιτείται"
                                     />}

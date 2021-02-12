@@ -8,7 +8,6 @@ let decoded
 const AvatarHook = () => {
 
     const triggerRef = useRef(null);
-    const authContext = useContext(AuthContext)
     const [username, setUsername] = useState('')
 
     function handleSelectMenu(eventKey, event) {

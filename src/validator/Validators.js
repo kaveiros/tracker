@@ -7,8 +7,25 @@ export const validate = (value, ...validatorTypes)=>{
     for(let validatorType of validatorTypes) {
         console.log(validatorType)
         if(validatorType == VALIDATOR_REQUIRED) {
-            isValid = isValid && validator.isEmpty(value)
+            isValid = isValid && !validator.isEmpty(value)
         }
     }
     return isValid
+}
+
+
+export const checkEmptyProperties = (obj) => {
+    for (var key in obj) {
+        if (obj[key] !== null && obj[key] != "")
+            return false;
+    }
+    return true;
+}
+
+export const hasErrors = (obj) => {
+    for (var key in obj) {
+        if (obj[key] === 'unknown' || obj[key] === false)
+            return false;
+    }
+    return true;
 }
