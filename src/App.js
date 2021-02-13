@@ -12,7 +12,7 @@ import PersonelTable from '../src/views/PersonelTable'
 import { Container } from 'rsuite'
 import SidebarPage from '../src/views/SidebarPage'
 import { backgroundStyle } from '../src/style/Style'
-import MaterialTab from '../src/views/Materials'
+// import MaterialTab from '../src/views/Materials'
 import NotFound from '../src/views/NotFound'
 import AdminPage from '../src/views/admin/AdminPage'
 import Sector from '../src/views/sector/Sector'
@@ -28,16 +28,12 @@ function App() {
 
   if (token) {
     routes = (
-      <Switch>
-        <Route path="/" exact>
-          <Dashboard />
-        </Route>
-        <Route path="/employeetab">
-          <EmployeeTab />
-        </Route>
+      <Switch>        <Route path="/employeetab">
+        <EmployeeTab />
+      </Route>
         {/* <Route  path="/materialsTab">
         <MaterialTab />
-        </Route> */}
+      </Route> */}
         <Route path="/worktab">
           <WorkTab />
         </Route>
@@ -56,10 +52,13 @@ function App() {
         <Route path="/tools">
           <Tools />
         </Route>
-        <Route path="/404" exact>
+        <Route path="/not-found">
           <NotFound />
         </Route>
-        <Redirect from="*" to="/404"/>
+        <Route path="/" exact>
+          <Dashboard />
+        </Route>
+        <Redirect to="/not-found" />
       </Switch>
     )
   }
@@ -81,9 +80,9 @@ function App() {
         <Router>
           <SidebarPage />
           <Container>
-            <main>
-              {routes}
-            </main>
+              <main>
+                {routes}
+              </main>
           </Container>
         </Router>
       </Container>
