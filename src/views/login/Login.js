@@ -4,13 +4,23 @@ import './login.css'
 import { AuthContext } from '../../context/Context'
 import LoginService from '../../services/LoginService'
 import { VALIDATOR_REQUIRED, validate, hasErrors } from '../../validator/Validators'
-import {REQUIRED_FIELD, LOGIN_ERROR} from '../../settings/MessageSettings'
+import { REQUIRED_FIELD, LOGIN_ERROR } from '../../settings/MessageSettings'
 import TrackerMessage from '../utils/TrackerMessage'
-
-
-
+import { useHistory } from "react-router-dom";
 
 const Login = () => {
+
+    let history = useHistory();
+    const [token, setToken] = useState()
+
+    // useEffect(() => {
+    //     setToken(LoginService.getCurrentUser())
+    //   }, [])
+    
+
+    // if(token) {
+    //     history.replace("/dashboard")
+    // }
 
     const styles = {
         position: 'relative',
@@ -25,13 +35,13 @@ const Login = () => {
     })
 
     const [loginErrors, setLogingErrors] = useState({
-        validUsername:'unknown',
-        validPassword:'unknown'
+        validUsername: 'unknown',
+        validPassword: 'unknown'
     })
 
-    const [loginError, setLoginError]=useState(null)
+    const [loginError, setLoginError] = useState(null)
 
-    const authContext = useContext(AuthContext)
+    //const authContext = useContext(AuthContext)
 
     const handleChange = (prop) => (evt) => {
 
@@ -43,26 +53,28 @@ const Login = () => {
 
         console.log(ev)
         let result = validate(ev.target.value, types)
-        setLogingErrors({...loginErrors, [name]: result})
+        setLogingErrors({ ...loginErrors, [name]: result })
     }
 
     const handleSubmit = (ev) => {
         ev.preventDefault()
         setLoginError(null)
         console.log(loginForm)
-        LoginService.signIn(loginForm).then((response) => {
-            console.log(response)
-            authContext.login(response.data.user, response.data.token)
-        }).catch((err) => {
-            setLoginError(err)
-            console.log(err)
-        })
+        try {
+            LoginService.signIn(loginForm)
+            history.replace("/dashboard")
+        } catch (error) {
+            setLoginError(error)
+            console.log(error)
+        }
+
+
     }
 
 
     return (
         <div className="html">
-               {loginError&&<TrackerMessage type="error" description={LOGIN_ERROR}/>}
+            {loginError && <TrackerMessage type="error" description={LOGIN_ERROR} />}
             <Grid fluid>
                 <Row className="show-grid">
                     <Col xs={8} xsOffset={16}></Col>
@@ -76,20 +88,20 @@ const Login = () => {
                                     </InputGroup.Addon>
                                     <Input name="username" onChange={handleChange('username')} onBlur={handleBlur('validUsername', VALIDATOR_REQUIRED)} />
                                 </InputGroup>
-                                {!loginErrors.validUsername&&<TrackerMessage
-                                        type="error"
-                                        description={REQUIRED_FIELD}
-                                    />}
+                                {!loginErrors.validUsername && <TrackerMessage
+                                    type="error"
+                                    description={REQUIRED_FIELD}
+                                />}
                                 <InputGroup style={styles}>
                                     <InputGroup.Addon>
                                         <Icon icon="key" />
                                     </InputGroup.Addon>
                                     <Input name="password" type="password" onChange={handleChange('password')} onBlur={handleBlur('validPassword', VALIDATOR_REQUIRED)} />
                                 </InputGroup>
-                                {!loginErrors.validPassword &&<TrackerMessage
-                                        type="error"
-                                        description={REQUIRED_FIELD}
-                                    />}
+                                {!loginErrors.validPassword && <TrackerMessage
+                                    type="error"
+                                    description={REQUIRED_FIELD}
+                                />}
                                 <Button color="blue" type="submit" style={styles} disabled={!hasErrors(loginErrors)} >Eίσοδος</Button>
                             </form>
                         </Panel>
