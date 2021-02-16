@@ -6,8 +6,11 @@ export const validate = (value, ...validatorTypes)=>{
     let isValid = true
     for(let validatorType of validatorTypes) {
         console.log(validatorType)
-        if(validatorType == VALIDATOR_REQUIRED) {
-            isValid = isValid && !validator.isEmpty(value)
+        if(validatorType[0] === VALIDATOR_REQUIRED) {
+            isValid = isValid && validator.isEmpty(value)
+        }
+        if (validatorType[0] === VALIDATOR_NUMERIC){
+            isValid = isValid && !validator.isNumeric(value)
         }
     }
     return isValid
@@ -16,7 +19,7 @@ export const validate = (value, ...validatorTypes)=>{
 
 export const checkEmptyProperties = (obj) => {
     for (var key in obj) {
-        if (obj[key] !== null && obj[key] != "")
+        if (obj[key] !== null && obj[key] !== "")
             return false;
     }
     return true;

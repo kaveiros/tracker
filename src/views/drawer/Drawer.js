@@ -1,18 +1,25 @@
 import React from 'react'
 import { Nav, Sidenav, Icon, Dropdown, Drawer, } from 'rsuite'
 import { Link } from 'react-router-dom';
+//import {Redirect} from 'react-router-dom'
+//import LoginService from '../services/ LoginService'
 
 const DrawerHook = ({handleToggle, expand}) => {
 
-    return(
+  // const token = LoginService.getCurrentUser()
+
+  // if (!token) {
+  //   return <Redirect to="/login" />
+  // }
+  
+  return(
         <Drawer
         show={expand}
         backdrop={true}
         placement="left"
         size="xs"
         onHide={handleToggle}
-
-      >
+        >
         <Drawer.Header>
           <div>
             <Icon icon="logo-analytics" size="lg" style={{ verticalAlign: 0 }} />

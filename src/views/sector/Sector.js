@@ -1,8 +1,10 @@
-import React, { useState } from 'react'
-import { Button, ControlLabel, Message, Panel, Form, Row, Header, 
-    Breadcrumb, Content, Col, Grid, FormGroup, FormControl } from 'rsuite'
+import React, {useState} from 'react'
+import { Button, ControlLabel, Panel, Form, Row, Header,
+    Breadcrumb, Content, Col, Grid, FormGroup, FormControl, Notification } from 'rsuite'
 
 import {VALIDATOR_REQUIRED, validate} from '../../validator/Validators'
+import TrackerMessage from "../utils/TrackerMessage";
+import SectorService from "../../services/SectorService";
 
 const Sector = () => {
 
@@ -20,11 +22,24 @@ const Sector = () => {
         setSectorError(result)
     }
 
-    const handleSubmit = (submitEvent) => {
-        console.log(submitEvent)
-        console.log("Submited")
-        console.log(sector)
+    const showSuccessNotification = () => {Notification.success({description:"Ο τομέας αποθηκεύτηκε",
+        placement:"topStart", duration:4000})}
 
+    const showErrorNotification = () => {Notification.error({description:"Ο τομέας δεν αποθηκεύτηκε. Προσπαθήστε ξανά",
+        placement:"topStart", duration:4000})}
+
+
+    const handleSubmit = () => {
+
+        let data = {sector:sector}
+        SectorService.saveSector(data).then((response) => {
+            showSuccessNotification()
+        }).catch((err) => {
+            console.log(err)
+            //console.log(err.response.statusText)
+            showErrorNotification()
+            }
+        )
     }
 
     return (<Panel>
@@ -36,20 +51,18 @@ const Sector = () => {
         </Header>
         <Content>
             <Panel shaded bordered>
-                <Form fluid={true}>
+                <Form fluid={true} onSubmit={handleSubmit}>
                     <Grid fluid={true}>
                         <Row className="show-grid">
                             <Col xs={24} sm={12} md={8} lg={6}></Col>
                             <Col xs={24} sm={12} md={8} lg={12}>
                                 <FormGroup>
                                     <ControlLabel>Τομέας</ControlLabel>
-                                    <FormControl onChange={handleSectorChange} onBlur={handleBlur('hasPasswordError', VALIDATOR_REQUIRED)}/> 
-                                {sectorError&&<Message
-                                        showIcon
-                                        type="error"
-                                        closable
-                                        description="Το πεδίο απαιτείται"
-                                    />}
+                                    <FormControl onChange={handleSectorChange} onBlur={handleBlur('hasPasswordError', VALIDATOR_REQUIRED)}/>
+                                {sectorError&&<TrackerMessage
+                                    type="error"
+                                    description="Το πεδίο απαιτείται."
+                                />}
                                     <Button type="submit" color="green">Αποθήκευση</Button>
                                 </FormGroup>
                             </Col>
@@ -60,7 +73,6 @@ const Sector = () => {
             </Panel>
         </Content>
     </Panel>
-
     )
 }
 

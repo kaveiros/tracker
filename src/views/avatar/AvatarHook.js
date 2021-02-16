@@ -1,7 +1,5 @@
-import React, { useContext, useEffect, useState, useRef } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import { Avatar, Whisper, Popover, Dropdown } from 'rsuite'
-import { AuthContext } from '../../context/Context'
-import jwt_decode from "jwt-decode";
 
 let decoded
 
@@ -20,11 +18,11 @@ const AvatarHook = () => {
 
         
         if (data) {
-            const tokenJson = JSON.parse(data)
-            console.log(tokenJson.token);
-            decoded = jwt_decode(tokenJson.token);
-            console.log(decoded)
-            setUsername(decoded.email)
+            // const tokenJson = JSON.parse(data)
+            // console.log(tokenJson.token);
+            // decoded = jwt_decode(tokenJson.token);
+            // console.log(decoded)
+            // setUsername(decoded.email)
         }
     }, [])
 
