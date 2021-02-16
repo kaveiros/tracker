@@ -1,14 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import 'rsuite/dist/styles/rsuite-default.css';
-// import { AuthContext } from '../src/context/Context'
-// import { AuthHook } from '../src/hook/AuthHook'
 import WorkTab from '../src/views/work/WorkTab'
 import EmployeeTab from '../src/views/employee/EmployeeTab'
 import InventoryTab from '../src/views/WarehouseTab'
-import Dashboard from '../src/views/Dashboard'
+import Dashboard from './views/dashboard/Dashboard'
 import Tools from '../src/views/Tools'
 import Login from '../src/views/login/Login'
-import PersonelTable from '../src/views/PersonelTable'
+import PersonelTable from './views/personel/PersonelTable'
 import { Container } from 'rsuite'
 import SidebarPage from '../src/views/SidebarPage'
 import { backgroundStyle } from '../src/style/Style'
@@ -16,76 +14,41 @@ import { backgroundStyle } from '../src/style/Style'
 import NotFound from '../src/views/NotFound'
 import AdminPage from '../src/views/admin/AdminPage'
 import Sector from '../src/views/sector/Sector'
-import { Switch, Route, Redirect, useHistory } from 'react-router-dom'
-import LoginService from './services/LoginService'
+import { Switch, Route, Redirect } from 'react-router-dom'
+import AuthenticatedRoute from './routes/AuthenticatedRoute'
 
 
 
 function App() {
 
-  const [token, setToken] = useState()
-  let history = useHistory();
-  let routes
-
-
-  useEffect(() => {
-    setToken(LoginService.getCurrentUser())
-  }, [])
-
-  // const { user, username, token, login, logout } = AuthHook()
-
-
-  if(!token) {
-    return <Login/>
-  }
-
-
-
   return (
-    // <AuthContext.Provider value={{ user: user, username: username, token: token, login: login, logout: logout }}>
     <Container style={backgroundStyle}>
         <SidebarPage />
         <Container>
           <Switch>
-            <Route path="/employeetab">
-              <EmployeeTab />
-            </Route>
+            <AuthenticatedRoute path="/employeetab" component={EmployeeTab}/>
             {/* <Route  path="/materialsTab">
             <MaterialTab />
           </Route> */}
-            <Route path="/worktab">
-              <WorkTab />
-            </Route>
-            <Route path="/warehouse">
-              <InventoryTab />
-            </Route>
+            <AuthenticatedRoute path="/worktab" component={WorkTab}/>
+            <AuthenticatedRoute path="/warehouse" component={InventoryTab}/>
             <Route path="/adminPage">
               <AdminPage />
             </Route>
-            <Route path="/personelTable">
-              <PersonelTable />
-            </Route>
-            <Route path="/sector">
-              <Sector />
-            </Route>
-            <Route path="/tools">
-              <Tools />
-            </Route>
+            <AuthenticatedRoute path="/personelTable" component={PersonelTable}/>
+            <AuthenticatedRoute path="/sector" component={Sector}/>
+            <AuthenticatedRoute path="/tools" component={Tools}/>
             <Route path="/not-found">
               <NotFound />
             </Route>
+            <AuthenticatedRoute path="/" exact component={Dashboard}/>
             <Route path="/login">
               <Login/>
-            </Route>
-            <Route path="/dashboard">
-              <Dashboard />
             </Route>
             <Redirect to="/not-found" />
           </Switch>
         </Container>
     </Container>
-    // </AuthContext.Provider>
-
   );
 }
 

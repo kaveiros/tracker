@@ -1,7 +1,7 @@
-import React, { useState } from 'react'
+import React from 'react'
 import {
-    Panel, Header, Breadcrumb, Content, Row, Col,
-    Icon, FlexboxGrid
+    Panel, Header, Breadcrumb, Content, Col,
+    FlexboxGrid
 } from 'rsuite'
 import AdminCard from '../card/AdminCard'
 import sector from '../../img/sector.jpg'

@@ -1,9 +1,8 @@
-import React, { useState, useEffect, useContext } from 'react'
-import { Grid, Panel, Row, Col, Input, InputGroup, Icon, Button, Message } from 'rsuite'
+import React, { useState } from 'react'
+import { Grid, Panel, Row, Col, Input, InputGroup, Icon, Button } from 'rsuite'
 import './login.css'
-import { AuthContext } from '../../context/Context'
 import LoginService from '../../services/LoginService'
-import { VALIDATOR_REQUIRED, validate, hasErrors } from '../../validator/Validators'
+import { VALIDATOR_REQUIRED, validate } from '../../validator/Validators'
 import { REQUIRED_FIELD, LOGIN_ERROR } from '../../settings/MessageSettings'
 import TrackerMessage from '../utils/TrackerMessage'
 import { useHistory } from "react-router-dom";
@@ -11,16 +10,6 @@ import { useHistory } from "react-router-dom";
 const Login = () => {
 
     let history = useHistory();
-    const [token, setToken] = useState()
-
-    // useEffect(() => {
-    //     setToken(LoginService.getCurrentUser())
-    //   }, [])
-    
-
-    // if(token) {
-    //     history.replace("/dashboard")
-    // }
 
     const styles = {
         position: 'relative',
@@ -35,13 +24,11 @@ const Login = () => {
     })
 
     const [loginErrors, setLogingErrors] = useState({
-        validUsername: 'unknown',
-        validPassword: 'unknown'
+        validUsername: '',
+        validPassword: ''
     })
 
     const [loginError, setLoginError] = useState(null)
-
-    //const authContext = useContext(AuthContext)
 
     const handleChange = (prop) => (evt) => {
 
@@ -60,15 +47,17 @@ const Login = () => {
         ev.preventDefault()
         setLoginError(null)
         console.log(loginForm)
-        try {
-            LoginService.signIn(loginForm)
-            history.replace("/dashboard")
-        } catch (error) {
-            setLoginError(error)
-            console.log(error)
-        }
 
-
+        LoginService.signIn(loginForm).then((response) => {
+            console.log(response)
+            if (response.data.token) {
+                localStorage.setItem("user", JSON.stringify(response.data.token))
+                history.replace("/")
+            }
+        }).catch((err) => {
+            console.log(err)
+            setLoginError(err)
+        })
     }
 
 
@@ -78,7 +67,6 @@ const Login = () => {
             <Grid fluid>
                 <Row className="show-grid">
                     <Col xs={8} xsOffset={16}></Col>
-
                     <Col xs={8} xsOffset={16}>
                         <Panel bordered shaded header="Tracker" className="backgroundStyle">
                             <form onSubmit={handleSubmit}>
@@ -88,7 +76,7 @@ const Login = () => {
                                     </InputGroup.Addon>
                                     <Input name="username" onChange={handleChange('username')} onBlur={handleBlur('validUsername', VALIDATOR_REQUIRED)} />
                                 </InputGroup>
-                                {!loginErrors.validUsername && <TrackerMessage
+                                {loginErrors.validUsername && <TrackerMessage
                                     type="error"
                                     description={REQUIRED_FIELD}
                                 />}
@@ -98,11 +86,11 @@ const Login = () => {
                                     </InputGroup.Addon>
                                     <Input name="password" type="password" onChange={handleChange('password')} onBlur={handleBlur('validPassword', VALIDATOR_REQUIRED)} />
                                 </InputGroup>
-                                {!loginErrors.validPassword && <TrackerMessage
+                                {loginErrors.validPassword && <TrackerMessage
                                     type="error"
                                     description={REQUIRED_FIELD}
                                 />}
-                                <Button color="blue" type="submit" style={styles} disabled={!hasErrors(loginErrors)} >Eίσοδος</Button>
+                                <Button color="blue" type="submit" style={styles} >Eίσοδος</Button>
                             </form>
                         </Panel>
                     </Col>

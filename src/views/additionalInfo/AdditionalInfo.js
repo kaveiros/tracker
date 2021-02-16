@@ -1,5 +1,5 @@
 import React from 'react'
-import { FormControl, Input, Panel } from 'rsuite'
+import { FormControl, Panel } from 'rsuite'
 
 const AdditionalInfo = () => {
     

@@ -4,7 +4,7 @@ import {
     Button, Icon, Content, ControlLabel, FormControl, HelpBlock, FormGroup, Form,
     Steps
 } from 'rsuite'
-import AdditionalInfo from './AdditionalInfo';
+import AdditionalInfo from './additionalInfo/AdditionalInfo';
 
 const data = [{
     "label": "Σταθερός",

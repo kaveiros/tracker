@@ -115,14 +115,8 @@ const style = {
     lineHeight: '24px',
 };
 
-
-
-const colors = [
-    '#34c3ff',
-    '#1464AC',
-];
-
 const Dashboard = () => {
+
 
     return (
         <div>

@@ -4,7 +4,7 @@ import { Panel, Header, Content, Breadcrumb } from 'rsuite'
 import 'rsuite-table/dist/css/rsuite-table.css'
 import axios from 'axios';
 import TablePagination from 'rsuite/lib/Table/TablePagination';
-import { baseUrl } from '../settings/ApiSettings'
+import { baseUrl } from '../../settings/ApiSettings'
 
 const PersonelTable = () => {
 

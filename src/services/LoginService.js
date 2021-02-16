@@ -3,13 +3,7 @@ import http from './http'
 class LoginService {
 
     signIn(data) {
-         http.post('/user/signIn', data).then((response) => {
-            console.log(response)
-            if (response.data.token) {
-                localStorage.setItem("user", JSON.stringify(response.data.token))
-            }
-            return response.data.token
-        })
+         return http.post('/user/signIn', data)
     }
 
     getCurrentUser() {

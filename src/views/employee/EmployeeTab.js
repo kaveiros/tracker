@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from 'react'
+import React from 'react'
 import { useState } from 'react'
 import {
   Content, Breadcrumb, Header, Steps,
@@ -6,8 +6,8 @@ import {
 } from 'rsuite'
 import EmployeeStep1 from './EmployeeStep1'
 import EmployeeStep2 from './EmployeeStep2'
-// import {navigate} from '@reach/router'
-
+import useAuth from '../../hook/useAuth'
+import {Redirect} from 'react-router-dom'
 
 const EmployeeTab = () => {
 
@@ -19,6 +19,15 @@ const EmployeeTab = () => {
     expertise: '',
     property: ''
   })
+
+
+  const isAuth = useAuth()
+
+
+  if (!isAuth) {
+      return <Redirect to="/login" />
+  }
+
 
 
 
@@ -65,7 +74,7 @@ const EmployeeTab = () => {
         </Panel>
         <hr />
         <Panel shaded bordered>
-          {step == 1 ? <EmployeeStep1 {...employeeState}
+          {step === 1 ? <EmployeeStep1 {...employeeState}
             handleChange={handleChange} handleStep={handleStep} /> :
             <EmployeeStep2 {...employeeState} handleChange={handleChange} handleStep={handleStep} />}
         </Panel>
