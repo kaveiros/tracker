@@ -45,7 +45,7 @@ const DrawerHook = ({handleToggle, expand}) => {
                     <Link className="rs-dropdown-item-content" style={{ textDecoration: 'none' }} to="/employeetab">Προσθήκη εργαζομένου</Link>
                   </Dropdown.Item>
                   <Dropdown.Item componentClass="div" onSelect={handleToggle}>
-                    <Link className="rs-dropdown-item-content" style={{ textDecoration: 'none' }} to="/personelTable">Προσθήκη εργαζομένου</Link>
+                    <Link className="rs-dropdown-item-content" style={{ textDecoration: 'none' }} to="/personelTable">Πίνακας εργαζομένων</Link>
                   </Dropdown.Item>
                 </Dropdown>
                 <Dropdown
