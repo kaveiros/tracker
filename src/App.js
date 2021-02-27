@@ -10,7 +10,7 @@ import PersonelTable from './views/personel/PersonelTable'
 import { Container } from 'rsuite'
 import SidebarPage from './views/sidebar/SidebarPage'
 import { backgroundStyle } from '../src/style/Style'
-// import MaterialTab from '../src/views/Materials'
+import Materials from './views/materials/MaterialTab'
 import NotFound from '../src/views/NotFound'
 import AdminPage from '../src/views/admin/AdminPage'
 import Sector from '../src/views/sector/Sector'
@@ -20,16 +20,12 @@ import AuthenticatedRoute from './routes/AuthenticatedRoute'
 
 
 function App() {
-
   return (
-    <Container style={backgroundStyle}>
+      <Container style={backgroundStyle}>
         <SidebarPage />
-        <Container>
           <Switch>
             <AuthenticatedRoute path="/employeetab" component={EmployeeTab}/>
-            {/* <Route  path="/materialsTab">
-            <MaterialTab />
-          </Route> */}
+             <AuthenticatedRoute  path="/materialsTab" component={Materials}/>
             <AuthenticatedRoute path="/worktab" component={WorkTab}/>
             <AuthenticatedRoute path="/warehouse" component={InventoryTab}/>
             <Route path="/adminPage">
@@ -47,8 +43,7 @@ function App() {
             </Route>
             <Redirect to="/not-found" />
           </Switch>
-        </Container>
-    </Container>
+      </Container>
   );
 }
 

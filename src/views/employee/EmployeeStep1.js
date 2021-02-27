@@ -3,7 +3,7 @@ import { Row, Grid, Col, FormControl, FormGroup, HelpBlock, ControlLabel, Icon, 
 
 const EmployeeStep1 = (props) => {
 
-    const {aa, code, name, expertise, handleChange, handleStep} = props
+    const {aa, code, name, address, expertise, handleChange, handleStep} = props
     console.log(props)
 
     return (
@@ -15,23 +15,28 @@ const EmployeeStep1 = (props) => {
                         <FormGroup>
                             <ControlLabel>Α/Α</ControlLabel>
                             <FormControl name="aa" type="number" value={aa} onChange={handleChange('aa')} />
-                            <HelpBlock>Υποχρεωτικό</HelpBlock>
+
                         </FormGroup>
                         <FormGroup>
                             <ControlLabel>Κωδικός</ControlLabel>
                             <FormControl name="code" value={code} onChange={handleChange('code')}/>
-                            <HelpBlock>Υποχρεωτικό</HelpBlock>
+
+                        </FormGroup>
+                        <FormGroup>
+                            <ControlLabel>Διεθυνση</ControlLabel>
+                            <FormControl name="address" value={address} onChange={handleChange('code')}/>
+
                         </FormGroup>
                         <FormGroup>
                             <ControlLabel>Όνοματεπώνυμο</ControlLabel>
                             <FormControl name="name" value={name} onChange={handleChange('name')}/>
-                            <HelpBlock>Υποχρεωτικό</HelpBlock>
+
                         </FormGroup>
                         <FormGroup>
-                            <ControlLabel>Ειδικότητα</ControlLabel>
-                            <FormControl name="expertise"  value={expertise} onChange={handleChange('expertise')}/>
-                            <HelpBlock>Υποχρεωτικό</HelpBlock>
+                            <ControlLabel>Τμήμα</ControlLabel>
+                            <FormControl name="section" onChange={handleChange("section")} />
                         </FormGroup>
+
                     </Col>
                     <Col xs={24} sm={12} md={8} lg={6}></Col>
                 </Row>

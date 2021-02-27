@@ -18,6 +18,7 @@ const EmployeeTab = () => {
     aa: 0,
     code: '',
     name: 'foo',
+    address:'',
     expertise: '',
     property: ''
   })
