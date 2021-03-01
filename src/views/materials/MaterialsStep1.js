@@ -50,7 +50,8 @@ const MaterialsStep1 = (props) => {
                     <Col md={4} mdOffset={20}>
                         <ButtonToolbar>
                             <Button appearance="primary" color="green" onClick={handleStep(2)}>Επόμενο<Icon icon="page-next"/></Button>
-                        </ButtonToolbar>                    </Col>
+                        </ButtonToolbar>
+                    </Col>
                 </Row>
             </Grid>
         </Form>
