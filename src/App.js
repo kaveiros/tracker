@@ -16,6 +16,7 @@ import AdminPage from '../src/views/admin/AdminPage'
 import Sector from '../src/views/sector/Sector'
 import { Switch, Route, Redirect } from 'react-router-dom'
 import AuthenticatedRoute from './routes/AuthenticatedRoute'
+import GearTab from "./views/gear/GearTab";
 
 
 
@@ -33,7 +34,7 @@ function App() {
             </Route>
             <AuthenticatedRoute path="/personelTable" component={PersonelTable}/>
             <AuthenticatedRoute path="/sector" component={Sector}/>
-            <AuthenticatedRoute path="/tools" component={Tools}/>
+            <AuthenticatedRoute path="/tools" component={GearTab}/>
             <Route path="/not-found">
               <NotFound />
             </Route>
