@@ -10,6 +10,8 @@ import { Schema } from 'rsuite';
 import { v4 as uuidv4 } from 'uuid';
 import EmployeeService from "../../services/EmployeeService";
 import {useLocation} from "react-router-dom";
+import {showErrorNotification, showSaveErrorNotification, showSuccessNotification} from "../common/Notifications";
+import LoaderHook from "../common/LoaderHook";
 
 const { StringType, NumberType } = Schema.Types;
 
@@ -74,17 +76,9 @@ const EmployeeTab = () => {
     costPerDay:NumberType("Το κόστος ανά ημέρα δεν μπορεί να είναι μηδέν ή μικρότερο").min(1)
   })
 
-  const showErrorNotification = (errorString) => {Notification.error({description: errorString
-        .split('\n').map((str, i) => <p key={i}>{str}</p>),
-    placement:"topStart", duration:7000})}
 
-  const showSaveErrorNotification = (errorString) => {Notification.error({description: errorString
-        .split('\n').map((str, i) => <p key={i}>{str}</p>),
-    placement:"topStart", duration:4000})}
-
-  const showSuccessNotification = () => {Notification.success({description:"Ο εργαζόμενος αποθηκεύτηκε",
-    placement:"topStart", duration:4000})}
-
+  const successString = "Ο εργαζόμενος αποθηκεύτηκε"
+  const saveErrorString = "Σφάλμα στην αποθήκευση εργαζομένου"
 
     useEffect(()=>{
       if(location.state !== undefined){
@@ -124,14 +118,13 @@ const EmployeeTab = () => {
       EmployeeService.saveEmployee(employeeState)
           .then(resp => {
             setIsLoading(false)
-            showSuccessNotification()
-
+            showSuccessNotification(successString)
           })
           .catch(err => {
             setIsLoading(false)
             setEmployeeState(initialState)
             setErrors(initialErrorState)
-            showSaveErrorNotification("Aποτυχία στην αποθήκευση εργαζομένου")
+            showSaveErrorNotification(saveErrorString)
           })
     }
   }
@@ -151,16 +144,14 @@ const EmployeeTab = () => {
         </Header>
         <Content>
           <Panel shaded bordered>
-
-            <Steps current={step}>
+            <Steps current={step-1}>
               <Steps.Item title="Βασικά στοιχεία" />
               <Steps.Item title="Παρατηρήσεις" />
             </Steps>
           </Panel>
           <hr />
           <Panel shaded bordered>
-            {loading&&<Loader backdrop center vertical size="md" content="Γίνεται επεξεργασία..."/>}
-
+            {loading&&<LoaderHook message={"Γίνεται επεξεργασία..."}/>}
             {step === 1 ? <EmployeeStep1 {...employeeState} errors={errors} hasValidationError={hasValidationError}
                                          handleChange={handleChange} handleStep={handleStep} /> :
                 <EmployeeStep2 {...employeeState} errors={errors} handleChange={handleChange}

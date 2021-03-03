@@ -4,7 +4,7 @@ import {  Table, Column, HeaderCell, Cell } from 'rsuite-table';
 import 'rsuite-table/dist/css/rsuite-table.css'
 import TablePagination from 'rsuite/lib/Table/TablePagination';
 import EmployeeService from "../../services/EmployeeService";
-import DeleteModal from "../../common/DeleteModal";
+import DeleteModal from "../common/DeleteModal";
 import {useHistory, useLocation} from "react-router-dom";
 
 const EmployeeTable = () => {
@@ -189,3 +189,4 @@ const EmployeeTable = () => {
 }
 
 export default EmployeeTable;
+

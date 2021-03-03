@@ -1,10 +1,11 @@
 import React, {useState} from 'react'
 import { Button, ControlLabel, Panel, Form, Row, Header,
-    Breadcrumb, Content, Col, Grid, FormGroup, FormControl, Notification } from 'rsuite'
+    Breadcrumb, Content, Col, Grid, FormGroup, FormControl} from 'rsuite'
 
 import {VALIDATOR_REQUIRED, validate} from '../../validator/Validators'
-import TrackerMessage from "../utils/TrackerMessage";
+import TrackerMessage from "../common/TrackerMessage";
 import SectorService from "../../services/SectorService";
+import {showErrorNotification, showSuccessNotification} from "../common/Notifications";
 
 const Sector = () => {
 
@@ -22,22 +23,18 @@ const Sector = () => {
         setSectorError(result)
     }
 
-    const showSuccessNotification = () => {Notification.success({description:"Ο τομέας αποθηκεύτηκε",
-        placement:"topStart", duration:4000})}
-
-    const showErrorNotification = () => {Notification.error({description:"Ο τομέας δεν αποθηκεύτηκε. Προσπαθήστε ξανά",
-        placement:"topStart", duration:4000})}
-
+    const successString = "Ο τομέας αποθηκεύτηκε"
+    const  errorString = "Ο τομέας δεν αποθηκεύτηκε. Προσπαθήστε ξανά"
 
     const handleSubmit = () => {
 
         let data = {sector:sector}
         SectorService.saveSector(data).then((response) => {
-            showSuccessNotification()
+            showSuccessNotification(successString)
         }).catch((err) => {
             console.log(err)
             //console.log(err.response.statusText)
-            showErrorNotification()
+            showErrorNotification(errorString)
             }
         )
     }

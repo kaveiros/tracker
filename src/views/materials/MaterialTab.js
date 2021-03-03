@@ -51,7 +51,7 @@ const MaterialTab = () => {
             <Content>
                 <Panel shaded bordered>
 
-                    <Steps current={step}>
+                    <Steps current={step-1}>
                         <Steps.Item title="Βασικά στοιχεία" />
                         <Steps.Item title="Παρατηρήσεις" />
                     </Steps>

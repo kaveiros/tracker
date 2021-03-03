@@ -1,7 +1,8 @@
 import React, {useEffect, useRef, useState} from 'react'
 import { Avatar, Whisper, Popover, Dropdown } from 'rsuite'
-import LoginService from "../../services/LoginService";
 import jwt_decode from "jwt-decode";
+import useAuthHook from "../../hook/useAuthHook";
+import LoginService from "../../services/LoginService";
 
 
 
@@ -10,6 +11,8 @@ const AvatarHook = () => {
 
     const triggerRef = useRef(null);
     const [username, setUsername] = useState('')
+    const  { user} = useAuthHook()
+
 
     function handleSelectMenu(eventKey, event) {
         console.log(eventKey);
@@ -20,9 +23,6 @@ const AvatarHook = () => {
 
         const data = LoginService.getCurrentUser()
 
-        //const data = localStorage.getItem("userData")
-
-        
         if (data) {
              const {token} = data
              console.log(token);
@@ -35,8 +35,8 @@ const AvatarHook = () => {
     const MenuPopover = ({ onSelect, ...rest }) => (
         <Popover {...rest} full>
           <Dropdown.Menu onSelect={onSelect}>
-            <Dropdown.Item >{username}</Dropdown.Item>
-            <Dropdown.Item eventKey={2}>New File with Current Profile</Dropdown.Item>
+            <Dropdown.Item >{user[0].username}</Dropdown.Item>
+            <Dropdown.Item eventKey={2}>{user[0].email}</Dropdown.Item>
             <Dropdown.Item eventKey={3}>Download As...</Dropdown.Item>
             <Dropdown.Item eventKey={4}>Export PDF</Dropdown.Item>
             <Dropdown.Item eventKey={5}>Export HTML</Dropdown.Item>

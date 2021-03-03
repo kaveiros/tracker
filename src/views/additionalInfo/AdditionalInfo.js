@@ -2,7 +2,7 @@ import React, {useEffect, useRef, useState} from 'react'
 import {Button, Input, Panel, Modal, SelectPicker, ControlLabel, Divider, List, Loader, Notification} from 'rsuite'
 import AdditionalInfoService from "../../services/AdditionalInfoService";
 import SectorService from "../../services/SectorService";
-
+import {sectorErrorNotification} from "../common/Notifications";
 
 
 const AdditionalInfo = ({showModal, hideModal, uniqueVersion}) => {
@@ -16,9 +16,6 @@ const AdditionalInfo = ({showModal, hideModal, uniqueVersion}) => {
     const [selectedFiles, setSelectedFiles] = useState([])
     const [comments,setComments] = useState()
     const [loading, setIsLoading] = useState(false)
-
-    const sectorErrorNotification = () => {Notification.error({description:"Σφάλμα στην ανάκτηση των τομέων.",
-        placement:"topStart", duration:4000})}
 
     useEffect(()=>{
 

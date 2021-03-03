@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useLayoutEffect, useState} from 'react'
+import React, {useState} from 'react'
 import DrawerHook from '../drawer/Drawer'
 import NavbarHook from '../navbar/NavbarHook'
 import { useHistory } from "react-router-dom";
@@ -6,11 +6,12 @@ import LoginService from "../../services/LoginService";
 
 
 
-const SidabarPage = () => {
+const SidebarPage = () => {
 
   const [expand, setExpand] = useState(false)
 
   let history = useHistory();
+
 
   const handleToggle = () => {
     setExpand(!expand)
@@ -32,4 +33,4 @@ const SidabarPage = () => {
 
 }
 
-export default SidabarPage
+export default SidebarPage
