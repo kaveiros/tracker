@@ -9,7 +9,7 @@ const Card = (props) => {
 
     return (
         <Panel shaded bordered bodyFill style={{ display: 'inline-block', width: 240 }}>
-    <img src={imgIcon} height="240" />
+    <img src={imgIcon} alt="imageString" height="240" />
         <Panel header={headerTitle}>
           <p>
             <small>{description}

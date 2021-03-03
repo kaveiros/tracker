@@ -1,18 +1,16 @@
-import React, {useContext, useState} from 'react'
+import React, {useState} from 'react'
 import { Grid, Panel, Row, Col, Input, InputGroup, Icon, Button } from 'rsuite'
 import './login.css'
 import LoginService from '../../services/LoginService'
 import { VALIDATOR_REQUIRED, validate } from '../../validator/Validators'
 import { REQUIRED_FIELD, LOGIN_ERROR } from '../../settings/MessageSettings'
 import TrackerMessage from '../utils/TrackerMessage'
-import {AuthContext} from "../../context/AuthContext";
-import { useHistory } from "react-router-dom";
+import {useHistory} from "react-router-dom";
 
 
 const LoginComponent = () => {
 
-    const history = useHistory();
-    const auth = useContext(AuthContext)
+    const history = useHistory()
     const styles = {
         position: 'relative',
         width: '60%',
@@ -49,16 +47,19 @@ const LoginComponent = () => {
         ev.preventDefault()
         setLoginError(null)
         console.log(loginForm)
-
-
         LoginService.signIn(loginForm)
-           .then((response) => {
-            console.log(response)
-             let token = response.headers["x-auth-token"]
-            let user = response.data.user
-            auth.login(user, token);
-            history.replace("/")
-        }).catch((err) => {
+            .then((response) => {
+                console.log(response)
+                let token = response.data.token
+                let expirationDate = new Date(new Date().getTime() + 1000 * 60 * 60)
+                localStorage.setItem('userData',
+                    JSON.stringify({
+                        token: token,
+                        isLoggedIn:true,
+                        expiration: expirationDate.toISOString()
+                    }))
+                history.replace("/")
+            }).catch((err) => {
             setLoginError(err)
         })
     }

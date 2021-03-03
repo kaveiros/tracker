@@ -2,11 +2,10 @@ import React, { useEffect, useState } from 'react'
 import { Table, Column, HeaderCell, Cell } from 'rsuite-table';
 import { Panel, Header, Content, Breadcrumb } from 'rsuite'
 import 'rsuite-table/dist/css/rsuite-table.css'
-import axios from 'axios';
 import TablePagination from 'rsuite/lib/Table/TablePagination';
-import { baseUrl } from '../../settings/ApiSettings'
+import EmployeeService from "../../services/EmployeeService";
 
-const PersonelTable = () => {
+const PersonnelTable = () => {
 
   const [currentPage, setCurrentPage] = useState(1)
   const [persons, setPersons] = useState([])
@@ -32,7 +31,9 @@ const PersonelTable = () => {
 
   useEffect(() => {
     const fetchPesonel = async () => {
-      axios.get(baseUrl + "/personel/all/" + currentPage)
+        EmployeeService.searchEmployees(null, currentPage)
+
+        //axios.get(baseUrl + "/personel/all/" + currentPage)
         .then(response => {
           const data = response.data
           setPersons(data.persons)
@@ -61,32 +62,32 @@ const PersonelTable = () => {
       {persons && <Content>
           <Table autoHeight={true} data={persons} loading={loading} onRowClick={handleRow}>
             <Column width={100} align="center" fixed>
-              <HeaderCell>Id</HeaderCell>
-              <Cell dataKey="code" />
+              <Table.HeaderCell>Id</Table.HeaderCell>
+              <Table.Cell dataKey="code" />
             </Column>
 
             <Column width={150} fixed>
-              <HeaderCell>Διεύθυνση</HeaderCell>
-              <Cell dataKey="address" />
+              <Table.HeaderCell>Διεύθυνση</Table.HeaderCell>
+              <Table.Cell dataKey="address" />
             </Column>
 
             <Column width={100} fixed>
-              <HeaderCell>Όνομα</HeaderCell>
-              <Cell dataKey="name" />
+              <Table.HeaderCell>Όνομα</Table.HeaderCell>
+              <Table.Cell dataKey="name" />
             </Column>
 
             <Column width={100}>
-              <HeaderCell>Τμήμα</HeaderCell>
-              <Cell dataKey="department" />
+              <Table.HeaderCell>Τμήμα</Table.HeaderCell>
+              <Table.Cell dataKey="department" />
             </Column>
 
             <Column width={200}>
-              <HeaderCell>City</HeaderCell>
-              <Cell dataKey="section" />
+              <Table.HeaderCell>City</Table.HeaderCell>
+              <Table.Cell dataKey="section" />
             </Column>
             <Column width={200} flexGrow={1}>
-              <HeaderCell>Company Name</HeaderCell>
-              <Cell dataKey="attribute1" />
+              <Table.HeaderCell>Company Name</Table.HeaderCell>
+              <Table.Cell dataKey="attribute1" />
             </Column>
           </Table>
         <TablePagination
@@ -108,4 +109,4 @@ const PersonelTable = () => {
 
 }
 
-export default PersonelTable;
+export default PersonnelTable;

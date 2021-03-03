@@ -1,100 +1,56 @@
 import React from 'react'
 import {
     Form, FormGroup, ControlLabel, Row, Col,
-    FormControl, HelpBlock, Button, Icon,
-    ButtonGroup
+    FormControl, DatePicker, HelpBlock, Button, Icon, Grid, ButtonToolbar
 } from 'rsuite'
-import { mandatory } from '../../style/Style'
 
 
-const WorkStep1 = ({ currentStep, setStep, onNext, onPrevious }) => {
+const WorkStep1 = (props) => {
 
-    if (currentStep !== 1) {
-        return null
-    }
+    const {aa, code, date, kind, handleChange, handleStep, errors, hasValidationError} = props
+
     return (
-        <Form layout="horizontal">
+        <Form fluid={true}>
+            <Grid fluid={true}>
+                <Row className="show-grid">
+                    <Col xs={24} sm={12} md={8} lg={6}></Col>
+                    <Col xs={24} sm={12} md={8} lg={12}>
+                        <FormGroup>
+                            <ControlLabel>Α/Α</ControlLabel>
+                            <FormControl name="aa" type="number" value={aa}
+                                         onChange={handleChange('aa')}  errorMessage={errors.aa.errorMessage}/>
 
-            <Row>
-                <Col xs={24} sm={24} md={8} lg={6}>
-                </Col>
-                <Col xs={24} sm={12} md={8} lg={12}>
-                    <FormGroup>
-                        <ControlLabel>Α/Α</ControlLabel>
-                        <ControlLabel style={mandatory}>*</ControlLabel>
-                        <FormControl name="name" type="number" />
-                        <HelpBlock tooltip>Υποχρεωτικό</HelpBlock>
-                    </FormGroup>
-                </Col>
-                <Col xs={24} sm={12} md={8} lg={6}></Col>
+                        </FormGroup>
+                        <FormGroup>
+                            <ControlLabel>Κωδικός</ControlLabel>
+                            <FormControl name="code" value={code}
+                                         onChange={handleChange('code')} errorMessage={errors.code.errorMessage}/>
 
-            </Row>
-            <Row>
-                <Col xs={24} sm={24} md={8} lg={6}>
-                </Col>
-                <Col xs={24} sm={12} md={8} lg={12}>
-                    <FormGroup>
-                        <ControlLabel>Πελάτης</ControlLabel>
-                        <ControlLabel style={mandatory}>*</ControlLabel>
-                        <FormControl name="code" />
-                        <HelpBlock tooltip>Υποχρεωτικό</HelpBlock>
-                    </FormGroup>
-                </Col>
-                <Col xs={24} sm={12} md={8} lg={6}></Col>
+                        </FormGroup>
+                        <FormGroup>
+                            <ControlLabel>Ημερομηνία</ControlLabel>
+                            <DatePicker className="rs-form-control-wrapper" name="date" value={date} onChange={handleChange('date')}/>
 
-            </Row>
-            <Row>
-                <Col xs={24} sm={24} md={8} lg={6}>
-                </Col>
-                <Col xs={24} sm={12} md={8} lg={12}>
-                    <FormGroup>
-                        <ControlLabel>Περιγραφή έργου</ControlLabel>
-                        <ControlLabel style={mandatory}>*</ControlLabel>
-                        <FormControl name="textarea" componentClass="textarea" />
-                        <HelpBlock tooltip>Υποχρεωτικό</HelpBlock>
-                    </FormGroup>
-                </Col>
-                <Col xs={24} sm={12} md={8} lg={6}></Col>
-
-            </Row>
-            <Row>
-                <Col xs={24} sm={24} md={8} lg={6}>
-                </Col>
-                <Col xs={24} sm={12} md={8} lg={12}>
-                    <FormGroup>
-                        <ControlLabel>Ειδικότητα</ControlLabel>
-                        <ControlLabel style={mandatory}>*</ControlLabel>
-                        <FormControl name="expertise" />
-                        <HelpBlock tooltip>Υποχρεωτικό</HelpBlock>
-                    </FormGroup>
-                </Col>
-                <Col xs={24} sm={12} md={8} lg={6}></Col>
-
-            </Row>
-
-
-
-
-
-
-            <Row className="show-grid">
-                <Col xs={24} sm={24} md={8} lg={6}>
-                </Col>
-                <Col xs={24} sm={12} md={8} lg={12}>
-                </Col>
-                <Col xs={24} sm={12} md={8} lg={6}>
-                    <ButtonGroup>
-                        <Button onClick={onPrevious} disabled={currentStep === 0}>
-                            <Icon icon='page-previous' />Πίσω
-                    </Button>
-                        <Button onClick={onNext} disabled={currentStep === 3}>
-                            Επόμενο<Icon icon='page-next' />
-                        </Button>
-                    </ButtonGroup>
-                </Col>
-            </Row>
+                        </FormGroup>
+                        <FormGroup>
+                            <ControlLabel>Είδος έργου</ControlLabel>
+                            <FormControl name="kind" value={kind} onChange={handleChange('kind')}
+                                         errorMessage={errors.kind.errorMessage}/>
+                        </FormGroup>
+                    </Col>
+                    <Col xs={24} sm={12} md={8} lg={6}></Col>
+                </Row>
+                <Row className="show-grid">
+                    <Col md={4} mdOffset={20}>
+                        <ButtonToolbar>
+                            <Button appearance="primary" color="green" disabled={hasValidationError}
+                                    onClick={handleStep(2)}>Επόμενο<Icon icon="page-next"/></Button>
+                        </ButtonToolbar>                    </Col>
+                </Row>
+            </Grid>
         </Form>
     )
+
 }
 
 export default WorkStep1

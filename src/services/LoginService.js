@@ -1,9 +1,17 @@
-import http from './http'
+import {httpClient} from './http'
 
 class LoginService {
 
     signIn(data) {
-         return http.post('/user/signIn', data)
+         return httpClient.post('/user/signIn', data)
+    }
+
+    getCurrentUser() {
+        return JSON.parse(localStorage.getItem("userData"))
+    }
+
+    signOut() {
+        localStorage.removeItem("userData")
     }
 
 }

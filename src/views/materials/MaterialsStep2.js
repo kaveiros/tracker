@@ -15,7 +15,7 @@ import AdditionalInfo from "../additionalInfo/AdditionalInfo";
 
 const MaterialsStep2 = (props) => {
 
-    const {handleChange, handleStep, expertise, property} = props
+    const {handleChange, handleStep} = props
     const [modal, setShowModal] = useState(false)
 
     const showModalHandler = () => {

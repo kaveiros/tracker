@@ -5,20 +5,19 @@ import {
     Col,
     FormControl,
     FormGroup,
-    HelpBlock,
     ControlLabel,
     Icon,
     ButtonToolbar,
     Button,
     Form,
-    Modal, Panel
 } from 'rsuite'
 import AdditionalInfo from "../additionalInfo/AdditionalInfo";
 
 const EmployeeStep2 = (props) => {
 
-    const {property, handleChange, handleStep, expertise} = props
-    console.log(props)
+    const {sector, property, specialisedIn, handleChange, handleStep, expertise,
+        costOvertime, costPerDay, errors, handleSubmit, uniqueVersion} = props
+
     const [modal, setShowModal] = useState(false)
 
     const showModalHandler = () => {
@@ -38,34 +37,40 @@ const EmployeeStep2 = (props) => {
                         <Col xs={24} sm={12} md={8} lg={12}>
                             <FormGroup>
                                 <ControlLabel>Τομέας</ControlLabel>
-                                <FormControl name="sector" onChange={handleChange("sector")} />
+                                <FormControl name="sector"  value={sector} onChange={handleChange("sector")}
+                                    errorMessage={errors.sector.errorMessage}/>
                             </FormGroup>
                             <FormGroup>
                                 <ControlLabel>Ιδιότητα</ControlLabel>
-                                <FormControl name="property"  value={property} onChange={handleChange('property')}/>
+                                <FormControl name="property"  value={property} onChange={handleChange('property')}
+                                errorMessage={errors.property.errorMessage}/>
                             </FormGroup>
                             <FormGroup>
                                 <ControlLabel>Ειδικότητα</ControlLabel>
-                                <FormControl name="speciality"  onChange={handleChange("speciality")}/>
+                                <FormControl name="specialisedIn"  value={specialisedIn} onChange={handleChange("specialisedIn")}
+                                errorMessage={errors.specialisedIn.errorMessage}/>
                             </FormGroup>
                             <FormGroup>
                                 <ControlLabel>Εξειδίκευση</ControlLabel>
-                                <FormControl name="expertise"  value={expertise} onChange={handleChange('expertise')}/>
+                                <FormControl name="expertise"  value={expertise} onChange={handleChange('expertise')}
+                                errorMessage={errors.expertise.errorMessage}/>
                             </FormGroup>
                             <FormGroup>
                                 <ControlLabel>Κόστος/Ωρα-υπερωρία</ControlLabel>
-                                <FormControl name="costOvertime" type="number" />
+                                <FormControl name="costOvertime" value={costOvertime} type="number"
+                                             onChange={handleChange('costOvertime')} errorMessage={errors.costOvertime.errorMessage}/>
                             </FormGroup>
                             <FormGroup>
                                 <ControlLabel>Κόστος/Ωρα-ημερομίσθιο</ControlLabel>
-                                <FormControl name="cost" type="number" />
+                                <FormControl name="costPerDay" value={costPerDay} type="number"
+                                             onChange={handleChange('costPerDay')} errorMessage={errors.costPerDay.errorMessage}/>
                             </FormGroup>
                             <FormGroup>
                                 <ButtonToolbar>
                                     <Button color="violet" onClick={handleStep(1)}><Icon icon="page-previous"/>Πίσω</Button>
                                     <Button appearance="primary" color="cyan" onClick={showModalHandler}> <Icon icon="info-circle" /> Παρατηρήσεις</Button>
-                                    <Button appearance="primary" color="green"> <Icon icon="save" /> Υποβολή</Button>
-                                    <Button appearance="primary" color="red"><Icon icon="ban" /> Ακύρωση</Button>
+                                    <Button appearance="primary" color="green" onClick={handleSubmit}> <Icon icon="save" /> Υποβολή</Button>
+                                    <Button appearance="primary" color="red"  onClick={handleStep(1)}><Icon icon="ban" /> Ακύρωση</Button>
                                 </ButtonToolbar>
                             </FormGroup>
                         </Col>
@@ -73,7 +78,7 @@ const EmployeeStep2 = (props) => {
                     </Row>
                 </Grid>
             </Form>
-            {modal && <AdditionalInfo showModal={modal} hideModal={hideModal}/>}
+            {modal && <AdditionalInfo showModal={modal} hideModal={hideModal} uniqueVersion={uniqueVersion}/>}
         </React.Fragment>
 
     )

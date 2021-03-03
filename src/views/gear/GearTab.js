@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import {
     Content, Breadcrumb, Header, Steps,
-    Panel, Modal, FormControl, Input, Button, Icon, ButtonToolbar
+    Panel
 } from 'rsuite'
 import GearStep1 from "./GearStep1";
 import GearStep2 from "./GearStep2";
@@ -9,8 +9,8 @@ import GearStep3 from "./GearStep3";
 
 const GearTab = () => {
 
-    const [modal, setShowModal] = useState(false)
-    const [step, setStep] = React.useState(1);
+    //const [modal, setShowModal] = useState(false)
+    const [step, setStep] = useState(1);
 
     const handleChange = (prop) => (evt) => {
         console.log(evt)

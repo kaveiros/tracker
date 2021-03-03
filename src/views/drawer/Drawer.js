@@ -35,6 +35,34 @@ const DrawerHook = ({handleToggle, expand}) => {
                   <Link className="rs-dropdown-item-content" style={{ textDecoration: 'none' }} to="/">Αρχική</Link>
                 </Nav.Item>
                 <Dropdown
+                    eventKey="34"
+                    trigger="hover"
+                    title="Εισερχόμενα 'Εργα"
+                    icon={<Icon icon="import" />}
+                    placement="rightStart"
+                >
+                  <Dropdown.Item componentClass="div" onSelect={handleToggle}>
+                    <Link className="rs-dropdown-item-content" style={{ textDecoration: 'none' }} to="/incoming-work-tab">Προσθήκη εισερχόμενου</Link>
+                  </Dropdown.Item>
+                  <Dropdown.Item componentClass="div" onSelect={handleToggle}>
+                    <Link className="rs-dropdown-item-content" style={{ textDecoration: 'none' }} to="/incomingWorkTable">Πίνακας εισερχομένων</Link>
+                  </Dropdown.Item>
+                </Dropdown>
+                <Dropdown
+                    eventKey="34"
+                    trigger="hover"
+                    title="Εξερχόμενα 'Εργα"
+                    icon={<Icon icon="export" />}
+                    placement="rightStart"
+                >
+                  <Dropdown.Item componentClass="div" onSelect={handleToggle}>
+                    <Link className="rs-dropdown-item-content" style={{ textDecoration: 'none' }} to="/outgoingWork">Προσθήκη εξερχομένου</Link>
+                  </Dropdown.Item>
+                  <Dropdown.Item componentClass="div" onSelect={handleToggle}>
+                    <Link className="rs-dropdown-item-content" style={{ textDecoration: 'none' }} to="/outgoingWorkTable">Πίνακας εξερχομένων</Link>
+                  </Dropdown.Item>
+                </Dropdown>
+                <Dropdown
                   eventKey="31"
                   trigger="hover"
                   title="Προσωπικό"
@@ -45,25 +73,7 @@ const DrawerHook = ({handleToggle, expand}) => {
                     <Link className="rs-dropdown-item-content" style={{ textDecoration: 'none' }} to="/employeetab">Προσθήκη εργαζομένου</Link>
                   </Dropdown.Item>
                   <Dropdown.Item componentClass="div" onSelect={handleToggle}>
-                    <Link className="rs-dropdown-item-content" style={{ textDecoration: 'none' }} to="/personelTable">Πίνακας εργαζομένων</Link>
-                  </Dropdown.Item>
-                </Dropdown>
-                <Dropdown
-                  eventKey="3"
-                  trigger="hover"
-                  title="Έργο"
-                  icon={<Icon icon="weapp" />}
-                  placement="rightStart"
-                >
-                  <Dropdown.Item componentClass="div" eventKey="3-1">
-                    <Link className="rs-dropdown-item-content" style={{ textDecoration: 'none' }} to="/worktab">
-                      Προσθήκη έργου
-                  </Link>
-                  </Dropdown.Item>
-                  <Dropdown.Item componentClass="div" eventKey="3-1">
-                    <Link className="rs-dropdown-item-content" style={{ textDecoration: 'none' }} to="/worktab">
-                      Πίνακας έργων
-                    </Link>
+                    <Link className="rs-dropdown-item-content" style={{ textDecoration: 'none' }} to="/employeeTable">Πίνακας εργαζομένων</Link>
                   </Dropdown.Item>
                 </Dropdown>
                 <Dropdown
@@ -105,8 +115,6 @@ const DrawerHook = ({handleToggle, expand}) => {
 
             </Sidenav.Body>
           </Sidenav>
-
-
         </Drawer.Body>
       </Drawer>
 

@@ -1,25 +1,25 @@
-import http from './http'
+import {httpClient} from './http'
 
 class SectorService {
 
-    getAllSectors(page) {
-        return http.get('/sector/all/'+page)
+    getAllSectors() {
+        return httpClient.get('/sector/all/')
     }
 
     getSector(id){
-        return http.get("/sector" + id)
+        return httpClient.get("/sector" + id)
     }
 
     saveSector(data) {
-        return http.post("/sector/create",data)
+        return httpClient.post("/sector/create",data)
     }
 
     updateSector(id, data) {
-        return http.put("/sector/update"+id, data)
+        return httpClient.put("/sector/update"+id, data)
     }
 
     deleteSector(id) {
-        return http.delete("/sector/delete" + id)
+        return httpClient.delete("/sector/delete" + id)
     }
 
 }
