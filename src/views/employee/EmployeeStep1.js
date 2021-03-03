@@ -1,10 +1,10 @@
 import React from 'react'
-import { Row, Grid, Col, FormControl, FormGroup, HelpBlock, ControlLabel, Icon, ButtonToolbar, Button, Form } from 'rsuite'
+import { Row, Grid, Col, FormControl, FormGroup, ControlLabel, Icon, ButtonToolbar, Button, Form } from 'rsuite'
 
 const EmployeeStep1 = (props) => {
 
-    const {aa, code, name, address, expertise, handleChange, handleStep} = props
-    console.log(props)
+    const {aa, code, name, address, section, handleChange, handleStep, errors, hasValidationError} = props
+    //console.log(props)
 
     return (
         <Form fluid={true}>
@@ -14,27 +14,31 @@ const EmployeeStep1 = (props) => {
                     <Col xs={24} sm={12} md={8} lg={12}>
                         <FormGroup>
                             <ControlLabel>Α/Α</ControlLabel>
-                            <FormControl name="aa" type="number" value={aa} onChange={handleChange('aa')} />
+                            <FormControl name="aa" type="number" value={aa}
+                                         onChange={handleChange('aa')}  errorMessage={errors.aa.errorMessage}/>
 
                         </FormGroup>
                         <FormGroup>
                             <ControlLabel>Κωδικός</ControlLabel>
-                            <FormControl name="code" value={code} onChange={handleChange('code')}/>
+                            <FormControl name="code" value={code}
+                                         onChange={handleChange('code')} errorMessage={errors.code.errorMessage}/>
 
                         </FormGroup>
                         <FormGroup>
                             <ControlLabel>Διεθυνση</ControlLabel>
-                            <FormControl name="address" value={address} onChange={handleChange('code')}/>
+                            <FormControl name="address" value={address} onChange={handleChange('address')}
+                                         errorMessage={errors.address.errorMessage}/>
 
                         </FormGroup>
                         <FormGroup>
                             <ControlLabel>Όνοματεπώνυμο</ControlLabel>
-                            <FormControl name="name" value={name} onChange={handleChange('name')}/>
-
+                            <FormControl name="name" value={name} onChange={handleChange('name')}
+                            errorMessage={errors.name.errorMessage}/>
                         </FormGroup>
                         <FormGroup>
                             <ControlLabel>Τμήμα</ControlLabel>
-                            <FormControl name="section" onChange={handleChange("section")} />
+                            <FormControl name="section" value={section} onChange={handleChange("section")}
+                            errorMessage={errors.section.errorMessage}/>
                         </FormGroup>
 
                     </Col>
@@ -50,7 +54,8 @@ const EmployeeStep1 = (props) => {
                 <Row className="show-grid">
                     <Col md={4} mdOffset={20}>
                     <ButtonToolbar>
-                            <Button appearance="primary" color="green" onClick={handleStep(2)}>Επόμενο<Icon icon="page-next"/></Button>
+                            <Button appearance="primary" color="green" disabled={hasValidationError}
+                                    onClick={handleStep(2)}>Επόμενο<Icon icon="page-next"/></Button>
                         </ButtonToolbar>                    </Col>
                 </Row>
             </Grid>

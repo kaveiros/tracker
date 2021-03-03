@@ -29,10 +29,10 @@ const AdminPage = () => {
                     <FlexboxGrid.Item componentClass={Col} colspan={24} md={6}>
                         <AdminCard
                             imgIcon={users}
-                            headerTitle={"Χρήστες"}
-                            description={"Παρουσίαση όλων των χρηστών"}
+                            headerTitle={"Παρατηρήσεις"}
+                            description={"Επιπλέον παρατηρήσεις"}
                             buttonTitle={"Περισσότερα..."}
-                            navigationLink={"/sector"} />
+                            navigationLink={"/additional-info-pages"} />
                     </FlexboxGrid.Item>
                     <FlexboxGrid.Item componentClass={Col} colspan={24} md={6} smHidden>
                         <AdminCard

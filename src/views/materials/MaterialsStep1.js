@@ -5,13 +5,11 @@ import {
     Col,
     FormControl,
     FormGroup,
-    HelpBlock,
     ControlLabel,
     Icon,
     ButtonToolbar,
     Button,
-    Form,
-    Panel
+    Form
 } from 'rsuite'
 
 const MaterialsStep1 = (props) => {

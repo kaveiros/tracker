@@ -5,7 +5,7 @@ import MaterialsStep2 from "./MaterialsStep2";
 
 const MaterialTab = () => {
 
-    const [modal, setShowModal] = useState(false)
+   // const [modal, setShowModal] = useState(false)
     const [step, setStep] = useState(1);
     const [materialState, setMaterialState] = useState({
         numberCode: '',
@@ -33,11 +33,11 @@ const MaterialTab = () => {
 
 
     const showModalHandler = () => {
-        setShowModal(true)
+        //setShowModal(true)
     }
 
     const hideModal = () => {
-        setShowModal(false)
+        //setShowModal(false)
     }
 
     return(

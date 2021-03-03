@@ -1,6 +1,5 @@
 import {Button, ButtonToolbar, Col, ControlLabel, Form, FormControl, FormGroup, Grid, Icon, Row} from "rsuite";
-import React, {useState} from "react";
-import AdditionalInfo from "../additionalInfo/AdditionalInfo";
+import React from "react";
 
 const GearStep2 = (props) => {
 

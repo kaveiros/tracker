@@ -1,47 +1,52 @@
-import React from 'react'
+import React, {useState} from 'react'
 import {
     Form, FormGroup, ControlLabel,
-    FormControl, HelpBlock, ButtonToolbar, Button, Panel, Icon, Divider
+    FormControl, HelpBlock, ButtonToolbar, Button, Panel, Icon, Divider, Grid, Row, Col, DatePicker, SelectPicker
 } from 'rsuite'
-import { mandatory } from '../../style/Style'
 
+const WorkStep2 = (props) => {
 
-const WorkStep2 = ({ currentStep, onPrevious }) => {
-
-    if (currentStep !== 2) {
-        return null
-    }
-
+    const {customer, description, startDate, endDate, handleChange, handleStep, errors, hasValidationError} = props
 
     return (
-        <Panel>
-            <Form>
-                <FormGroup>
-                    <ControlLabel>Κύρια εργασία</ControlLabel>
-                    <ControlLabel style={mandatory}>*</ControlLabel>
-                    <FormControl name="expertise" />
-                    <HelpBlock tooltip>Υποχρεωτικό</HelpBlock>
-                </FormGroup>
-                <FormGroup>
-                    <ButtonToolbar>
-                        <ControlLabel>Προσθήκη δευτερεύουσας εργασίας</ControlLabel>
-                        <Divider />
-                        <Button primary color="green"> <Icon icon="plus" /> Προσθήκη</Button>
-                    </ButtonToolbar>
-                </FormGroup>
-                <FormGroup>
-                    <ControlLabel>Παρατηρήσεις</ControlLabel>
-                    <FormControl rows={5} name="textarea" componentClass="textarea" />
-                </FormGroup>
-                <FormGroup>
-                    <ButtonToolbar>
-                        <Button primary color="green"> <Icon icon="save" /> Υποβολή</Button>
-                        <Button primary color="red" onClick={onPrevious}><Icon icon="ban" /> Ακύρωση</Button>
-                    </ButtonToolbar>
-                </FormGroup>
+            <Form fluid={true}>
+                <Grid fluid={true}>
+                    <Row className="show-grid">
+                        <Col xs={24} sm={12} md={8} lg={6}></Col>
+                        <Col xs={24} sm={12} md={8} lg={12}>
+                            <FormGroup>
+                                <ControlLabel>Πελάτης</ControlLabel>
+                                <FormControl name="customer"  value={customer} onChange={handleChange("customer")}
+                                             errorMessage={errors.customer.errorMessage}/>
+                            </FormGroup>
+                            <FormGroup>
+                                <ControlLabel>Περιγραφή</ControlLabel>
+                                <FormControl name="description"  value={description} onChange={handleChange('description')}
+                                             errorMessage={errors.description.errorMessage}/>
+                            </FormGroup>
+                            <FormGroup>
+                                <ControlLabel>Χρόνος Έναρξης</ControlLabel>
+                                <DatePicker className="rs-form-control-wrapper" name="date" value={startDate} onChange={handleChange('startDate')}/>
+                            </FormGroup>
+                            <FormGroup>
+                                <ControlLabel>Χρόνος Αποπεράτωσης</ControlLabel>
+                                <DatePicker className="rs-form-control-wrapper" name="date" value={endDate} onChange={handleChange('endDate')}/>
+                            </FormGroup>
+
+                        </Col>
+                        <Col xs={24} sm={12} md={8} lg={6}></Col>
+                    </Row>
+                    <Row className="show-grid">
+                        <Col md={4} mdOffset={20}>
+                            <ButtonToolbar>
+                                <Button color="violet" onClick={handleStep(1)}><Icon icon="page-previous"/>Πίσω</Button>
+                                <Button appearance="primary" color="green" disabled={hasValidationError}
+                                        onClick={handleStep(3)}>Επόμενο<Icon icon="page-next"/></Button>
+                            </ButtonToolbar>                    </Col>
+                    </Row>
+                </Grid>
             </Form>
-        </Panel>
-    )
+        )
 
 }
 

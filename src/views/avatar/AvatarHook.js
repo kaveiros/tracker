@@ -1,13 +1,13 @@
-import React, {useEffect, useState, useRef, useContext} from 'react'
+import React, {useEffect, useRef, useState} from 'react'
 import { Avatar, Whisper, Popover, Dropdown } from 'rsuite'
-import {AuthContext} from "../../context/AuthContext";
+import LoginService from "../../services/LoginService";
+import jwt_decode from "jwt-decode";
 
 
-let decoded
+
 
 const AvatarHook = () => {
 
-    const auth = useContext(AuthContext)
     const triggerRef = useRef(null);
     const [username, setUsername] = useState('')
 
@@ -17,22 +17,25 @@ const AvatarHook = () => {
       }
 
     useEffect(() => {
-        const data = localStorage.getItem("userData")
+
+        const data = LoginService.getCurrentUser()
+
+        //const data = localStorage.getItem("userData")
 
         
         if (data) {
-            // const tokenJson = JSON.parse(data)
-            // console.log(tokenJson.token);
-            // decoded = jwt_decode(tokenJson.token);
+             const {token} = data
+             console.log(token);
+            let decoded = jwt_decode(token);
             // console.log(decoded)
-            // setUsername(decoded.email)
+            setUsername(decoded.username)
         }
-    }, [])
+    },[username])
 
     const MenuPopover = ({ onSelect, ...rest }) => (
         <Popover {...rest} full>
           <Dropdown.Menu onSelect={onSelect}>
-            <Dropdown.Item >{auth.username}</Dropdown.Item>
+            <Dropdown.Item >{username}</Dropdown.Item>
             <Dropdown.Item eventKey={2}>New File with Current Profile</Dropdown.Item>
             <Dropdown.Item eventKey={3}>Download As...</Dropdown.Item>
             <Dropdown.Item eventKey={4}>Export PDF</Dropdown.Item>
