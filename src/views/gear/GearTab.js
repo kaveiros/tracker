@@ -33,7 +33,7 @@ const GearTab = () => {
         <Content>
             <Panel shaded bordered>
 
-                <Steps current={step}>
+                <Steps current={step -1 }>
                     <Steps.Item title="Βασικά στοιχεία" />
                     <Steps.Item title="Επιπλέον στοιχεία"/>
                     <Steps.Item title="Παρατηρήσεις" />

@@ -14,6 +14,10 @@ class LoginService {
         localStorage.removeItem("userData")
     }
 
+    checkTokenValidity(token) {
+        //TO DO
+    }
+
 }
 
 export default new LoginService()

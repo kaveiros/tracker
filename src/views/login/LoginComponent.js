@@ -4,13 +4,15 @@ import './login.css'
 import LoginService from '../../services/LoginService'
 import { VALIDATOR_REQUIRED, validate } from '../../validator/Validators'
 import { REQUIRED_FIELD, LOGIN_ERROR } from '../../settings/MessageSettings'
-import TrackerMessage from '../utils/TrackerMessage'
-import {useHistory} from "react-router-dom";
-
+import TrackerMessage from '../common/TrackerMessage'
+import {Redirect, useHistory} from "react-router-dom";
+import useAuthHook from "../../hook/useAuthHook";
 
 const LoginComponent = () => {
 
+    const  { user} = useAuthHook()
     const history = useHistory()
+
     const styles = {
         position: 'relative',
         width: '60%',
@@ -51,17 +53,18 @@ const LoginComponent = () => {
             .then((response) => {
                 console.log(response)
                 let token = response.data.token
-                let expirationDate = new Date(new Date().getTime() + 1000 * 60 * 60)
                 localStorage.setItem('userData',
                     JSON.stringify({
-                        token: token,
-                        isLoggedIn:true,
-                        expiration: expirationDate.toISOString()
+                        token
                     }))
                 history.replace("/")
             }).catch((err) => {
             setLoginError(err)
         })
+    }
+
+    if (user[0]) {
+        return <Redirect to="/"/>
     }
 
 
