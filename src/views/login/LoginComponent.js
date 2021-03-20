@@ -1,16 +1,18 @@
-import React, { useState } from 'react'
+import React, {useContext, useState} from 'react'
 import { Grid, Panel, Row, Col, Input, InputGroup, Icon, Button } from 'rsuite'
 import './login.css'
 import LoginService from '../../services/LoginService'
 import { VALIDATOR_REQUIRED, validate } from '../../validator/Validators'
 import { REQUIRED_FIELD, LOGIN_ERROR } from '../../settings/MessageSettings'
 import TrackerMessage from '../utils/TrackerMessage'
+import {AuthContext} from "../../context/AuthContext";
 import { useHistory } from "react-router-dom";
 
-const Login = () => {
 
-    let history = useHistory();
+const LoginComponent = () => {
 
+    const history = useHistory();
+    const auth = useContext(AuthContext)
     const styles = {
         position: 'relative',
         width: '60%',
@@ -48,14 +50,15 @@ const Login = () => {
         setLoginError(null)
         console.log(loginForm)
 
-        LoginService.signIn(loginForm).then((response) => {
+
+        LoginService.signIn(loginForm)
+           .then((response) => {
             console.log(response)
-            if (response.data.token) {
-                localStorage.setItem("user", JSON.stringify(response.data.token))
-                history.replace("/")
-            }
+             let token = response.headers["x-auth-token"]
+            let user = response.data.user
+            auth.login(user, token);
+            history.replace("/")
         }).catch((err) => {
-            console.log(err)
             setLoginError(err)
         })
     }
@@ -103,4 +106,4 @@ const Login = () => {
 
 }
 
-export default Login
+export default LoginComponent

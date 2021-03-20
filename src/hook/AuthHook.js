@@ -1,35 +1,49 @@
 import { useState, useCallback, useEffect } from 'react';
+import jwt_decode from "jwt-decode";
 
 let logoutTimer
 
-export const AuthHook = () => {
+export const useAuth = () => {
 
+    const [role, setRole] = useState(null)
     const [token, setToken] = useState(false)
     const [tokenExpirationDate, setTokenExpirationDate] = useState()
-    const [user, setUser] = useState(false)
     const [username, setUsername] = useState(null)
+    const [userId, setUserId] = useState(null)
 
 
-    const login = useCallback((user, token, expiration) => {
+    const login = useCallback((user, serverToken) => {
 
-        let username = user.username
-        let expirationDate = expiration || new Date(new Date().getTime() + 1000 * 60 * 60)
+        let expirationDate = new Date(new Date().getTime() + 1000 * 60 * 60)
         setTokenExpirationDate(expirationDate)
-        setUser(user)
-        setToken(token)
+        setToken(serverToken)
         setUsername(user.username)
-        localStorage.setItem('userData',
-            JSON.stringify({
-                token: token,
-                expiration: expirationDate.toISOString()
-            }))
+        setUserId(user.userId)
+        setRole(user.role)
+        if (localStorage.getItem('user') === null){
+            localStorage.setItem('user',
+                JSON.stringify({
+                    token: serverToken,
+                    expiration: expirationDate.toISOString()
+                }))
+        }
+        else {
+            let user = JSON.parse(localStorage.getItem('user'))
+            let token = user.token
+            setToken(token)
+            let decoded = jwt_decode(token)
+            console.log(decoded)
+            setUserId(decoded.userId)
+            setRole(decoded.role)
+            setUsername(decoded.username)
+        }
     }, [])
 
     const logout = useCallback(() => {
         setToken(null);
+        setRole(null)
         setTokenExpirationDate(null);
-        setUser(null);
-        localStorage.removeItem('userData');
+        localStorage.removeItem('user');
     }, [])
 
     useEffect(() => {
@@ -41,19 +55,19 @@ export const AuthHook = () => {
         }
       }, [token, logout, tokenExpirationDate]);
     
-      useEffect(() => {
-        const storedData = JSON.parse(localStorage.getItem('userData'));
+    useEffect(() => {
+        const storedData = JSON.parse(localStorage.getItem('user'));
         if (
           storedData &&
           storedData.token &&
           new Date(storedData.expiration) > new Date()
         ) {
             //recheck how to implement this 
-          login(user, storedData.token, new Date(storedData.expiration));
+          login( storedData.token, username);
         }
       }, [login]);
     
-      return { token, login, logout, username, user };
+    return { token, role, login, logout, username };
 
 
 }

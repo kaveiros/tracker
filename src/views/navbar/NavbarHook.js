@@ -2,7 +2,6 @@ import React from 'react'
 import { Nav, Navbar, Icon, } from 'rsuite'
 import AvatarHook from '../avatar/AvatarHook'
 
-
 const NavbarHook = ({handleToggle, logoutHandler}) => {
 
     return (

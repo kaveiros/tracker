@@ -1,10 +1,13 @@
-import React, { useEffect, useState, useRef } from 'react'
+import React, {useEffect, useState, useRef, useContext} from 'react'
 import { Avatar, Whisper, Popover, Dropdown } from 'rsuite'
+import {AuthContext} from "../../context/AuthContext";
+
 
 let decoded
 
 const AvatarHook = () => {
 
+    const auth = useContext(AuthContext)
     const triggerRef = useRef(null);
     const [username, setUsername] = useState('')
 
@@ -29,7 +32,7 @@ const AvatarHook = () => {
     const MenuPopover = ({ onSelect, ...rest }) => (
         <Popover {...rest} full>
           <Dropdown.Menu onSelect={onSelect}>
-            <Dropdown.Item >{username}</Dropdown.Item>
+            <Dropdown.Item >{auth.username}</Dropdown.Item>
             <Dropdown.Item eventKey={2}>New File with Current Profile</Dropdown.Item>
             <Dropdown.Item eventKey={3}>Download As...</Dropdown.Item>
             <Dropdown.Item eventKey={4}>Export PDF</Dropdown.Item>

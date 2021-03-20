@@ -4,8 +4,7 @@ import WorkTab from '../src/views/work/WorkTab'
 import EmployeeTab from '../src/views/employee/EmployeeTab'
 import InventoryTab from '../src/views/WarehouseTab'
 import Dashboard from './views/dashboard/Dashboard'
-import Tools from '../src/views/Tools'
-import Login from '../src/views/login/Login'
+import LoginComponent from './views/login/LoginComponent'
 import PersonelTable from './views/personel/PersonelTable'
 import { Container } from 'rsuite'
 import SidebarPage from './views/sidebar/SidebarPage'
@@ -17,11 +16,23 @@ import Sector from '../src/views/sector/Sector'
 import { Switch, Route, Redirect } from 'react-router-dom'
 import AuthenticatedRoute from './routes/AuthenticatedRoute'
 import GearTab from "./views/gear/GearTab";
+import {AuthContext} from "./context/AuthContext";
+import {useAuth} from "./hook/AuthHook";
 
 
 
 function App() {
+    const {token, role, login, logout, username} = useAuth()
+
   return (
+      <AuthContext.Provider value={{
+        isLoggedIn: !!token,
+        role: role,
+        username:username,
+        token: token,
+        login: login,
+        logout: logout
+      }}>
       <Container style={backgroundStyle}>
         <SidebarPage />
           <Switch>
@@ -40,11 +51,12 @@ function App() {
             </Route>
             <AuthenticatedRoute path="/" exact component={Dashboard}/>
             <Route path="/login">
-              <Login/>
+              <LoginComponent/>
             </Route>
             <Redirect to="/not-found" />
           </Switch>
       </Container>
+      </AuthContext.Provider>
   );
 }
 

@@ -1,12 +1,14 @@
-import React, {useEffect, useLayoutEffect, useState} from 'react'
+import React, {useContext, useEffect, useLayoutEffect, useState} from 'react'
 import DrawerHook from '../drawer/Drawer'
 import NavbarHook from '../navbar/NavbarHook'
-import LoginService from '../../services/LoginService'
 import { useHistory } from "react-router-dom";
+import {AuthContext} from "../../context/AuthContext";
+
 
 
 const SidabarPage = () => {
 
+  const auth = useContext(AuthContext)
   const [expand, setExpand] = useState(false)
 
   let history = useHistory();
@@ -16,7 +18,7 @@ const SidabarPage = () => {
   }
 
   const logoutHandler = () => {
-    LoginService.signOut()
+    auth.logout()
     history.push("/login")
   };
 
