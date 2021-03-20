@@ -1,16 +1,17 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import { Component } from 'react'
 import { Route, Redirect } from 'react-router-dom'
-import LoginService from '../services/LoginService'
+import {AuthContext} from "../context/AuthContext";
 
 const AuthenticatedRoute = ({ path, component: Component,}) => {
 
-    const token = LoginService.getCurrentUser()
+    const auth = useContext(AuthContext)
+
     return (
         <Route
             path={path}
             render={props => {
-                if (!token) {
+                if (!auth.isLoggedIn) {
                     return <Redirect to="/login" />
                 }
                 else {

@@ -6,7 +6,7 @@ import {
 } from 'rsuite'
 import EmployeeStep1 from './EmployeeStep1'
 import EmployeeStep2 from './EmployeeStep2'
-import useAuth from '../../hook/useAuth'
+//import useAuth from '../../hook/useAuth'
 import {Redirect} from 'react-router-dom'
 import AdditionalInfo from "../additionalInfo/AdditionalInfo";
 
@@ -24,12 +24,12 @@ const EmployeeTab = () => {
   })
 
 
-  const isAuth = useAuth()
+  //const isAuth = useAuth()
 
 
-  if (!isAuth) {
-      return <Redirect to="/login" />
-  }
+  // if (!isAuth) {
+  //     return <Redirect to="/login" />
+  // }
 
 
 
