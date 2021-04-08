@@ -67,7 +67,7 @@ const EmployeeStep2 = (props) => {
                             </FormGroup>
                             <FormGroup>
                                 <ButtonToolbar>
-                                    <Button color="violet" onClick={handleStep(1)}><Icon icon="page-previous"/>Πίσω</Button>
+                                    <Button color="violet" onClick={handleStep(0)}><Icon icon="page-previous"/>Πίσω</Button>
                                     <Button appearance="primary" color="cyan" onClick={showModalHandler}> <Icon icon="info-circle" /> Παρατηρήσεις</Button>
                                     <Button appearance="primary" color="green" onClick={handleSubmit}> <Icon icon="save" /> Υποβολή</Button>
                                     <Button appearance="primary" color="red"  onClick={handleStep(1)}><Icon icon="ban" /> Ακύρωση</Button>

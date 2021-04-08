@@ -17,7 +17,7 @@ const { StringType, NumberType } = Schema.Types;
 
 const EmployeeTab = () => {
 
-  const [step, setStep] = React.useState(1);
+  const [step, setStep] = React.useState(0);
   const uniqueVersion = useState(uuidv4())
   const [loading, setIsLoading] = useState(false)
   const initialState = {
@@ -144,7 +144,7 @@ const EmployeeTab = () => {
         </Header>
         <Content>
           <Panel shaded bordered>
-            <Steps current={step-1}>
+            <Steps current={step}>
               <Steps.Item title="Βασικά στοιχεία" />
               <Steps.Item title="Παρατηρήσεις" />
             </Steps>
@@ -152,7 +152,7 @@ const EmployeeTab = () => {
           <hr />
           <Panel shaded bordered>
             {loading&&<LoaderHook message={"Γίνεται επεξεργασία..."}/>}
-            {step === 1 ? <EmployeeStep1 {...employeeState} errors={errors} hasValidationError={hasValidationError}
+            {step === 0 ? <EmployeeStep1 {...employeeState} errors={errors} hasValidationError={hasValidationError}
                                          handleChange={handleChange} handleStep={handleStep} /> :
                 <EmployeeStep2 {...employeeState} errors={errors} handleChange={handleChange}
                                handleStep={handleStep} handleSubmit={handleSubmit} uniqueVersion={uniqueVersion[0]} />}

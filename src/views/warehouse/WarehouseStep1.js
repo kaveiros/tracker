@@ -1,13 +1,9 @@
 import React from 'react'
-import {
-    Form, FormGroup, ControlLabel, Row, Col,
-    FormControl, DatePicker, Button, Icon, Grid, ButtonToolbar
-} from 'rsuite'
+import { Row, Grid, Col, FormControl, FormGroup, ControlLabel, Icon, ButtonToolbar, Button, Form } from 'rsuite'
 
+const WarehouseStep1 = (props) => {
 
-const WorkStep1 = (props) => {
-
-    const {aa, code, date, kind, handleChange, handleStep, errors, hasValidationError} = props
+    const {aa, code, description, kind, handleChange, handleStep, errors, hasValidationError} = props
 
     return (
         <Form fluid={true}>
@@ -28,23 +24,32 @@ const WorkStep1 = (props) => {
 
                         </FormGroup>
                         <FormGroup>
-                            <ControlLabel>Ημερομηνία</ControlLabel>
-                            <DatePicker className="rs-form-control-wrapper" name="date" value={date} onChange={handleChange('date')}/>
+                            <ControlLabel>Είδος</ControlLabel>
+                            <FormControl name="kind" value={kind} onChange={handleChange('kind')}
+                                         errorMessage={errors.kind.errorMessage}/>
 
                         </FormGroup>
                         <FormGroup>
-                            <ControlLabel>Είδος έργου</ControlLabel>
-                            <FormControl name="kind" value={kind} onChange={handleChange('kind')}
-                                         errorMessage={errors.kind.errorMessage}/>
+                            <ControlLabel>Περιγραφή</ControlLabel>
+                            <FormControl name="description" value={description} onChange={handleChange('description')}
+                            errorMessage={errors.description.errorMessage}/>
                         </FormGroup>
                     </Col>
                     <Col xs={24} sm={12} md={8} lg={6}></Col>
                 </Row>
+                <Row>
+                    <Col xs={24} sm={12} md={8} lg={6}></Col>
+                    <Col xs={24} sm={12} md={8} lg={6}></Col>
+                    <Col xs={24} sm={12} md={8} lg={6}>
+
+                    </Col>
+                </Row>
                 <Row className="show-grid">
                     <Col md={4} mdOffset={20}>
-                        <ButtonToolbar>
-                            <Button appearance="primary" color="green" disabled={hasValidationError}
-                                    onClick={handleStep(2)}>Επόμενο<Icon icon="page-next"/></Button>
+                    <ButtonToolbar>
+                            <Button appearance="primary" color="green"
+                                    // disabled={hasValidationError}
+                                    onClick={handleStep(1)}>Επόμενο<Icon icon="page-next"/></Button>
                         </ButtonToolbar>                    </Col>
                 </Row>
             </Grid>
@@ -53,4 +58,4 @@ const WorkStep1 = (props) => {
 
 }
 
-export default WorkStep1
+export default WarehouseStep1

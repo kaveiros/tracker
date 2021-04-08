@@ -84,8 +84,8 @@ const DrawerHook = ({handleToggle, expand}) => {
                                 icon={<Icon icon="building" />}
                                 placement="rightStart"
                             >
-                                <Dropdown.Item href="/warehouse" eventKey="3-3">Προσθήκη υλικών αποθήκης</Dropdown.Item>
-                                <Dropdown.Item href="/materialsTab" eventKey="3-4">υλικά</Dropdown.Item>
+                                <Dropdown.Item href="/warehouse" eventKey="3-3">Προσθήκη υλικών</Dropdown.Item>
+                                <Dropdown.Item href="/warehouse-table" eventKey="3-4">Πίνακας υλικών</Dropdown.Item>
                             </Dropdown>
                             <Dropdown
                                 eventKey="4"

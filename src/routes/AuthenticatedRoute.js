@@ -1,12 +1,15 @@
 import React from 'react'
 import { Route, Redirect } from 'react-router-dom'
-const AuthenticatedRoute = ({ path, component: Component, user:user}) => {
+import LoginService from "../services/LoginService";
+const AuthenticatedRoute = ({ path, component: Component}) => {
 
+    const token = LoginService.getCurrentUser()
+    console.log(token)
     return (
         <Route
             path={path}
             render={props => {
-                if (!user) {
+                if (!token) {
                     return <Redirect to="/login" />
                 }
                 else {

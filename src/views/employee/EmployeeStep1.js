@@ -55,7 +55,7 @@ const EmployeeStep1 = (props) => {
                     <Col md={4} mdOffset={20}>
                     <ButtonToolbar>
                             <Button appearance="primary" color="green" disabled={hasValidationError}
-                                    onClick={handleStep(2)}>Επόμενο<Icon icon="page-next"/></Button>
+                                    onClick={handleStep(1)}>Επόμενο<Icon icon="page-next"/></Button>
                         </ButtonToolbar>                    </Col>
                 </Row>
             </Grid>

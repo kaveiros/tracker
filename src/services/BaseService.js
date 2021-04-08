@@ -23,4 +23,8 @@ export default class BaseService {
         return httpClient.get(`${this.url}/all`)
     }
 
+    update(data) {
+        return httpClient.post(`${this.url}/update`,data)
+    }
+
 }

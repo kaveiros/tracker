@@ -20,10 +20,6 @@ const GearStep2 = (props) => {
                                 <FormControl name="model" onChange={handleChange("model")} />
                             </FormGroup>
                             <FormGroup>
-                                <ControlLabel>Παραγωγή ανά ώρα</ControlLabel>
-                                <FormControl name="type" onChange={handleChange("type")} />
-                            </FormGroup>
-                            <FormGroup>
                                 <ControlLabel>Τμήμα</ControlLabel>
                                 <FormControl name="type" onChange={handleChange("type")} />
                             </FormGroup>

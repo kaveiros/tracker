@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Table, Column, HeaderCell, Cell } from 'rsuite-table';
+import { Table, Column } from 'rsuite-table';
 import { Panel, Header, Content, Breadcrumb } from 'rsuite'
 import 'rsuite-table/dist/css/rsuite-table.css'
 import TablePagination from 'rsuite/lib/Table/TablePagination';
@@ -26,40 +26,41 @@ const PersonnelTable = () => {
 
   const handleRow = (eve) => {
     console.log(eve)
-  } 
+  }
 
 
   useEffect(() => {
+    setLoading(true)
     const fetchPesonel = async () => {
-        EmployeeService.searchEmployees(null, currentPage)
+      EmployeeService.searchEmployees(null, currentPage)
+          .then(response => {
+            const data = response.data
+            setPersons(data.persons)
+            setCurrentPage(data.currentPage)
+            setPages(data.pages)
+            setRecords(data.records)
+            console.log(data)
+            setLoading(false)
 
-        //axios.get(baseUrl + "/personel/all/" + currentPage)
-        .then(response => {
-          const data = response.data
-          setPersons(data.persons)
-          setCurrentPage(data.currentPage)
-          setPages(data.pages)
-          setRecords(data.records)
-          console.log(data)
-
-        }).catch(error => {
-          setError(error.message)
-        })
+          }).catch(error => {
+        setLoading(false)
+        setError(error.message)
+      })
     }
     fetchPesonel()
   }, [currentPage])
 
 
   return (
-    <Panel bodyFill={true}>
-      <Header>
-        <Breadcrumb>
-          <Breadcrumb.Item href="/">Αρχική</Breadcrumb.Item>
-          <Breadcrumb.Item href="/materials" active>πινακας προσωπικού</Breadcrumb.Item>
-        </Breadcrumb>
-      </Header>
-      {error != null && <div>{error.message}</div>}
-      {persons && <Content>
+      <Panel bodyFill={true}>
+        <Header>
+          <Breadcrumb>
+            <Breadcrumb.Item href="/">Αρχική</Breadcrumb.Item>
+            <Breadcrumb.Item href="/materials" active>πινακας προσωπικού</Breadcrumb.Item>
+          </Breadcrumb>
+        </Header>
+        {error != null && <div>{error.message}</div>}
+        {persons && <Content>
           <Table autoHeight={true} data={persons} loading={loading} onRowClick={handleRow}>
             <Column width={100} align="center" fixed>
               <Table.HeaderCell>Id</Table.HeaderCell>
@@ -90,21 +91,21 @@ const PersonnelTable = () => {
               <Table.Cell dataKey="attribute1" />
             </Column>
           </Table>
-        <TablePagination
-          activePage={Number(currentPage)}
-          first={true}
-          last={true}
-          next={true}
-          prev={true}
-          pages={pages}
-          total={records}
-          showInfo={false}
-          boundaryLinks={true}
-          showLengthMenu={false}
-          onChangePage={handleChangePage}
-          onChangeLength={handleChangeLength}/>
-      </Content>}
-    </Panel>
+          <TablePagination
+              activePage={Number(currentPage)}
+              first={true}
+              last={true}
+              next={true}
+              prev={true}
+              pages={pages}
+              total={records}
+              showInfo={false}
+              boundaryLinks={true}
+              showLengthMenu={false}
+              onChangePage={handleChangePage}
+              onChangeLength={handleChangeLength}/>
+        </Content>}
+      </Panel>
   )
 
 }

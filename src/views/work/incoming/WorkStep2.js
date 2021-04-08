@@ -21,7 +21,7 @@ const WorkStep2 = (props) => {
                             </FormGroup>
                             <FormGroup>
                                 <ControlLabel>Περιγραφή</ControlLabel>
-                                <FormControl name="description"  value={description} onChange={handleChange('description')}
+                                <FormControl name="description" componentClass="textarea" rows={3} value={description} onChange={handleChange('description')}
                                              errorMessage={errors.description.errorMessage}/>
                             </FormGroup>
                             <FormGroup>
