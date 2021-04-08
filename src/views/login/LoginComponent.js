@@ -1,17 +1,22 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import { Grid, Panel, Row, Col, Input, InputGroup, Icon, Button } from 'rsuite'
 import './login.css'
 import LoginService from '../../services/LoginService'
 import { VALIDATOR_REQUIRED, validate } from '../../validator/Validators'
 import { REQUIRED_FIELD, LOGIN_ERROR } from '../../settings/MessageSettings'
 import TrackerMessage from '../common/TrackerMessage'
-import {Redirect, useHistory} from "react-router-dom";
-import useAuthHook from "../../hook/useAuthHook";
+import {useHistory} from "react-router-dom";
 
 const LoginComponent = () => {
 
-    const  { user} = useAuthHook()
     const history = useHistory()
+
+    useEffect(()=>{
+        const token = LoginService.getCurrentUser()
+        if (token) {
+            history.replace("/")
+        }
+    },[history])
 
     const styles = {
         position: 'relative',
@@ -20,12 +25,12 @@ const LoginComponent = () => {
         marginLeft: '25%'
     };
 
-    const [loginForm, setLogingForm] = useState({
+    const [loginForm, setLoggingForm] = useState({
         username: '',
         password: ''
     })
 
-    const [loginErrors, setLogingErrors] = useState({
+    const [loginErrors, setLoggingErrors] = useState({
         validUsername: '',
         validPassword: ''
     })
@@ -35,14 +40,14 @@ const LoginComponent = () => {
     const handleChange = (prop) => (evt) => {
 
         console.log(prop, evt)
-        setLogingForm({ ...loginForm, [prop]: evt })
+        setLoggingForm({ ...loginForm, [prop]: evt })
     }
 
     const handleBlur = (name, ...types) => (ev) => {
 
         console.log(ev)
         let result = validate(ev.target.value, types)
-        setLogingErrors({ ...loginErrors, [name]: result })
+        setLoggingErrors({ ...loginErrors, [name]: result })
     }
 
     const handleSubmit = (ev) => {
@@ -63,9 +68,7 @@ const LoginComponent = () => {
         })
     }
 
-    if (user[0]) {
-        return <Redirect to="/"/>
-    }
+
 
 
     return (

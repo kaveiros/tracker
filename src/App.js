@@ -1,8 +1,8 @@
-import React, {useCallback, useEffect, useState} from 'react';
+import React from 'react';
 import 'rsuite/dist/styles/rsuite-default.css';
 import IncomingWorkTab from './views/work/incoming/IncomingWorkTab'
 import EmployeeTab from '../src/views/employee/EmployeeTab'
-import InventoryTab from '../src/views/WarehouseTab'
+import WarehouseTab from './views/warehouse/WarehouseTab'
 import Dashboard from './views/dashboard/Dashboard'
 import LoginComponent from './views/login/LoginComponent'
 import PersonnelTable from './views/personel/PersonnelTable'
@@ -19,33 +19,31 @@ import GearTab from "./views/gear/GearTab";
 import EmployeeTable from "./views/employee/EmployeeTable";
 import AdditionalInfoTable from "./views/additionalInfo/AdditionalInfoTable";
 import OutgoingWorkTab from "./views/work/outgoing/OutgoingWorkTab";
-import useAuthHook from "./hook/useAuthHook";
+import WareHouseTable from "./views/warehouse/WareHouseTable";
 
 function App() {
-
-    const  { user} = useAuthHook()
-    console.log(user)
 
     return (
             <Container style={backgroundStyle}>
                 <SidebarPage />
                 <Switch>
-                    <AuthenticatedRoute path='/additional-info-pages' component={AdditionalInfoTable} user={user[0]}/>
-                    <AuthenticatedRoute path="/employeetab"  component={EmployeeTab} user={user[0]}/>
-                    <AuthenticatedRoute path="/employeeTable"  component={EmployeeTable} user={user[0]}/>
-                    <AuthenticatedRoute path="/materialsTab"  component={Materials} user={user[0]}/>
-                    <AuthenticatedRoute path="/incoming-work-tab"  component={IncomingWorkTab} user={user[0]}/>
-                    <AuthenticatedRoute path="/outgoing-work-tab"  component={OutgoingWorkTab} user={user[0]}/>
-                    <AuthenticatedRoute path="/warehouse"  component={InventoryTab} user={user[0]}/>
-                    <AuthenticatedRoute path="/adminPage" component={AdminPage} user={user[0]}/>
-                    <AuthenticatedRoute path="/personelTable"  component={PersonnelTable} user={user[0]}/>
-                    <AuthenticatedRoute path="/sector"  component={Sector} user={user[0]}/>
-                    <AuthenticatedRoute path="/tools"  component={GearTab} user={user[0]}/>
-                    <Route path="/not-found">
+                    <AuthenticatedRoute  path='/additional-info-pages' component={AdditionalInfoTable} />
+                    <AuthenticatedRoute  path="/employeetab"  component={EmployeeTab} />
+                    <AuthenticatedRoute  path="/employeeTable"  component={EmployeeTable} />
+                    {/*<AuthenticatedRoute  path="/materialsTab"  component={Materials} />*/}
+                    <AuthenticatedRoute  path="/warehouse-table" component={WareHouseTable}/>
+                    <AuthenticatedRoute  path="/incoming-work-tab"  component={IncomingWorkTab} />
+                    <AuthenticatedRoute  path="/outgoing-work-tab"  component={OutgoingWorkTab} />
+                    <AuthenticatedRoute  path="/warehouse"  component={WarehouseTab} />
+                    <AuthenticatedRoute  path="/adminPage" component={AdminPage} />
+                    <AuthenticatedRoute  path="/personelTable"  component={PersonnelTable} />
+                    <AuthenticatedRoute  path="/sector"  component={Sector} />
+                    <AuthenticatedRoute  path="/tools"  component={GearTab} />
+                    <Route exact path="/not-found">
                         <NotFound />
                     </Route>
                     <Route path="/login"  component={LoginComponent} />
-                    <AuthenticatedRoute path="/"  exact component={Dashboard} user={user[0]}/>
+                    <AuthenticatedRoute exact path="/" component={Dashboard} />
                     <Redirect to="/not-found" />
                 </Switch>
             </Container>

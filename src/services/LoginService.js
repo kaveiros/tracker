@@ -2,12 +2,16 @@ import {httpClient} from './http'
 
 class LoginService {
 
-    signIn(data) {
-         return httpClient.post('/user/signIn', data)
+    async signIn(data) {
+        return httpClient.post('/user/signIn', data)
     }
 
     getCurrentUser() {
-        return JSON.parse(localStorage.getItem("userData"))
+        const userData = JSON.parse(localStorage.getItem("userData"))
+        if (userData) {
+            return userData.token
+        }
+        return null
     }
 
     signOut() {

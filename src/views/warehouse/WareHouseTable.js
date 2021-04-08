@@ -3,15 +3,21 @@ import {Panel, Header, Content, Breadcrumb, Button, ButtonGroup, Notification} f
 import {Table, Column, HeaderCell, Cell} from 'rsuite-table';
 import 'rsuite-table/dist/css/rsuite-table.css'
 import TablePagination from 'rsuite/lib/Table/TablePagination';
-import EmployeeService from "../../services/EmployeeService";
 import DeleteModal from "../common/DeleteModal";
 import {useHistory, useLocation} from "react-router-dom";
+import {showErrorNotification, showSuccessNotification} from "../common/Notifications";
+import WarehouseService from '../../services/WarehouseService'
 
-const EmployeeTable = () => {
+const WareHouseTable = () => {
 
-    const [employeePage, setEmployeePage] = useState(1)
-    const [employees, setEmployees] = useState([])
-    const [employeeRecords, setEmployeeRecords] = useState(1)
+    const descriptionText = "Είστε σίγουροι ότι θέλετε να διαγράψετε το υλικό;"
+    const deleteErrorString = "Σφάλμα στη διαγραφή του υλικού."
+    const successString = "To υλικό διαγράφηκε"
+
+
+    const [warehousePage, setWarehousePage] = useState(1)
+    const [materials, setMaterials] = useState()
+    const [materialRecords, setMaterialRecords] = useState(1)
     const [error, setError] = useState("")
     const [loading, setLoading] = useState(false)
     const [pages, setPages] = useState(1)
@@ -19,6 +25,8 @@ const EmployeeTable = () => {
     const [rowData, setRowData] = useState()
     const location = useLocation()
     const history = useHistory()
+    const [deleted, setDeleted] = useState(false)
+    const warehouseService = new WarehouseService()
 
     const showDeleteModal = () => {
         setDeleteModal(true)
@@ -28,26 +36,22 @@ const EmployeeTable = () => {
         setDeleteModal(false)
     }
 
-    const descriptionText = "Είστε σίγουροι ότι θέλετε να διαγράψετε τον εργαζόμενο;"
-
-    const employeeErrorNotification = () => {Notification.error({description:"Σφάλμα στη διαγραφή του εργαζομένου.",
-        placement:"topStart", duration:4000})}
-
-    const employeeSuccessNotification = () => {Notification.success({description:"Ο εργαζόμενος διαγράφηκε.",
-        placement:"topStart", duration:4000})}
 
     const deleteRecordHandler = () => {
         console.log(rowData)
-        EmployeeService.deleteEmployee({data:rowData})
+        warehouseService.delete({data:rowData})
             .then(response=>{
                 console.log(response)
                 setDeleteModal(false)
-                employeeSuccessNotification()
+                setDeleted(true)
+                showSuccessNotification(successString)
+                setMaterials(materials.filter(material => material._id !== rowData._id))
             })
             .catch(err => {
                 console.log(err)
                 setDeleteModal(false)
-                employeeErrorNotification()
+                setDeleted(false)
+                showErrorNotification(deleteErrorString)
             })
     }
 
@@ -59,23 +63,27 @@ const EmployeeTable = () => {
 
     }
 
+    const dataChange = () => {
+        console.log("Data changed....")
+    }
+
     const handleRow = (eve) => {
-        console.log(eve)
-        location.pathname = "/employeetab"
+        location.pathname = "/warehouse"
         location.state = eve
         setRowData(eve)
     }
 
 
     useEffect(() => {
-        const fetchPesonnel = async () => {
+        const fetchMaterial = async () => {
             setLoading(true)
-            EmployeeService.searchEmployees(null, employeePage)
+            warehouseService.search(null, warehousePage)
                 .then(response => {
+                    console.log(response)
                     const data = response.data
-                    setEmployees(data.employees)
+                    setMaterials(data.materials)
                     setPages(data.pages)
-                    setEmployeeRecords(data.records)
+                    setMaterialRecords(data.records)
                     console.log(data)
                     setLoading(false)
                 }).catch(error => {
@@ -83,13 +91,13 @@ const EmployeeTable = () => {
                 setLoading(false)
             })
         }
-        fetchPesonnel()
-    }, [employeePage])
+        fetchMaterial()
+    }, [warehousePage])
 
 
     const employeeChangePage = (e) => {
 
-        setEmployeePage(e)
+        setWarehousePage(e)
         console.log(e)
     }
 
@@ -102,15 +110,15 @@ const EmployeeTable = () => {
             <Header>
                 <Breadcrumb>
                     <Breadcrumb.Item href="/">Αρχική</Breadcrumb.Item>
-                    <Breadcrumb.Item href="/materials" active>πινακας Εργαζομένων</Breadcrumb.Item>
+                    <Breadcrumb.Item href="/materialsTab" active>Πίνακας Υλικών</Breadcrumb.Item>
                 </Breadcrumb>
             </Header>
             {error != null && <div>{error.message}</div>}
-            {employees && <Content>
-                <Table autoHeight={true} data={employees} loading={loading} onRowClick={handleRow}>
+            {materials && <Content>
+                <Table autoHeight={true} data={materials} loading={loading} onRowClick={handleRow} onDataUpdated={dataChange}>
                     <Column width={120} align="center" fixed>
                         <HeaderCell>Αύξων αριθμός</HeaderCell>
-                        <Cell dataKey="aa" />
+                        <Cell  dataKey="aa"/>
                     </Column>
                     <Column width={100} align="center" fixed>
                         <HeaderCell>Κωδικός</HeaderCell>
@@ -118,13 +126,13 @@ const EmployeeTable = () => {
                     </Column>
 
                     <Column width={150} fixed>
-                        <HeaderCell>Διεύθυνση</HeaderCell>
-                        <Cell dataKey="address" />
+                        <HeaderCell>Περιγραφή</HeaderCell>
+                        <Cell dataKey="description" />
                     </Column>
 
                     <Column width={200} fixed>
-                        <HeaderCell>Όνομα</HeaderCell>
-                        <Cell dataKey="name" />
+                        <HeaderCell>Ποσότητα</HeaderCell>
+                        <Cell dataKey="quantity" />
                     </Column>
 
                     <Column width={100}>
@@ -137,24 +145,8 @@ const EmployeeTable = () => {
                         <Cell dataKey="sector" />
                     </Column>
                     <Column width={100}>
-                        <HeaderCell>Ειδικότητα</HeaderCell>
-                        <Cell dataKey="expertise" />
-                    </Column>
-                    <Column width={100}>
-                        <HeaderCell>Ιδιότητα</HeaderCell>
-                        <Cell dataKey="property" />
-                    </Column>
-                    <Column width={100}>
-                        <HeaderCell>Εξειδίκευση</HeaderCell>
-                        <Cell dataKey="specialisedIn" />
-                    </Column>
-                    <Column width={100}>
-                        <HeaderCell>Υπερωρία</HeaderCell>
-                        <Cell dataKey="costOvertime" />
-                    </Column>
-                    <Column width={100}>
-                        <HeaderCell>Κόστος/μέρα</HeaderCell>
-                        <Cell dataKey="costPerDay" />
+                        <HeaderCell>Παραλαβών</HeaderCell>
+                        <Cell dataKey="nameOfPersonAccepted" />
                     </Column>
 
                     <Column width={300}>
@@ -168,13 +160,13 @@ const EmployeeTable = () => {
                     </Column>
                 </Table>
                 <TablePagination
-                    activePage={Number(employeePage)}
+                    activePage={Number(warehousePage)}
                     first={true}
                     last={true}
                     next={true}
                     prev={true}
                     pages={pages}
-                    total={employeeRecords}
+                    total={materialRecords}
                     showInfo={false}
                     boundaryLinks={true}
                     showLengthMenu={false}
@@ -188,5 +180,5 @@ const EmployeeTable = () => {
 
 }
 
-export default EmployeeTable;
+export default WareHouseTable;
 
