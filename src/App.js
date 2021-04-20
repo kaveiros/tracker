@@ -21,6 +21,7 @@ import OutgoingWorkTab from "./views/work/outgoing/OutgoingWorkTab";
 import WareHouseTable from "./views/warehouse/WareHouseTable";
 import Section from "./views/section/Section";
 import SectorTable from "./views/sector/SectorsTable";
+import SectionsTable from "./views/section/SectionsTable";
 
 function App() {
 
@@ -41,6 +42,7 @@ function App() {
                     <AuthenticatedRoute  path="/sector"  component={Sector} />
                     <AuthenticatedRoute  path="/tools"  component={GearTab} />
                     <AuthenticatedRoute  path="/sector-table" component={SectorTable} />
+                    <AuthenticatedRoute  path="/section-table" component={SectionsTable}/>
                     <Route exact path="/not-found">
                         <NotFound />
                     </Route>

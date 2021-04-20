@@ -10,8 +10,6 @@ const AvatarHook = () => {
 
     const triggerRef = useRef(null);
     const [user, setUser] = useState()
-    //const  { user} = useAuthHook()
-
 
     function handleSelectMenu(eventKey, event) {
         console.log(eventKey);
@@ -23,9 +21,7 @@ const AvatarHook = () => {
         const token = LoginService.getCurrentUser()
 
         if (token) {
-             console.log(token);
             let decoded = jwt_decode(token);
-            // console.log(decoded)
             setUser(decoded)
         }
     },[])

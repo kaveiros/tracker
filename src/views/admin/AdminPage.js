@@ -26,7 +26,7 @@ const AdminPage = () => {
                             headerTitle={"Τμήματα"}
                             description={"Παρουσίαση όλων των τμημάτων"}
                             buttonTitle={"Περισσότερα..."}
-                            navigationLink={"/sectorTable"} />
+                            navigationLink={"/section-table"} />
                     </FlexboxGrid.Item>
                     <FlexboxGrid.Item componentClass={Col} colspan={24} md={6}>
                         <AdminCard
