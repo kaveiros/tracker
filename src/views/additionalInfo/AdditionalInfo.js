@@ -20,7 +20,7 @@ const AdditionalInfo = ({showModal, hideModal, uniqueVersion}) => {
     useEffect(()=>{
 
         setIsLoading(true)
-        SectorService.getAllSectors().then((resp)=>{
+        SectorService.getAll().then((resp)=>{
             let sectors = []
             for (let sec of resp.data){
                 let secData = {

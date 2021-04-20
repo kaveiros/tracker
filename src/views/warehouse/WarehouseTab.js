@@ -101,8 +101,7 @@ const WarehouseTab = () =>  {
     useEffect(()=> {
         setIsLoading(true)
         let sections = []
-        const sectionService = new SectionService()
-        sectionService.getAll().then(res => {
+        SectionService.getAll().then(res => {
             for (let sec of res.data) {
 
                 let sectionData = {

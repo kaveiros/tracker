@@ -1,9 +1,10 @@
 import BaseService from "./BaseService";
 
-export default class SectionService extends BaseService {
+class SectionService extends BaseService {
 
     constructor() {
         super('/section');
     }
 }
 
+export default new SectionService()
