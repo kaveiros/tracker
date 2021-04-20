@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import {Panel, Header, Content, Breadcrumb, Button, ButtonGroup, Notification} from 'rsuite'
+import {Panel, Header, Content, Breadcrumb, Button, ButtonGroup, Notification, Icon, IconButton} from 'rsuite'
 import {Table, Column, HeaderCell, Cell} from 'rsuite-table';
 import 'rsuite-table/dist/css/rsuite-table.css'
 import TablePagination from 'rsuite/lib/Table/TablePagination';
@@ -13,8 +13,6 @@ const WareHouseTable = () => {
     const descriptionText = "Είστε σίγουροι ότι θέλετε να διαγράψετε το υλικό;"
     const deleteErrorString = "Σφάλμα στη διαγραφή του υλικού."
     const successString = "To υλικό διαγράφηκε"
-
-
     const [warehousePage, setWarehousePage] = useState(1)
     const [materials, setMaterials] = useState()
     const [materialRecords, setMaterialRecords] = useState(1)
@@ -25,8 +23,6 @@ const WareHouseTable = () => {
     const [rowData, setRowData] = useState()
     const location = useLocation()
     const history = useHistory()
-    const [deleted, setDeleted] = useState(false)
-    const warehouseService = new WarehouseService()
 
     const showDeleteModal = () => {
         setDeleteModal(true)
@@ -39,18 +35,16 @@ const WareHouseTable = () => {
 
     const deleteRecordHandler = () => {
         console.log(rowData)
-        warehouseService.delete({data:rowData})
+        WarehouseService.delete({data:rowData})
             .then(response=>{
                 console.log(response)
                 setDeleteModal(false)
-                setDeleted(true)
                 showSuccessNotification(successString)
                 setMaterials(materials.filter(material => material._id !== rowData._id))
             })
             .catch(err => {
                 console.log(err)
                 setDeleteModal(false)
-                setDeleted(false)
                 showErrorNotification(deleteErrorString)
             })
     }
@@ -77,7 +71,7 @@ const WareHouseTable = () => {
     useEffect(() => {
         const fetchMaterial = async () => {
             setLoading(true)
-            warehouseService.search(null, warehousePage)
+            WarehouseService.search(null, warehousePage)
                 .then(response => {
                     console.log(response)
                     const data = response.data
@@ -153,8 +147,8 @@ const WareHouseTable = () => {
                         <HeaderCell>Περισσότερα</HeaderCell>
                         <Cell>
                             <ButtonGroup>
-                                <Button color="cyan" onClick={updateRecordHandler}>Τροποποίηση</Button>
-                                <Button color="red" onClick={showDeleteModal}>Διαγραφή</Button>
+                                <IconButton color="cyan" icon={<Icon icon="edit"/>} onClick={updateRecordHandler}/>
+                                <IconButton color="red" icon={<Icon icon="trash" />} onClick={showDeleteModal}/>
                             </ButtonGroup>
                         </Cell>
                     </Column>

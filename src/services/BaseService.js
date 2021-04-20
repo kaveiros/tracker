@@ -27,4 +27,7 @@ export default class BaseService {
         return httpClient.post(`${this.url}/update`,data)
     }
 
+    search(data, page) {
+        return httpClient.post(`${this.url}/search/`+page, data)
+    }
 }

@@ -4,8 +4,10 @@ import {
     FlexboxGrid
 } from 'rsuite'
 import AdminCard from '../card/AdminCard'
-import sector from '../../img/sector.jpg'
-import users from '../../img/people.jpg'
+import sector from '../../img/sector1.png'
+import user from '../../img/user.png'
+import section from '../../img/section.png'
+
 
 const AdminPage = () => {
 
@@ -20,15 +22,15 @@ const AdminPage = () => {
             <Content>
                 <FlexboxGrid justify="space-around">
                     <FlexboxGrid.Item componentClass={Col} colspan={24} md={6}>
-                        <AdminCard imgIcon={sector}
-                            headerTitle={"Τομείς"}
-                            description={"Παρουσίαση όλων των τομέων"}
+                        <AdminCard imgIcon={section}
+                            headerTitle={"Τμήματα"}
+                            description={"Παρουσίαση όλων των τμημάτων"}
                             buttonTitle={"Περισσότερα..."}
                             navigationLink={"/sectorTable"} />
                     </FlexboxGrid.Item>
                     <FlexboxGrid.Item componentClass={Col} colspan={24} md={6}>
                         <AdminCard
-                            imgIcon={users}
+                            imgIcon={user}
                             headerTitle={"Παρατηρήσεις"}
                             description={"Επιπλέον παρατηρήσεις"}
                             buttonTitle={"Περισσότερα..."}
@@ -36,7 +38,7 @@ const AdminPage = () => {
                     </FlexboxGrid.Item>
                     <FlexboxGrid.Item componentClass={Col} colspan={24} md={6} smHidden>
                         <AdminCard
-                            imgIcon={users}
+                            imgIcon={user}
                             headerTitle={"Χρήστες"}
                             description={"Παρουσίαση όλων των χρηστών"}
                             buttonTitle={"Περισσότερα..."}
@@ -49,11 +51,11 @@ const AdminPage = () => {
                             headerTitle={"Τομείς"}
                             description={"Παρουσίαση όλων των τομέων"}
                             buttonTitle={"Περισσότερα..."}
-                            navigationLink={"/sectorTable"} />
+                            navigationLink={"/sector-table"} />
                     </FlexboxGrid.Item>
                     <FlexboxGrid.Item componentClass={Col} colspan={24} md={6}>
                         <AdminCard
-                            imgIcon={users}
+                            imgIcon={user}
                             headerTitle={"Χρήστες"}
                             description={"Παρουσίαση όλων των χρηστών"}
                             buttonTitle={"Περισσότερα..."}
@@ -61,7 +63,7 @@ const AdminPage = () => {
                     </FlexboxGrid.Item>
                     <FlexboxGrid.Item componentClass={Col} colspan={24} md={6} smHidden>
                         <AdminCard
-                            imgIcon={users}
+                            imgIcon={user}
                             headerTitle={"Χρήστες"}
                             description={"Παρουσίαση όλων των χρηστών"}
                             buttonTitle={"Περισσότερα..."}

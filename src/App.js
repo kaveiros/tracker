@@ -9,7 +9,6 @@ import PersonnelTable from './views/personel/PersonnelTable'
 import { Container } from 'rsuite'
 import SidebarPage from './views/sidebar/SidebarPage'
 import { backgroundStyle } from '../src/style/Style'
-import Materials from './views/materials/MaterialTab'
 import NotFound from '../src/views/NotFound'
 import AdminPage from '../src/views/admin/AdminPage'
 import Sector from '../src/views/sector/Sector'
@@ -20,6 +19,8 @@ import EmployeeTable from "./views/employee/EmployeeTable";
 import AdditionalInfoTable from "./views/additionalInfo/AdditionalInfoTable";
 import OutgoingWorkTab from "./views/work/outgoing/OutgoingWorkTab";
 import WareHouseTable from "./views/warehouse/WareHouseTable";
+import Section from "./views/section/Section";
+import SectorTable from "./views/sector/SectorsTable";
 
 function App() {
 
@@ -30,7 +31,7 @@ function App() {
                     <AuthenticatedRoute  path='/additional-info-pages' component={AdditionalInfoTable} />
                     <AuthenticatedRoute  path="/employeetab"  component={EmployeeTab} />
                     <AuthenticatedRoute  path="/employeeTable"  component={EmployeeTable} />
-                    {/*<AuthenticatedRoute  path="/materialsTab"  component={Materials} />*/}
+                    <AuthenticatedRoute  path="/section"  component={Section} />
                     <AuthenticatedRoute  path="/warehouse-table" component={WareHouseTable}/>
                     <AuthenticatedRoute  path="/incoming-work-tab"  component={IncomingWorkTab} />
                     <AuthenticatedRoute  path="/outgoing-work-tab"  component={OutgoingWorkTab} />
@@ -39,6 +40,7 @@ function App() {
                     <AuthenticatedRoute  path="/personelTable"  component={PersonnelTable} />
                     <AuthenticatedRoute  path="/sector"  component={Sector} />
                     <AuthenticatedRoute  path="/tools"  component={GearTab} />
+                    <AuthenticatedRoute  path="/sector-table" component={SectorTable} />
                     <Route exact path="/not-found">
                         <NotFound />
                     </Route>

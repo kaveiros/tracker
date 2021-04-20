@@ -1,6 +1,6 @@
 import BaseService from "./BaseService";
 
- export default class WarehouseService extends BaseService {
+ class WarehouseService extends BaseService {
 
 
     constructor() {
@@ -8,4 +8,6 @@ import BaseService from "./BaseService";
     }
 
 }
+
+export default new WarehouseService()
 

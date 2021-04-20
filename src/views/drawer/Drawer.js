@@ -90,18 +90,20 @@ const DrawerHook = ({handleToggle, expand}) => {
                             <Dropdown
                                 eventKey="4"
                                 trigger="hover"
-                                title="Ρυθμίσεις"
+                                title="Διαχείριση"
                                 icon={<Icon icon="gear-circle" />}
                                 placement="rightStart"
                             >
                                 <Dropdown.Item componentClass="div" onSelect={handleToggle}>
                                     <Link className="rs-dropdown-item-content" style={{ textDecoration: 'none' }} to="/adminPage">
-                                        Διαχείριση
+                                        Πίνακες
                                     </Link>
                                 </Dropdown.Item>
                                 <Dropdown.Item componentClass="div" onSelect={handleToggle}>
-                                    <Link className="rs-dropdown-item-content" style={{ textDecoration: 'none' }} to="/sector">Τομείς</Link></Dropdown.Item>
-                            </Dropdown>
+                                    <Link className="rs-dropdown-item-content" style={{ textDecoration: 'none' }} to="/sector">Προσθήκη τομέα</Link></Dropdown.Item>
+                            <Dropdown.Item componentClass="div" onSelect={handleToggle}>
+                                <Link className="rs-dropdown-item-content" style={{ textDecoration: 'none' }} to="/section">Προσθήκη τμήματος</Link></Dropdown.Item>
+                        </Dropdown>
                         </Nav>
 
                     </Sidenav.Body>
