@@ -10,10 +10,12 @@ import {useLocation} from "react-router-dom";
 import WarehouseService from "../../services/WarehouseService";
 import {showSaveErrorNotification, showSuccessNotification} from "../common/Notifications";
 import SectorService from "../../services/SectorService";
+import SectionService from "../../services/SectionService";
 
 const WarehouseTab = () =>  {
 
-    const successString = 'Το υλικό αποθηκεύτικε'
+    const successString = 'Το υλικό αποθηκεύτηκε'
+    const updateSuccessString = 'Το υλικό ενημερώθηκε.'
     const errorString = 'Σφάλμα στην αποθήκευση του υλικού'
     const [step, setStep] = React.useState(0);
     const uniqueVersion = useState(uuidv4())
@@ -70,7 +72,7 @@ const WarehouseTab = () =>  {
 
         //let ignore = false
 
-        SectorService.getAllSectors().then(response => {
+        SectorService.getAll().then(response => {
             setIsLoading(true)
             let sectors = []
             for (let sec of response.data){
@@ -97,21 +99,31 @@ const WarehouseTab = () =>  {
 
     //fetch sections
     useEffect(()=> {
+        setIsLoading(true)
         let sections = []
-        let secData = {
-            "label": "sector1",
-            "value": "sector1"
-        }
-        sections.push(secData)
-        setSections(sections)
+        const sectionService = new SectionService()
+        sectionService.getAll().then(res => {
+            for (let sec of res.data) {
+
+                let sectionData = {
+                    "label": sec.section,
+                    "value": sec.section
+                }
+                sections.push(sectionData)
+
+            }
+            setIsLoading(false)
+            setSections(sections)
+        }).catch(err => {
+            setIsLoading(false)
+        })
+
 
     },[])
 
 
     const handleChange = (name) => (event) => {
         //TO DO check for validation errors later
-        console.log(warehouseState)
-        console.log(name, "-----", event)
         setWarehouseState({...warehouseState, [name]: event})
     }
 
@@ -120,17 +132,23 @@ const WarehouseTab = () =>  {
         console.log("submitted->")
         console.log(warehouseState)
         setIsLoading(true)
-        const wareHouseService = new WarehouseService()
         if (isUpdating) {
             console.log("Updating.....")
-            wareHouseService.update(warehouseState).then(r => {
+            WarehouseService.update(warehouseState).then(r => {
                 console.log(r)
+                showSuccessNotification(updateSuccessString)
+                setStep(0)
+                setWarehouseState(initState)
                 setIsLoading(false)
-            }).catch(e=>{console.log(e)})
+            }).catch(e=>{
+                setErrors(initErrorState)
+                setIsLoading(false)
+                showSaveErrorNotification(errorString)
+                console.log(e)})
         }
         else {
 
-            wareHouseService.save(warehouseState).
+            WarehouseService.save(warehouseState).
             then(response => {
                 setIsLoading(false)
                 showSuccessNotification(successString)
