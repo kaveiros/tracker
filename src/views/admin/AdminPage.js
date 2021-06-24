@@ -3,7 +3,7 @@ import {
     Panel, Header, Breadcrumb, Content, Col,
     FlexboxGrid
 } from 'rsuite'
-import AdminCard from '../card/AdminCard'
+import AdminCard from '../Card/AdminCard'
 import sector from '../../img/sector1.png'
 import user from '../../img/user.png'
 import section from '../../img/section.png'
@@ -56,10 +56,11 @@ const AdminPage = () => {
                     <FlexboxGrid.Item componentClass={Col} colspan={24} md={6}>
                         <AdminCard
                             imgIcon={user}
-                            headerTitle={"Χρήστες"}
-                            description={"Παρουσίαση όλων των χρηστών"}
+                            headerTitle={"Ρόλοι"}
+                            description={"Παρουσίαση όλων των ρόλων"}
                             buttonTitle={"Περισσότερα..."}
-                            navigationLink={"/sector"} />
+
+                            navigationLink={"/role"} />
                     </FlexboxGrid.Item>
                     <FlexboxGrid.Item componentClass={Col} colspan={24} md={6} smHidden>
                         <AdminCard
