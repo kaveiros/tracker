@@ -1,8 +1,23 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import { Nav, Sidenav, Icon, Dropdown, Drawer, } from 'rsuite'
 import { Link } from 'react-router-dom';
+import LoginService from "../../services/LoginService";
+import jwt_decode from "jwt-decode";
 
 const DrawerHook = ({handleToggle, expand}) => {
+
+    const [isAdmin, setIsAdmin] = useState(false)
+
+    useEffect(()=>{
+        const token = LoginService.getCurrentUser()
+        const decodedToken = jwt_decode(token)
+        console.log("ROLE ->",decodedToken.role)
+        if (decodedToken.role==="ADMIN") {
+            setIsAdmin(true)
+        }
+    },[])
+
+
 
     return(
         <Drawer
@@ -49,9 +64,9 @@ const DrawerHook = ({handleToggle, expand}) => {
                                 <Dropdown.Item componentClass="div" onSelect={handleToggle}>
                                     <Link className="rs-dropdown-item-content" style={{ textDecoration: 'none' }} to="/outgoing-work-tab">Προσθήκη εξερχομένου</Link>
                                 </Dropdown.Item>
-                                <Dropdown.Item componentClass="div" onSelect={handleToggle}>
+                                { isAdmin && <Dropdown.Item componentClass="div" onSelect={handleToggle}>
                                     <Link className="rs-dropdown-item-content" style={{ textDecoration: 'none' }} to="/outgoingWorkTable">Πίνακας εξερχομένων</Link>
-                                </Dropdown.Item>
+                                </Dropdown.Item>}
                             </Dropdown>
                             <Dropdown
                                 eventKey="31"

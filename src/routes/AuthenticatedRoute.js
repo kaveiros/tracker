@@ -1,9 +1,14 @@
 import React from 'react'
 import { Route, Redirect } from 'react-router-dom'
 import LoginService from "../services/LoginService";
-const AuthenticatedRoute = ({ path, component: Component}) => {
+import jwt_decode from "jwt-decode";
+const AuthenticatedRoute = ({ path, roles, component: Component}) => {
 
     const token = LoginService.getCurrentUser()
+    const decodedToken = jwt_decode(token)
+    console.log(roles)
+    console.log(decodedToken.role)
+
     return (
         <Route
             path={path}
@@ -11,8 +16,11 @@ const AuthenticatedRoute = ({ path, component: Component}) => {
                 if (!token) {
                     return <Redirect to="/login" />
                 }
-                else {
+                if(roles.includes(decodedToken.role)){
                     return <Component {...props} />
+                }
+                else {
+                    return <Redirect to="/permissions" />
                 }
             }}
         />

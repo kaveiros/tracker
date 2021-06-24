@@ -39,13 +39,11 @@ const LoginComponent = () => {
 
     const handleChange = (prop) => (evt) => {
 
-        console.log(prop, evt)
         setLoggingForm({ ...loginForm, [prop]: evt })
     }
 
     const handleBlur = (name, ...types) => (ev) => {
 
-        console.log(ev)
         let result = validate(ev.target.value, types)
         setLoggingErrors({ ...loginErrors, [name]: result })
     }
@@ -53,10 +51,8 @@ const LoginComponent = () => {
     const handleSubmit = (ev) => {
         ev.preventDefault()
         setLoginError(null)
-        console.log(loginForm)
         LoginService.signIn(loginForm)
             .then((response) => {
-                console.log(response)
                 let token = response.data.token
                 localStorage.setItem('userData',
                     JSON.stringify({
