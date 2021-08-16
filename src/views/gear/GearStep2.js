@@ -26,7 +26,7 @@ const GearStep2 = (props) => {
                                 <Form.Control name="type" onChange={handleChange("type")} />
                             </Form.Group>
                         </Col>
-                        <Col xs={24} sm={12} md={8} lg={6}>''</Col>
+                        <Col xs={24} sm={12} md={8} lg={6}/>
                     </Row>
                     <Row>
 

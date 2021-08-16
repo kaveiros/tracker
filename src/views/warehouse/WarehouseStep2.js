@@ -54,7 +54,7 @@ const WarehouseStep2 = (props) => {
                             </Form.Group>
                             <Form.Group>
                                 <ButtonToolbar>
-                                    <Button color="violet" onClick={handleStep(0)}><PagePreviousIcon/>Πίσω</Button>
+                                    <Button appearance="primary" color="violet" onClick={handleStep(0)}><PagePreviousIcon/>Πίσω</Button>
                                     <Button appearance="primary" color="cyan" onClick={showModalHandler}> <InfoRoundIcon/> Παρατηρήσεις</Button>
                                     <Button appearance="primary" color="green" onClick={handleSubmit}> <CheckIcon /> Υποβολή</Button>
                                     <Button appearance="primary" color="red"  onClick={handleStep(0)}><BlockIcon /> Ακύρωση</Button>

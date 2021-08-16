@@ -9,9 +9,7 @@ import LoginService from "../../services/LoginService";
 const SidebarPage = () => {
 
   const [open, setOpen] = useState(false)
-
   let history = useHistory();
-
 
   const handleToggle = () => {
     setOpen(!open)

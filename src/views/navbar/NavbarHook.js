@@ -1,10 +1,9 @@
 import React from 'react' 
 import { Nav, Navbar } from 'rsuite'
 import AvatarHook from '../avatar/AvatarHook'
-import BarChartIcon from '@rsuite/icons/BarChart';
 import NoticeIcon from '@rsuite/icons/Notice';
 import ExitIcon from '@rsuite/icons/Exit';
-
+import MenuIcon from '@rsuite/icons/Menu';
 
 
 
@@ -14,7 +13,7 @@ const NavbarHook = ({handleToggle, logoutHandler}) => {
         <Navbar appearance="subtle" className="nav-toggle">
           <Nav>
             <Nav.Item onClick={handleToggle}>
-              <BarChartIcon />
+                <MenuIcon/>
             </Nav.Item>
           </Nav>
           <Nav pullRight>

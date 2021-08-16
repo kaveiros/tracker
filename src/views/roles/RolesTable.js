@@ -1,10 +1,9 @@
-import {Breadcrumb, ButtonGroup, Content, Header, IconButton, Pagination, Panel} from "rsuite";
+import {Breadcrumb, ButtonGroup, Content, Header, IconButton, Pagination, Panel, Table} from "rsuite";
 import React, {useEffect, useState} from "react";
 import RoleService from "../../services/RoleService";
 import {useHistory, useLocation} from "react-router-dom";
 import SectionService from "../../services/SectionService";
 import {showErrorNotification, showSuccessNotification} from "../common/Notifications";
-import {Cell, Column, HeaderCell, Table} from "rsuite-table";
 import DeleteModal from "../common/DeleteModal";
 import EditIcon from "@rsuite/icons/Edit";
 import TrashIcon from "@rsuite/icons/Trash";
@@ -105,29 +104,30 @@ const SectionsTable = () => {
             <Header>
                 <Breadcrumb>
                     <Breadcrumb.Item href="/">Αρχική</Breadcrumb.Item>
+                    <Breadcrumb.Item href="/adminPage">Διαχείριση</Breadcrumb.Item>
                     <Breadcrumb.Item href="/roles-table" active>πίνακας ρόλων</Breadcrumb.Item>
                 </Breadcrumb>
             </Header>
             {error != null && <div>{error.message}</div>}
             {roles && <Content>
                 <Table autoHeight={true} data={roles} loading={loading} onRowClick={handleRow}>
-                    <Column width={200} align="center" fixed>
-                        <HeaderCell>Ρόλος</HeaderCell>
-                        <Cell dataKey="name" />
-                    </Column>
-                    <Column width={200} align="center" fixed>
-                        <HeaderCell>ID</HeaderCell>
-                        <Cell dataKey="_id" />
-                    </Column>
-                    <Column width={100}>
-                        <HeaderCell></HeaderCell>
-                        <Cell>
+                    <Table.Column width={200} align="center" fixed>
+                        <Table.HeaderCell>Ρόλος</Table.HeaderCell>
+                        <Table.Cell dataKey="name" />
+                    </Table.Column>
+                    <Table.Column width={200} align="center" fixed>
+                        <Table.HeaderCell>ID</Table.HeaderCell>
+                        <Table.Cell dataKey="_id" />
+                    </Table.Column>
+                    <Table.Column width={100}>
+                        <Table.HeaderCell/>
+                        <Table.Cell>
                             <ButtonGroup>
-                                <IconButton icon={<EditIcon/>} color="cyan" onClick={updateRecordHandler}/>
-                                <IconButton icon={<TrashIcon/>} color="red" onClick={showDeleteModal}/>
+                                <IconButton icon={<EditIcon/>} appearance="primary" color="cyan" onClick={updateRecordHandler}/>
+                                <IconButton icon={<TrashIcon/>} appearance="primary" color="red" onClick={showDeleteModal}/>
                             </ButtonGroup>
-                        </Cell>
-                    </Column>
+                        </Table.Cell>
+                    </Table.Column>
                 </Table>
                 <Pagination
                     activePage={Number(currentPage)}
@@ -137,11 +137,9 @@ const SectionsTable = () => {
                     prev={true}
                     pages={pages}
                     total={records}
-                    showInfo={false}
                     boundaryLinks={true}
-                    showLengthMenu={false}
                     onChangePage={handleChangePage}
-                    onChangeLength={handleChangeLength} />
+                    onChangeLimit={handleChangeLength} />
             </Content>}
             {deleteModal && <DeleteModal showDeleteModal={deleteModal} hideDeleteModal = {hideDeleteModal} deleteRecordHandler = {deleteRecordHandler}
                                          descriptionText = {descriptionText}/>}

@@ -1,14 +1,14 @@
 import React, {useEffect, useState} from 'react'
-import { Grid, Panel, Row, Col, Input, InputGroup, Button, Form } from 'rsuite'
+import {Grid, Panel, Row, Col, Input, InputGroup, Button, toaster} from 'rsuite'
 import './login.css'
 import LoginService from '../../services/LoginService'
 import { VALIDATOR_REQUIRED, validate } from '../../validator/Validators'
-import { REQUIRED_FIELD, LOGIN_ERROR } from '../../settings/MessageSettings'
+import { REQUIRED_FIELD} from '../../settings/MessageSettings'
 import TrackerMessage from '../common/TrackerMessage'
 import {useHistory} from "react-router-dom";
-import DangerIcon from '@rsuite/icons/Danger';
-import GearIcon from '@rsuite/icons/Gear';
-
+import OthersIcon from '@rsuite/icons/Others';
+import MemberIcon from '@rsuite/icons/Member';
+import {showErrorNotification} from "../common/Notifications";
 
 
 const LoginComponent = () => {
@@ -39,8 +39,6 @@ const LoginComponent = () => {
         validPassword: ''
     })
 
-    const [loginError, setLoginError] = useState(null)
-
     const handleChange = (prop) => (evt) => {
 
         setLoggingForm({ ...loginForm, [prop]: evt })
@@ -54,35 +52,34 @@ const LoginComponent = () => {
 
     const handleSubmit = (ev) => {
         ev.preventDefault()
-        setLoginError(null)
         LoginService.signIn(loginForm)
             .then((response) => {
+                console.log(response)
                 let token = response.data.token
                 localStorage.setItem('userData',
                     JSON.stringify({
                         token
                     }))
                 history.replace("/")
-            }).catch((err) => {
-            setLoginError(err)
+            }).catch(err => {
+            let errorResponse = err.response.data
+            console.log(errorResponse)
+            toaster.push(showErrorNotification(errorResponse), {placement:"topStart"})
         })
     }
 
 
-
-
     return (
         <div className="html">
-            {loginError && <TrackerMessage type="error" description={LOGIN_ERROR} />}
             <Grid fluid>
                 <Row className="show-grid">
-                    <Col xs={8} xsOffset={16}>''</Col>
+                    <Col xs={8} xsOffset={16}/>
                     <Col xs={8} xsOffset={16}>
                         <Panel bordered shaded header="Tracker" className="backgroundStyle">
                             <form onSubmit={handleSubmit}>
                                 <InputGroup style={styles}>
                                     <InputGroup.Addon>
-                                        <DangerIcon/>
+                                        <MemberIcon/>
                                     </InputGroup.Addon>
                                     <Input name="username" onChange={handleChange('username')} onBlur={handleBlur('validUsername', VALIDATOR_REQUIRED)} />
                                 </InputGroup>
@@ -92,7 +89,7 @@ const LoginComponent = () => {
                                 />}
                                 <InputGroup style={styles}>
                                     <InputGroup.Addon>
-                                        <GearIcon  />
+                                        <OthersIcon />
                                     </InputGroup.Addon>
                                     <Input name="password" type="password" onChange={handleChange('password')} onBlur={handleBlur('validPassword', VALIDATOR_REQUIRED)} />
                                 </InputGroup>
@@ -104,11 +101,9 @@ const LoginComponent = () => {
                             </form>
                         </Panel>
                     </Col>
-                    <Col xs={8} xsOffset={16}>''</Col>
                 </Row>
             </Grid>
         </div>
-
     )
 
 }

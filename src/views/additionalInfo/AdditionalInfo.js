@@ -138,7 +138,7 @@ const AdditionalInfo = ({showModal, hideModal, uniqueVersion}) => {
                     <Form.ControlLabel>Προς Τομέα: </Form.ControlLabel>
                     <SelectPicker data={toSectorInitialData} onChange={handleToSector}/>
                     <Divider/>
-                    <Input componentClass="textarea" value={comments} onChange={handleComments} rows={3} placeholder="Σχόλια" />
+                    <Input as="textarea" value={comments} onChange={handleComments} rows={3} placeholder="Σχόλια" />
                     <Divider/>
                     <div className="rs-uploader rs-uploader-text">
                         <input type="file" ref={inputFile} multiple={true} name="documents" style={{display:'none'}}

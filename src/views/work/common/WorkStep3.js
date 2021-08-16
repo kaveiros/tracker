@@ -1,8 +1,9 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import {
     Form, Row, Col, Button,
      Grid, ButtonToolbar, SelectPicker
 } from 'rsuite'
+import SectorService from '../../../services/SectorService';
 import AdditionalInfo from "../../additionalInfo/AdditionalInfo";
 import PagePreviousIcon from "@rsuite/icons/PagePrevious";
 import InfoRoundIcon from "@rsuite/icons/InfoRound";
@@ -29,6 +30,16 @@ const WorkStep3 = (props) => {
         "label":  "τομέας1",
         "value": "τομέας1"
     }]
+
+    /**
+     * 
+     */
+    useEffect(()=>{
+        SectorService.getAll().then(response => {
+            console.log(response)
+        }).catch(err => {console.error(err);})
+
+    },[])
 
     return (
         <React.Fragment>

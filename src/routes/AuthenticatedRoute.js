@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {Component} from 'react'
 import { Route, Redirect } from 'react-router-dom'
 import LoginService from "../services/LoginService";
 import jwt_decode from "jwt-decode";
@@ -11,7 +11,7 @@ const AuthenticatedRoute = ({ path, roles, component: Component}) => {
         //console.log(decodedToken.role)
 
     }
-    console.log(roles)
+    //console.log(roles)
 
     return (
         <Route

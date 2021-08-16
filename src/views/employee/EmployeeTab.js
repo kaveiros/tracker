@@ -2,7 +2,7 @@ import React, {useEffect} from 'react'
 import { useState } from 'react'
 import {
   Content, Breadcrumb, Header, Steps,
-  Panel, Notification, Loader,
+  Panel,
 } from 'rsuite'
 import EmployeeStep1 from './EmployeeStep1'
 import EmployeeStep2 from './EmployeeStep2'
@@ -10,7 +10,7 @@ import { Schema } from 'rsuite';
 import { v4 as uuidv4 } from 'uuid';
 import EmployeeService from "../../services/EmployeeService";
 import {useLocation} from "react-router-dom";
-import {showErrorNotification, showSaveErrorNotification, showSuccessNotification} from "../common/Notifications";
+import {showErrorNotification, showSuccessNotification} from "../common/Notifications";
 import LoaderHook from "../common/LoaderHook";
 
 const { StringType, NumberType } = Schema.Types;
@@ -124,7 +124,7 @@ const EmployeeTab = () => {
             setIsLoading(false)
             setEmployeeState(initialState)
             setErrors(initialErrorState)
-            showSaveErrorNotification(saveErrorString)
+            showErrorNotification(saveErrorString)
           })
     }
   }

@@ -11,7 +11,7 @@ const EmployeeStep1 = (props) => {
         <Form fluid={true}>
             <Grid fluid={true}>
                 <Row className="show-grid">
-                    <Col xs={24} sm={12} md={8} lg={6}>''</Col>
+                    <Col xs={24} sm={12} md={8} lg={6}/>
                     <Col xs={24} sm={12} md={8} lg={12}>
                         <Form.Group>
                             <Form.ControlLabel>Α/Α</Form.ControlLabel>
@@ -43,12 +43,12 @@ const EmployeeStep1 = (props) => {
                         </Form.Group>
 
                     </Col>
-                    <Col xs={24} sm={12} md={8} lg={6}>''</Col>
+                    <Col xs={24} sm={12} md={8} lg={6}/>
                 </Row>
                 <Row>
-                    <Col xs={24} sm={12} md={8} lg={6}>''</Col>
-                    <Col xs={24} sm={12} md={8} lg={6}>''</Col>
-                    <Col xs={24} sm={12} md={8} lg={6}>''</Col>
+                    <Col xs={24} sm={12} md={8} lg={6}/>
+                    <Col xs={24} sm={12} md={8} lg={6}/>
+                    <Col xs={24} sm={12} md={8} lg={6}/>
                 </Row>
                 <Row className="show-grid">
                     <Col md={4} mdOffset={20}>
