@@ -1,6 +1,8 @@
 import React, {useEffect, useState} from 'react'
-import { Button, Panel, Form, Row, Header,
-    Breadcrumb, Content, Col, Grid} from 'rsuite'
+import {
+    Button, Panel, Form, Row, Header,
+    Breadcrumb, Content, Col, Grid, Divider
+} from 'rsuite'
 
 import {VALIDATOR_REQUIRED, validate} from '../../validator/Validators'
 import TrackerMessage from "../common/TrackerMessage";
@@ -73,6 +75,7 @@ const Sector = () => {
             <Header>
                 <Breadcrumb>
                     <Breadcrumb.Item href="/">Αρχική</Breadcrumb.Item>
+                    <Breadcrumb.Item href="/adminPage">Διαχείριση</Breadcrumb.Item>
                     <Breadcrumb.Item href="/sector" active>Τομέας</Breadcrumb.Item>
                 </Breadcrumb>
             </Header>
@@ -82,15 +85,14 @@ const Sector = () => {
                     <Form fluid={true} onSubmit={handleSubmit}>
                         <Grid fluid={true}>
                             <Row className="show-grid">
-                                <Col xs={24} sm={12} md={8} lg={6}></Col>
+                                <Col xs={24} sm={12} md={8} lg={6}/>
                                 <Col xs={24} sm={12} md={8} lg={12}>
                                     <Form.Group>
                                         <Form.ControlLabel>Τομέας</Form.ControlLabel>
                                         <Form.Control onChange={handleSectorChange('sector')} value={sectorState.sector} name='sector'/>
-                                        <Button type="submit" color="green">Αποθήκευση</Button>
+                                        <Button type="submit" appearance="primary" color="green">Αποθήκευση</Button>
                                     </Form.Group>
                                 </Col>
-                                <Col xs={24} sm={12} md={8} lg={6}></Col>
                             </Row>
                         </Grid>
                     </Form>

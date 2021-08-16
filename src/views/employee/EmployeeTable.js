@@ -1,10 +1,22 @@
 import React, { useEffect, useState } from 'react'
-import {Panel, Header, Content, Breadcrumb, Button, ButtonGroup, Notification, Pagination} from 'rsuite'
-import {Table, HeaderCell, Cell} from 'rsuite-table';
+import {
+    Panel,
+    Header,
+    Content,
+    Breadcrumb,
+    Button,
+    ButtonGroup,
+    Notification,
+    Pagination,
+    Table,
+    IconButton
+} from 'rsuite'
 import 'rsuite-table/dist/css/rsuite-table.css'
 import EmployeeService from "../../services/EmployeeService";
 import DeleteModal from "../common/DeleteModal";
 import {useHistory, useLocation} from "react-router-dom";
+import EditIcon from "@rsuite/icons/Edit";
+import TrashIcon from "@rsuite/icons/Trash";
 
 const EmployeeTable = () => {
 
@@ -108,62 +120,62 @@ const EmployeeTable = () => {
             {employees && <Content>
                 <Table autoHeight={true} data={employees} loading={loading} onRowClick={handleRow}>
                     <Table.Column width={120} align="center" fixed>
-                        <HeaderCell>Αύξων αριθμός</HeaderCell>
-                        <Cell dataKey="aa" />
+                        <Table.HeaderCell>Αύξων αριθμός</Table.HeaderCell>
+                        <Table.Cell dataKey="aa" />
                     </Table.Column>
                     <Table.Column width={100} align="center" fixed>
-                        <HeaderCell>Κωδικός</HeaderCell>
-                        <Cell dataKey="code" />
+                        <Table.HeaderCell>Κωδικός</Table.HeaderCell>
+                        <Table.Cell dataKey="code" />
                     </Table.Column>
 
                     <Table.Column width={150} fixed>
-                        <HeaderCell>Διεύθυνση</HeaderCell>
-                        <Cell dataKey="address" />
+                        <Table.HeaderCell>Διεύθυνση</Table.HeaderCell>
+                        <Table.Cell dataKey="address" />
                     </Table.Column>
 
                     <Table.Column width={200} fixed>
-                        <HeaderCell>Όνομα</HeaderCell>
-                        <Cell dataKey="name" />
+                        <Table.HeaderCell>Όνομα</Table.HeaderCell>
+                        <Table.Cell dataKey="name" />
                     </Table.Column>
 
                     <Table.Column width={100}>
-                        <HeaderCell>Τμήμα</HeaderCell>
-                        <Cell dataKey="section" />
+                        <Table.HeaderCell>Τμήμα</Table.HeaderCell>
+                        <Table.Cell dataKey="section" />
                     </Table.Column>
 
                     <Table.Column width={200}>
-                        <HeaderCell>Τομέας</HeaderCell>
-                        <Cell dataKey="sector" />
+                        <Table.HeaderCell>Τομέας</Table.HeaderCell>
+                        <Table.Cell dataKey="sector" />
                     </Table.Column>
                     <Table.Column width={100}>
-                        <HeaderCell>Ειδικότητα</HeaderCell>
-                        <Cell dataKey="expertise" />
+                        <Table.HeaderCell>Ειδικότητα</Table.HeaderCell>
+                        <Table.Cell dataKey="expertise" />
                     </Table.Column>
                     <Table.Column width={100}>
-                        <HeaderCell>Ιδιότητα</HeaderCell>
-                        <Cell dataKey="property" />
+                        <Table.HeaderCell>Ιδιότητα</Table.HeaderCell>
+                        <Table.Cell dataKey="property" />
                     </Table.Column>
                     <Table.Column width={100}>
-                        <HeaderCell>Εξειδίκευση</HeaderCell>
-                        <Cell dataKey="specialisedIn" />
+                        <Table.HeaderCell>Εξειδίκευση</Table.HeaderCell>
+                        <Table.Cell dataKey="specialisedIn" />
                     </Table.Column>
                     <Table.Column width={100}>
-                        <HeaderCell>Υπερωρία</HeaderCell>
-                        <Cell dataKey="costOvertime" />
+                        <Table.HeaderCell>Υπερωρία</Table.HeaderCell>
+                        <Table.Cell dataKey="costOvertime" />
                     </Table.Column>
                     <Table.Column width={100}>
-                        <HeaderCell>Κόστος/μέρα</HeaderCell>
-                        <Cell dataKey="costPerDay" />
+                        <Table.HeaderCell>Κόστος/μέρα</Table.HeaderCell>
+                        <Table.Cell dataKey="costPerDay" />
                     </Table.Column>
 
                     <Table.Column width={300}>
-                        <HeaderCell>Περισσότερα</HeaderCell>
-                        <Cell>
+                        <Table.HeaderCell>Περισσότερα</Table.HeaderCell>
+                        <Table.Cell>
                             <ButtonGroup>
-                                <Button color="cyan" onClick={updateRecordHandler}>Τροποποίηση</Button>
-                                <Button color="red" onClick={showDeleteModal}>Διαγραφή</Button>
+                                <IconButton icon={<EditIcon/>} appearance="primary"color="cyan" onClick={updateRecordHandler}/>
+                                <IconButton icon={<TrashIcon/>} appearance="primary" color="red" onClick={showDeleteModal}/>
                             </ButtonGroup>
-                        </Cell>
+                        </Table.Cell>
                     </Table.Column>
                 </Table>
                 <Pagination

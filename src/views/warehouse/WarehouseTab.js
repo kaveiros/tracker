@@ -8,7 +8,7 @@ import WarehouseStep1 from "./WarehouseStep1";
 import WarehouseStep2 from "./WarehouseStep2";
 import {useLocation} from "react-router-dom";
 import WarehouseService from "../../services/WarehouseService";
-import {showSaveErrorNotification, showSuccessNotification} from "../common/Notifications";
+import {showErrorNotification, showSuccessNotification} from "../common/Notifications";
 import SectorService from "../../services/SectorService";
 import SectionService from "../../services/SectionService";
 
@@ -142,7 +142,7 @@ const WarehouseTab = () =>  {
             }).catch(e=>{
                 setErrors(initErrorState)
                 setIsLoading(false)
-                showSaveErrorNotification(errorString)
+                showErrorNotification(errorString)
                 console.log(e)})
         }
         else {
@@ -157,7 +157,7 @@ const WarehouseTab = () =>  {
                 setIsLoading(false)
                 setWarehouseState(initState)
                 setErrors(initErrorState)
-                showSaveErrorNotification(errorString)
+                showErrorNotification(errorString)
             })
         }
 

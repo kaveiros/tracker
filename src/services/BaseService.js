@@ -12,7 +12,12 @@ export default class BaseService {
     }
 
     search(data, page) {
-        return httpClient.post(`${this.url}/search/`+page, data)
+        if (page !== undefined) {
+            return httpClient.post(`${this.url}/search/`+page, data)
+        }
+        else {
+            return httpClient.post(`${this.url}/search`, data)
+        }
     }
 
     delete(data) {

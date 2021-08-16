@@ -1,5 +1,4 @@
-import {Breadcrumb, ButtonGroup, Content, Header, IconButton, Pagination, Panel} from "rsuite";
-import {Cell, HeaderCell, Table} from "rsuite-table";
+import {Breadcrumb, ButtonGroup, Content, Header, IconButton, Pagination, Panel, Table} from "rsuite";
 import DeleteModal from "../common/DeleteModal";
 import React, {useEffect, useState} from "react";
 import {useHistory, useLocation} from "react-router-dom";
@@ -105,6 +104,7 @@ const SectionsTable = () => {
             <Header>
                 <Breadcrumb>
                     <Breadcrumb.Item href="/">Αρχική</Breadcrumb.Item>
+                    <Breadcrumb.Item href="/adminPage">Διαχείριση</Breadcrumb.Item>
                     <Breadcrumb.Item href="/section-table" active>πίνακας τμημάτων</Breadcrumb.Item>
                 </Breadcrumb>
             </Header>
@@ -112,21 +112,21 @@ const SectionsTable = () => {
             {sections && <Content>
                 <Table autoHeight={true} data={sections} loading={loading} onRowClick={handleRow}>
                     <Table.Column width={100} align="center" fixed>
-                        <HeaderCell>Τομέας</HeaderCell>
-                        <Cell dataKey="section" />
+                        <Table.HeaderCell>Τομέας</Table.HeaderCell>
+                        <Table.Cell dataKey="section" />
                     </Table.Column>
                     <Table.Column width={200} align="center" fixed>
-                        <HeaderCell>Δημιουργήθηκε</HeaderCell>
-                        <Cell dataKey="createdAt" />
+                        <Table.HeaderCell>Δημιουργήθηκε</Table.HeaderCell>
+                        <Table.Cell dataKey="createdAt" />
                     </Table.Column>
                     <Table.Column width={100}>
-                        <HeaderCell>''</HeaderCell>
-                        <Cell>
+                        <Table.HeaderCell>''</Table.HeaderCell>
+                        <Table.Cell>
                             <ButtonGroup>
-                                <IconButton icon={<EditIcon/>} color="cyan" onClick={updateRecordHandler}/>
-                                <IconButton icon={<TrashIcon/>} color="red" onClick={showDeleteModal}/>
+                                <IconButton appearance="primary" color="cyan" icon={<EditIcon/>}  onClick={updateRecordHandler}/>
+                                <IconButton appearance="primary" color="red" icon={<TrashIcon/>}  onClick={showDeleteModal}/>
                             </ButtonGroup>
-                        </Cell>
+                        </Table.Cell>
                     </Table.Column>
                 </Table>
                 <Pagination
@@ -137,11 +137,9 @@ const SectionsTable = () => {
                     prev={true}
                     pages={pages}
                     total={records}
-                    showInfo={false}
                     boundaryLinks={true}
-                    showLengthMenu={false}
                     onChangePage={handleChangePage}
-                    onChangeLength={handleChangeLength} />
+                    onChangeLimit={handleChangeLength} />
             </Content>}
             {deleteModal && <DeleteModal showDeleteModal={deleteModal} hideDeleteModal = {hideDeleteModal} deleteRecordHandler = {deleteRecordHandler}
                                          descriptionText = {descriptionText}/>}

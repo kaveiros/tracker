@@ -26,7 +26,7 @@ const RoleHook = () => {
         setShowModal(false)
     }
 
-    //load all users
+    //load all roles
     useEffect(()=>{
 
         setIsLoading(true)
@@ -49,6 +49,7 @@ const RoleHook = () => {
 
     },[])
 
+    //load all users
     useEffect(()=>{
         setIsLoading(true)
         UserService.getAll().then(response=>{

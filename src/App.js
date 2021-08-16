@@ -25,6 +25,8 @@ import SectionsTable from "./views/section/SectionsTable";
 import RoleHook from "./views/roles/RoleHook";
 import PermissionsModal from "./views/common/PermissionsModal";
 import RolesTable from "./views/roles/RolesTable";
+import User from "./views/user/User";
+import UserTable from "./views/user/UserTable";
 
 function App() {
 
@@ -46,8 +48,10 @@ function App() {
                     <AuthenticatedRoute  path="/tools"  component={GearTab} roles={["ADMIN", "MODERATOR"]}/>
                     <AuthenticatedRoute  path="/sector-table" component={SectorTable} roles={["ADMIN", "MODERATOR"]}/>
                     <AuthenticatedRoute  path="/section-table" component={SectionsTable} roles={["ADMIN", "MODERATOR"]}/>
-                    <AuthenticatedRoute path="/role" component={RoleHook}roles={["MOD", "MODERATOR"]} />
+                    <AuthenticatedRoute  path="/role" component={RoleHook}roles={["MOD", "MODERATOR"]} />
                     <AuthenticatedRoute  path="/roles-table" component={RolesTable} roles={["ADMIN", "MODERATOR"]}/>
+                    <AuthenticatedRoute  path="/user" component={User} roles={["ADMIN", "MODERATOR"]}/>
+                    <AuthenticatedRoute  path="/user-table" component={UserTable} roles={["ADMIN", "MODERATOR"]}/>
                     <Route exact path="/not-found">
                         <NotFound />
                     </Route>

@@ -1,7 +1,9 @@
-import React, {useEffect, useRef, useState} from 'react'
-import {Avatar, Whisper, Popover, Dropdown, Button} from 'rsuite'
+import React, {useEffect, useState} from 'react'
+import {Avatar, Whisper, Popover, Dropdown} from 'rsuite'
 import jwt_decode from "jwt-decode";
 import LoginService from "../../services/LoginService";
+import DoingRoundIcon from '@rsuite/icons/DoingRound';
+
 
 const selectedItemListener = (ev) => {
     console.log(ev)
@@ -25,20 +27,19 @@ const MenuPopover = React.forwardRef(({ onSelect, renderTitle:rendertitle,  user
 const AvatarHook = () => {
 
     const [user, setUser] = useState()
+    const token = LoginService.getCurrentUser()
+
     useEffect(() => {
-
-        const token = LoginService.getCurrentUser()
-
         if (token) {
             let decoded = jwt_decode(token);
             //console.log(decoded)
             setUser(decoded)
         }
-    },[])
+    },[token])
 
     const ref = React.useRef();
     const handleSelectMenu=(eventKey) =>( event) =>{
-        console.log(event);
+        //console.log(event);
         ref.current.close();
     }
     return (
@@ -49,7 +50,7 @@ const AvatarHook = () => {
             ref={ref}
             speaker={<MenuPopover onSelect={handleSelectMenu} user={user} />}
         >
-            <Avatar>File</Avatar>
+            <DoingRoundIcon/>
         </Whisper>
     );
 

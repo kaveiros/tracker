@@ -1,7 +1,6 @@
 import React from 'react'
 import { Nav, Sidenav, Dropdown, Drawer, } from 'rsuite'
 import DashboardIcon from '@rsuite/icons/Dashboard';
-import AdvancedAnalyticsIcon from '@rsuite/icons/AdvancedAnalytics';
 import ImportIcon from '@rsuite/icons/Import';
 import ToolsIcon from '@rsuite/icons/Tools';
 import StorageIcon from '@rsuite/icons/Storage';
@@ -10,8 +9,7 @@ import GearIcon from '@rsuite/icons/Gear';
 import MemberIcon from '@rsuite/icons/Member';
 
 
-
-const DrawerHook = ({handleToggle, open, isAdmin}) => {
+const DrawerHook = ({handleToggle, renderTitle:rendertitle, open, isAdmin}) => {
 
     return(
         <Drawer
@@ -21,28 +19,25 @@ const DrawerHook = ({handleToggle, open, isAdmin}) => {
             size="xs"
             onClose={handleToggle}>
             <Drawer.Header>
-                    <AdvancedAnalyticsIcon />
-                    Tracker
-
+                Tracker
             </Drawer.Header>
             <Drawer.Body>
                 <Sidenav>
                     <Sidenav.Body>
                         <Nav>
                             <Nav.Item href="/" icon={<DashboardIcon />} onSelect={handleToggle}>
-                               Αρχική
+                                Αρχική
                             </Nav.Item>
                             <Dropdown
-                                eventKey="34"
                                 trigger="hover"
                                 title="Εισερχόμενα 'Εργα"
                                 icon={<ImportIcon/>}
                                 placement="rightStart"
                             >
-                                <Dropdown.Item href="/incoming-work-tab" onSelect={handleToggle}>
+                                <Dropdown.Item  href="/incoming-work-tab" onSelect={handleToggle}>
                                     Προσθήκη εισερχόμενου
                                 </Dropdown.Item>
-                                <Dropdown.Item href="/incomingWorkTable" onSelect={handleToggle}>
+                                <Dropdown.Item  href="/incomingWorkTable" onSelect={handleToggle}>
                                     Πίνακας εισερχομένων
                                 </Dropdown.Item>
                             </Dropdown>
@@ -53,10 +48,10 @@ const DrawerHook = ({handleToggle, open, isAdmin}) => {
                                 icon={<ExportIcon/>}
                                 placement="rightStart"
                             >
-                                <Dropdown.Item href="/outgoing-work-tab" onSelect={handleToggle}>
+                                <Dropdown.Item  href="/outgoing-work-tab" onSelect={handleToggle}>
                                     Προσθήκη εξερχομένου
                                 </Dropdown.Item>
-                                { isAdmin && <Dropdown.Item href="/outgoingWorkTable" onSelect={handleToggle}>
+                                { isAdmin && <Dropdown.Item  href="/outgoingWorkTable" onSelect={handleToggle}>
                                     Πίνακας εξερχομένων
                                 </Dropdown.Item>}
                             </Dropdown>
@@ -67,10 +62,10 @@ const DrawerHook = ({handleToggle, open, isAdmin}) => {
                                 icon={<MemberIcon />}
                                 placement="rightStart"
                             >
-                                <Dropdown.Item href="/employeetab" onSelect={handleToggle}>
+                                <Dropdown.Item  href="/employeetab" onSelect={handleToggle}>
                                     Προσθήκη εργαζομένου
                                 </Dropdown.Item>
-                                <Dropdown.Item href="/employeeTable" onSelect={handleToggle}>
+                                <Dropdown.Item  href="/employeeTable" onSelect={handleToggle}>
                                     Πίνακας εργαζομένων
                                 </Dropdown.Item>
                             </Dropdown>
@@ -81,8 +76,8 @@ const DrawerHook = ({handleToggle, open, isAdmin}) => {
                                 icon={<ToolsIcon/>}
                                 placement="rightStart"
                             >
-                                <Dropdown.Item href="/tools" eventKey="3-4">Προσθήκη εργαλείου</Dropdown.Item>
-                                <Dropdown.Item href="/tools" eventKey="3-4">Πίνακας εργαλειών</Dropdown.Item>
+                                <Dropdown.Item  href="/tools" eventKey="3-4">Προσθήκη εργαλείου</Dropdown.Item>
+                                <Dropdown.Item  href="/tools" eventKey="3-4">Πίνακας εργαλειών</Dropdown.Item>
                             </Dropdown>
                             <Dropdown
                                 eventKey="365"
@@ -91,8 +86,8 @@ const DrawerHook = ({handleToggle, open, isAdmin}) => {
                                 icon={<StorageIcon/>}
                                 placement="rightStart"
                             >
-                                <Dropdown.Item href="/warehouse" eventKey="3-3">Προσθήκη υλικών</Dropdown.Item>
-                                <Dropdown.Item href="/warehouse-table" eventKey="3-4">Πίνακας υλικών</Dropdown.Item>
+                                <Dropdown.Item  href="/warehouse" eventKey="3-3">Προσθήκη υλικών</Dropdown.Item>
+                                <Dropdown.Item  href="/warehouse-table" eventKey="3-4">Πίνακας υλικών</Dropdown.Item>
                             </Dropdown>
                             <Dropdown
                                 eventKey="4"
@@ -101,17 +96,17 @@ const DrawerHook = ({handleToggle, open, isAdmin}) => {
                                 icon={<GearIcon />}
                                 placement="rightStart"
                             >
-                                <Dropdown.Item href="/adminPage" onSelect={handleToggle}>Πίνακες</Dropdown.Item>
-                                <Dropdown.Item href="/sector" onSelect={handleToggle}>Προσθήκη τομέα</Dropdown.Item>
-                            <Dropdown.Item href="/section" onSelect={handleToggle}>Προσθήκη τμήματος</Dropdown.Item>
-                        </Dropdown>
+                                <Dropdown.Item  href="/adminPage" onSelect={handleToggle}>Πίνακες</Dropdown.Item>
+                                <Dropdown.Item  href="/sector" onSelect={handleToggle}>Προσθήκη τομέα</Dropdown.Item>
+                                <Dropdown.Item  href="/section" onSelect={handleToggle}>Προσθήκη τμήματος</Dropdown.Item>
+                                <Dropdown.Item  href="/user" as="div" onSelect={handleToggle}>Προσθήκη χρήστη</Dropdown.Item>
+                            </Dropdown>
                         </Nav>
 
                     </Sidenav.Body>
                 </Sidenav>
             </Drawer.Body>
         </Drawer>
-
     )
 
 }

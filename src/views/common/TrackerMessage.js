@@ -8,8 +8,8 @@ const TrackerMessage = (props) => {
             showIcon
             type={type}
             closable
-            description={description}
-        />
+
+        >{description}</Message>
 
     )
 }

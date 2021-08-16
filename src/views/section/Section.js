@@ -46,6 +46,7 @@ const Section = () => {
             <Header>
                 <Breadcrumb>
                     <Breadcrumb.Item href="/">Αρχική</Breadcrumb.Item>
+                    <Breadcrumb.Item href="/adminPage">Διαχείριση</Breadcrumb.Item>
                     <Breadcrumb.Item href="/section" active>Τμήμα</Breadcrumb.Item>
                 </Breadcrumb>
             </Header>
@@ -54,15 +55,14 @@ const Section = () => {
                     <Form fluid={true} onSubmit={handleSubmit}>
                         <Grid fluid={true}>
                             <Row className="show-grid">
-                                <Col xs={24} sm={12} md={8} lg={6}>''</Col>
+                                <Col xs={24} sm={12} md={8} lg={6}/>
                                 <Col xs={24} sm={12} md={8} lg={12}>
                                     <Form.Group>
                                         <Form.ControlLabel>Τμήμα</Form.ControlLabel>
-                                        <Form.Control onChange={handleSectionChange} />
-                                        <Button type="submit" color="green">Αποθήκευση</Button>
+                                        <Form.Control name="sectionName" onChange={handleSectionChange} />
+                                        <Button type="submit" color="green" appearance="primary">Αποθήκευση</Button>
                                     </Form.Group>
                                 </Col>
-                                <Col xs={24} sm={12} md={8} lg={6}>''</Col>
                             </Row>
                         </Grid>
                     </Form>

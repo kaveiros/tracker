@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Table, HeaderCell, Cell } from 'rsuite-table';
-import {Panel, Header, Content, Breadcrumb, ButtonGroup, IconButton, Pagination} from 'rsuite'
+import {Panel, Header, Content, Breadcrumb, ButtonGroup, IconButton, Pagination, Table} from 'rsuite'
 import 'rsuite-table/dist/css/rsuite-table.css'
 import SectorService from '../../services/SectorService'
 import TrashIcon from '@rsuite/icons/Trash';
@@ -105,6 +104,7 @@ const SectorTable = () => {
             <Header>
                 <Breadcrumb>
                     <Breadcrumb.Item href="/">Αρχική</Breadcrumb.Item>
+                    <Breadcrumb.Item href="/adminPage">Διαχείριση</Breadcrumb.Item>
                     <Breadcrumb.Item href="/sectorTable" active>πίνακας τομέων</Breadcrumb.Item>
                 </Breadcrumb>
             </Header>
@@ -112,21 +112,21 @@ const SectorTable = () => {
             {sectors && <Content>
                 <Table autoHeight={true} data={sectors} loading={loading} onRowClick={handleRow}>
                     <Table.Column width={100} align="center" fixed>
-                        <HeaderCell>Τομέας</HeaderCell>
-                        <Cell dataKey="sector" />
+                        <Table.HeaderCell>Τομέας</Table.HeaderCell>
+                        <Table.Cell dataKey="sector" />
                     </Table.Column>
                     <Table.Column width={200} align="center" fixed>
-                        <HeaderCell>Δημιουργήθηκε</HeaderCell>
-                        <Cell dataKey="createdAt" />
+                        <Table.HeaderCell>Δημιουργήθηκε</Table.HeaderCell>
+                        <Table.Cell dataKey="createdAt" />
                     </Table.Column>
                     <Table.Column width={100}>
-                        <HeaderCell>''</HeaderCell>
-                        <Cell>
+                        <Table.HeaderCell>''</Table.HeaderCell>
+                        <Table.Cell>
                             <ButtonGroup>
-                                <IconButton icon={<EditIcon/>} color="cyan" onClick={updateRecordHandler}/>
-                                <IconButton icon={<TrashIcon/>} color="red" onClick={showDeleteModal}/>
+                                <IconButton icon={<EditIcon/>} appearance="primary" color="cyan" onClick={updateRecordHandler}/>
+                                <IconButton icon={<TrashIcon/>} appearance="primary" color="red" onClick={showDeleteModal}/>
                             </ButtonGroup>
-                        </Cell>
+                        </Table.Cell>
                     </Table.Column>
                 </Table>
                 <Pagination
@@ -137,11 +137,9 @@ const SectorTable = () => {
                     prev={true}
                     pages={pages}
                     total={records}
-                    showInfo={false}
                     boundaryLinks={true}
-                    showLengthMenu={false}
                     onChangePage={handleChangePage}
-                    onChangeLength={handleChangeLength} />
+                    onChangeLimit={handleChangeLength} />
             </Content>}
             {deleteModal && <DeleteModal showDeleteModal={deleteModal} hideDeleteModal = {hideDeleteModal} deleteRecordHandler = {deleteRecordHandler}
                                          descriptionText = {descriptionText}/>}

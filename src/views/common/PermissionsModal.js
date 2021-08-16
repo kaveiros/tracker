@@ -15,7 +15,7 @@ const PermissionsModal = () => {
     }
 
     return(
-        <Modal backdrop={"static"}  keyboard={true} show={true}>
+        <Modal backdrop={"static"}  keyboard={true} open={true}>
             <Modal.Header closeButton={false}>
                 <Modal.Title>Σφάλμα</Modal.Title>
             </Modal.Header>
