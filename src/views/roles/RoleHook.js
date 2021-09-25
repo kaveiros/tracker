@@ -3,13 +3,14 @@ import {
     SelectPicker,
     Loader,
     Modal,
-    Icon,
     Button,
     Divider
 } from "rsuite";
 import React, {useEffect, useState} from "react";
 import RoleService from "../../services/RoleService";
 import UserService from "../../services/UserService";
+import BlockIcon from "@rsuite/icons/Block";
+import CheckIcon from "@rsuite/icons/Check";
 
 
 const RoleHook = () => {
@@ -107,8 +108,8 @@ const RoleHook = () => {
                     <SelectPicker data={roles} valueKey="id" labelKey="name" defaultValue={null} onChange={handleRole}/>
                 </Panel>
             </Modal.Body>
-            <Button appearance="primary" color="red"  onClick={handleShowModal}><Icon icon="ban" /> Ακύρωση</Button>
-            <Button appearance="primary" color="green" onClick={handleSubmit}><Icon icon="save"/> Υποβολή</Button>
+            <Button appearance="primary" color="red"  onClick={handleShowModal}><BlockIcon /> Ακύρωση</Button>
+            <Button appearance="primary" color="green" onClick={handleSubmit}><CheckIcon/> Υποβολή</Button>
 
         </Modal>
 

@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import {Panel, Header, Content, Breadcrumb, Button, ButtonGroup, Notification} from 'rsuite'
-import {Table, Column, HeaderCell, Cell} from 'rsuite-table';
+import {Panel, Header, Content, Breadcrumb, Button, ButtonGroup, Notification, Pagination} from 'rsuite'
+import {Table, HeaderCell, Cell} from 'rsuite-table';
 import 'rsuite-table/dist/css/rsuite-table.css'
-import TablePagination from 'rsuite/lib/Table/TablePagination';
 import EmployeeService from "../../services/EmployeeService";
 import DeleteModal from "../common/DeleteModal";
 import {useHistory, useLocation} from "react-router-dom";
@@ -108,56 +107,56 @@ const EmployeeTable = () => {
             {error != null && <div>{error.message}</div>}
             {employees && <Content>
                 <Table autoHeight={true} data={employees} loading={loading} onRowClick={handleRow}>
-                    <Column width={120} align="center" fixed>
+                    <Table.Column width={120} align="center" fixed>
                         <HeaderCell>Αύξων αριθμός</HeaderCell>
                         <Cell dataKey="aa" />
-                    </Column>
-                    <Column width={100} align="center" fixed>
+                    </Table.Column>
+                    <Table.Column width={100} align="center" fixed>
                         <HeaderCell>Κωδικός</HeaderCell>
                         <Cell dataKey="code" />
-                    </Column>
+                    </Table.Column>
 
-                    <Column width={150} fixed>
+                    <Table.Column width={150} fixed>
                         <HeaderCell>Διεύθυνση</HeaderCell>
                         <Cell dataKey="address" />
-                    </Column>
+                    </Table.Column>
 
-                    <Column width={200} fixed>
+                    <Table.Column width={200} fixed>
                         <HeaderCell>Όνομα</HeaderCell>
                         <Cell dataKey="name" />
-                    </Column>
+                    </Table.Column>
 
-                    <Column width={100}>
+                    <Table.Column width={100}>
                         <HeaderCell>Τμήμα</HeaderCell>
                         <Cell dataKey="section" />
-                    </Column>
+                    </Table.Column>
 
-                    <Column width={200}>
+                    <Table.Column width={200}>
                         <HeaderCell>Τομέας</HeaderCell>
                         <Cell dataKey="sector" />
-                    </Column>
-                    <Column width={100}>
+                    </Table.Column>
+                    <Table.Column width={100}>
                         <HeaderCell>Ειδικότητα</HeaderCell>
                         <Cell dataKey="expertise" />
-                    </Column>
-                    <Column width={100}>
+                    </Table.Column>
+                    <Table.Column width={100}>
                         <HeaderCell>Ιδιότητα</HeaderCell>
                         <Cell dataKey="property" />
-                    </Column>
-                    <Column width={100}>
+                    </Table.Column>
+                    <Table.Column width={100}>
                         <HeaderCell>Εξειδίκευση</HeaderCell>
                         <Cell dataKey="specialisedIn" />
-                    </Column>
-                    <Column width={100}>
+                    </Table.Column>
+                    <Table.Column width={100}>
                         <HeaderCell>Υπερωρία</HeaderCell>
                         <Cell dataKey="costOvertime" />
-                    </Column>
-                    <Column width={100}>
+                    </Table.Column>
+                    <Table.Column width={100}>
                         <HeaderCell>Κόστος/μέρα</HeaderCell>
                         <Cell dataKey="costPerDay" />
-                    </Column>
+                    </Table.Column>
 
-                    <Column width={300}>
+                    <Table.Column width={300}>
                         <HeaderCell>Περισσότερα</HeaderCell>
                         <Cell>
                             <ButtonGroup>
@@ -165,9 +164,9 @@ const EmployeeTable = () => {
                                 <Button color="red" onClick={showDeleteModal}>Διαγραφή</Button>
                             </ButtonGroup>
                         </Cell>
-                    </Column>
+                    </Table.Column>
                 </Table>
-                <TablePagination
+                <Pagination
                     activePage={Number(employeePage)}
                     first={true}
                     last={true}

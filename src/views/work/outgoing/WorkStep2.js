@@ -1,8 +1,9 @@
-import React, {useState} from 'react'
+import React from 'react'
 import {
-    Form, FormGroup, ControlLabel,
-    FormControl, HelpBlock, ButtonToolbar, Button, Panel, Icon, Divider, Grid, Row, Col, DatePicker, SelectPicker
+    Form, ButtonToolbar, Button, Grid, Row, Col, DatePicker
 } from 'rsuite'
+import PagePreviousIcon from "@rsuite/icons/PagePrevious";
+import PageNextIcon from "@rsuite/icons/PageNext";
 
 const WorkStep2 = (props) => {
 
@@ -12,41 +13,41 @@ const WorkStep2 = (props) => {
         <Form fluid={true}>
             <Grid fluid={true}>
                 <Row className="show-grid">
-                    <Col xs={24} sm={12} md={8} lg={6}></Col>
+                    <Col xs={24} sm={12} md={8} lg={6}>''</Col>
                     <Col xs={24} sm={12} md={8} lg={12}>
-                        <FormGroup>
-                            <ControlLabel>Εργολάβος</ControlLabel>
-                            <FormControl name="customer"  value={customer} onChange={handleChange("customer")}
+                        <Form.Group>
+                            <Form.ControlLabel>Εργολάβος</Form.ControlLabel>
+                            <Form.Control name="customer"  value={customer} onChange={handleChange("customer")}
                                          errorMessage={errors.customer.errorMessage}/>
-                        </FormGroup>
-                        <FormGroup>
-                            <ControlLabel>Κωδικός εργασίας</ControlLabel>
-                            <FormControl name="description"  value={description} onChange={handleChange('description')}
+                        </Form.Group>
+                        <Form.Group>
+                            <Form.ControlLabel>Κωδικός εργασίας</Form.ControlLabel>
+                            <Form.Control name="description"  value={description} onChange={handleChange('description')}
                                          errorMessage={errors.description.errorMessage}/>
-                        </FormGroup>
-                        <FormGroup>
-                            <ControlLabel>Εργασία</ControlLabel>
-                            <FormControl name="description"  value={description} onChange={handleChange('description')}
+                        </Form.Group>
+                        <Form.Group>
+                            <Form.ControlLabel>Εργασία</Form.ControlLabel>
+                            <Form.Control name="description"  value={description} onChange={handleChange('description')}
                                          errorMessage={errors.description.errorMessage}/>
-                        </FormGroup>
-                        <FormGroup>
-                            <ControlLabel>Χρόνος Έναρξης</ControlLabel>
+                        </Form.Group>
+                        <Form.Group>
+                            <Form.ControlLabel>Χρόνος Έναρξης</Form.ControlLabel>
                             <DatePicker className="rs-form-control-wrapper" name="date" value={startDate} onChange={handleChange('startDate')}/>
-                        </FormGroup>
-                        <FormGroup>
-                            <ControlLabel>Χρόνος Αποπεράτωσης</ControlLabel>
+                        </Form.Group>
+                        <Form.Group>
+                            <Form.ControlLabel>Χρόνος Αποπεράτωσης</Form.ControlLabel>
                             <DatePicker className="rs-form-control-wrapper" name="date" value={endDate} onChange={handleChange('endDate')}/>
-                        </FormGroup>
+                        </Form.Group>
 
                     </Col>
-                    <Col xs={24} sm={12} md={8} lg={6}></Col>
+                    <Col xs={24} sm={12} md={8} lg={6}>''</Col>
                 </Row>
                 <Row className="show-grid">
                     <Col md={4} mdOffset={20}>
                         <ButtonToolbar>
-                            <Button color="violet" onClick={handleStep(1)}><Icon icon="page-previous"/>Πίσω</Button>
+                            <Button color="violet" onClick={handleStep(1)}><PagePreviousIcon/>Πίσω</Button>
                             <Button appearance="primary" color="green" disabled={hasValidationError}
-                                    onClick={handleStep(3)}>Επόμενο<Icon icon="page-next"/></Button>
+                                    onClick={handleStep(3)}>Επόμενο<PageNextIcon/></Button>
                         </ButtonToolbar>                    </Col>
                 </Row>
             </Grid>

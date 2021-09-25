@@ -8,13 +8,13 @@ import LoginService from "../../services/LoginService";
 
 const SidebarPage = () => {
 
-  const [expand, setExpand] = useState(false)
+  const [open, setOpen] = useState(false)
 
   let history = useHistory();
 
 
   const handleToggle = () => {
-    setExpand(!expand)
+    setOpen(!open)
   }
 
   const logoutHandler = () => {
@@ -26,8 +26,8 @@ const SidebarPage = () => {
   return (
 
       <React.Fragment>
-      <NavbarHook handleToggle={handleToggle} expand={expand} logoutHandler={logoutHandler}/>
-      <DrawerHook handleToggle={handleToggle} expand={expand} />
+      <NavbarHook handleToggle={handleToggle} open={open} logoutHandler={logoutHandler}/>
+      <DrawerHook handleToggle={handleToggle} open={open} />
     </React.Fragment>
   );
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import 'rsuite/dist/styles/rsuite-default.css';
+import 'rsuite/dist/rsuite.min.css';
 import IncomingWorkTab from './views/work/incoming/IncomingWorkTab'
 import EmployeeTab from '../src/views/employee/EmployeeTab'
 import WarehouseTab from './views/warehouse/WarehouseTab'

@@ -1,12 +1,13 @@
-import {Breadcrumb, ButtonGroup, Content, Header, Icon, IconButton, Panel} from "rsuite";
+import {Breadcrumb, ButtonGroup, Content, Header, IconButton, Pagination, Panel} from "rsuite";
 import React, {useEffect, useState} from "react";
 import RoleService from "../../services/RoleService";
 import {useHistory, useLocation} from "react-router-dom";
 import SectionService from "../../services/SectionService";
 import {showErrorNotification, showSuccessNotification} from "../common/Notifications";
 import {Cell, Column, HeaderCell, Table} from "rsuite-table";
-import TablePagination from "rsuite/lib/Table/TablePagination";
 import DeleteModal from "../common/DeleteModal";
+import EditIcon from "@rsuite/icons/Edit";
+import TrashIcon from "@rsuite/icons/Trash";
 
 const SectionsTable = () => {
 
@@ -122,13 +123,13 @@ const SectionsTable = () => {
                         <HeaderCell></HeaderCell>
                         <Cell>
                             <ButtonGroup>
-                                <IconButton icon={<Icon icon="edit"/>} color="cyan" onClick={updateRecordHandler}/>
-                                <IconButton icon={<Icon icon="trash"/>} color="red" onClick={showDeleteModal}/>
+                                <IconButton icon={<EditIcon/>} color="cyan" onClick={updateRecordHandler}/>
+                                <IconButton icon={<TrashIcon/>} color="red" onClick={showDeleteModal}/>
                             </ButtonGroup>
                         </Cell>
                     </Column>
                 </Table>
-                <TablePagination
+                <Pagination
                     activePage={Number(currentPage)}
                     first={true}
                     last={true}

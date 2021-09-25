@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import {Panel, Header, Content, Breadcrumb, Button, Notification} from 'rsuite'
-import {  Table, Column, HeaderCell, Cell } from 'rsuite-table';
+import {Panel, Header, Content, Breadcrumb, Button, Notification, Pagination} from 'rsuite'
+import {  Table, HeaderCell, Cell } from 'rsuite-table';
 import 'rsuite-table/dist/css/rsuite-table.css'
-import TablePagination from 'rsuite/lib/Table/TablePagination';
 import AdditionalInfoService from "../../services/AdditionalInfoService";
 import FileModal from "./FileModal";
 
@@ -101,28 +100,28 @@ const AdditionalInfoTable = () => {
             {error != null && <div>{error.message}</div>}
             {infos && <Content>
                 <Table autoHeight={true}  data={infos} loading={loading} onRowClick={handleRow} >
-                    <Column align="center" fixed>
+                    <Table.Column align="center" fixed>
                         <HeaderCell>Από τομέα</HeaderCell>
                         <Cell dataKey="fromSector" />
-                    </Column>
-                    <Column  align="center" fixed>
+                    </Table.Column>
+                    <Table.Column  align="center" fixed>
                         <HeaderCell>Προς τομέα</HeaderCell>
                         <Cell dataKey="toSector" />
-                    </Column>
+                    </Table.Column>
 
-                    <Column  fixed>
+                    <Table.Column  fixed>
                         <HeaderCell>Περιγραφή</HeaderCell>
                         <Cell dataKey="description" />
-                    </Column>
+                    </Table.Column>
 
 
-                   <Column width={300}>
+                   <Table.Column width={300}>
                             <HeaderCell>Αρχεία</HeaderCell>
                             <Cell><Button onClick={showModalHandler}>Περισσότερα...</Button></Cell>
-                   </Column>
+                   </Table.Column>
 
                 </Table>
-                <TablePagination
+                <Pagination
                     activePage={Number(infoPage)}
                     first={true}
                     last={true}

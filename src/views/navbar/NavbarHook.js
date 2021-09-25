@@ -1,15 +1,20 @@
 import React from 'react' 
-import { Nav, Navbar, Icon, } from 'rsuite'
+import { Nav, Navbar } from 'rsuite'
 import AvatarHook from '../avatar/AvatarHook'
+import BarChartIcon from '@rsuite/icons/BarChart';
+import NoticeIcon from '@rsuite/icons/Notice';
+import ExitIcon from '@rsuite/icons/Exit';
+
+
+
 
 const NavbarHook = ({handleToggle, logoutHandler}) => {
 
     return (
         <Navbar appearance="subtle" className="nav-toggle">
-        <Navbar.Body>
           <Nav>
             <Nav.Item onClick={handleToggle}>
-              <Icon icon="bars" />
+              <BarChartIcon />
             </Nav.Item>
           </Nav>
           <Nav pullRight>
@@ -17,13 +22,12 @@ const NavbarHook = ({handleToggle, logoutHandler}) => {
               <AvatarHook/>
             </Nav.Item>
             <Nav.Item >
-              <Icon icon="bell-o" />
+              <NoticeIcon />
             </Nav.Item>
             <Nav.Item onClick={logoutHandler}>
-              <Icon icon="sign-out" />
+              <ExitIcon />
             </Nav.Item>
           </Nav>
-        </Navbar.Body>
       </Navbar>
     )
 
