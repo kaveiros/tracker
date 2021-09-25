@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import { Table, Column, HeaderCell, Cell } from 'rsuite-table';
-import {Panel, Header, Content, Breadcrumb, Button, ButtonGroup, IconButton, Icon} from 'rsuite'
+import { Table, HeaderCell, Cell } from 'rsuite-table';
+import {Panel, Header, Content, Breadcrumb, ButtonGroup, IconButton, Pagination} from 'rsuite'
 import 'rsuite-table/dist/css/rsuite-table.css'
-import TablePagination from 'rsuite/lib/Table/TablePagination';
 import SectorService from '../../services/SectorService'
+import TrashIcon from '@rsuite/icons/Trash';
+import EditIcon from '@rsuite/icons/Edit';
 import DeleteModal from "../common/DeleteModal";
 import {useHistory, useLocation} from "react-router-dom";
 import {showErrorNotification, showSuccessNotification} from "../common/Notifications";
@@ -110,25 +111,25 @@ const SectorTable = () => {
             {error != null && <div>{error.message}</div>}
             {sectors && <Content>
                 <Table autoHeight={true} data={sectors} loading={loading} onRowClick={handleRow}>
-                    <Column width={100} align="center" fixed>
+                    <Table.Column width={100} align="center" fixed>
                         <HeaderCell>Τομέας</HeaderCell>
                         <Cell dataKey="sector" />
-                    </Column>
-                    <Column width={200} align="center" fixed>
+                    </Table.Column>
+                    <Table.Column width={200} align="center" fixed>
                         <HeaderCell>Δημιουργήθηκε</HeaderCell>
                         <Cell dataKey="createdAt" />
-                    </Column>
-                    <Column width={100}>
-                        <HeaderCell></HeaderCell>
+                    </Table.Column>
+                    <Table.Column width={100}>
+                        <HeaderCell>''</HeaderCell>
                         <Cell>
                             <ButtonGroup>
-                                <IconButton icon={<Icon icon="edit"/>} color="cyan" onClick={updateRecordHandler}/>
-                                <IconButton icon={<Icon icon="trash"/>} color="red" onClick={showDeleteModal}/>
+                                <IconButton icon={<EditIcon/>} color="cyan" onClick={updateRecordHandler}/>
+                                <IconButton icon={<TrashIcon/>} color="red" onClick={showDeleteModal}/>
                             </ButtonGroup>
                         </Cell>
-                    </Column>
+                    </Table.Column>
                 </Table>
-                <TablePagination
+                <Pagination
                     activePage={Number(currentPage)}
                     first={true}
                     last={true}

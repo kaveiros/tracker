@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import { Table, Column } from 'rsuite-table';
-import { Panel, Header, Content, Breadcrumb } from 'rsuite'
+import { Table } from 'rsuite-table';
+import {Panel, Header, Content, Breadcrumb, Pagination} from 'rsuite'
 import 'rsuite-table/dist/css/rsuite-table.css'
-import TablePagination from 'rsuite/lib/Table/TablePagination';
 import EmployeeService from "../../services/EmployeeService";
 
 const PersonnelTable = () => {
@@ -62,36 +61,36 @@ const PersonnelTable = () => {
         {error != null && <div>{error.message}</div>}
         {persons && <Content>
           <Table autoHeight={true} data={persons} loading={loading} onRowClick={handleRow}>
-            <Column width={100} align="center" fixed>
+            <Table.Column width={100} align="center" fixed>
               <Table.HeaderCell>Id</Table.HeaderCell>
               <Table.Cell dataKey="code" />
-            </Column>
+            </Table.Column>
 
-            <Column width={150} fixed>
+            <Table.Column width={150} fixed>
               <Table.HeaderCell>Διεύθυνση</Table.HeaderCell>
               <Table.Cell dataKey="address" />
-            </Column>
+            </Table.Column>
 
-            <Column width={100} fixed>
+            <Table.Column width={100} fixed>
               <Table.HeaderCell>Όνομα</Table.HeaderCell>
               <Table.Cell dataKey="name" />
-            </Column>
+            </Table.Column>
 
-            <Column width={100}>
+            <Table.Column width={100}>
               <Table.HeaderCell>Τμήμα</Table.HeaderCell>
               <Table.Cell dataKey="department" />
-            </Column>
+            </Table.Column>
 
-            <Column width={200}>
+            <Table.Column width={200}>
               <Table.HeaderCell>City</Table.HeaderCell>
               <Table.Cell dataKey="section" />
-            </Column>
-            <Column width={200} flexGrow={1}>
+            </Table.Column>
+            <Table.Column width={200} flexGrow={1}>
               <Table.HeaderCell>Company Name</Table.HeaderCell>
               <Table.Cell dataKey="attribute1" />
-            </Column>
+            </Table.Column>
           </Table>
-          <TablePagination
+          <Pagination
               activePage={Number(currentPage)}
               first={true}
               last={true}

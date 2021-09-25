@@ -1,5 +1,7 @@
 import React from "react";
-import {Button, Icon, Modal, Panel} from "rsuite";
+import {Button, Modal, Panel} from "rsuite";
+import RemindOutlineIcon from '@rsuite/icons/RemindOutline';
+
 
 const DeleteModal = ({showDeleteModal, hideDeleteModal, deleteRecordHandler, descriptionText}) => {
     return(
@@ -8,13 +10,7 @@ const DeleteModal = ({showDeleteModal, hideDeleteModal, deleteRecordHandler, des
                 <Modal.Title>Διαγραφή</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                <Icon
-                    icon="remind"
-                    style={{
-                        color: '#ffb300',
-                        fontSize: 24
-                    }}
-                />
+                <RemindOutlineIcon/>
                 <Panel>
                     {descriptionText}
                 </Panel>

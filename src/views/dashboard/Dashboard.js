@@ -128,7 +128,7 @@ const Dashboard = () => {
             </Header>
             <Content>
                 <FlexboxGrid justify="space-around">
-                    <FlexboxGrid.Item componentClass={Col} colspan={24} md={6}>
+                    <FlexboxGrid.Item as={Col} colspan={24} md={6}>
                         <LineChart
                             width={500}
                             height={300}
@@ -146,7 +146,7 @@ const Dashboard = () => {
                             <Line type="monotone" dataKey="uv" stroke="#82ca9d" />
                         </LineChart>
                     </FlexboxGrid.Item>
-                    <FlexboxGrid.Item componentClass={Col} colspan={24} md={6}>
+                    <FlexboxGrid.Item as={Col} colspan={24} md={6}>
                         <BarChart
                             width={500}
                             height={300}
@@ -164,7 +164,7 @@ const Dashboard = () => {
                             <Bar dataKey="uv" fill="#82ca9d" />
                         </BarChart>
                     </FlexboxGrid.Item>
-                    <FlexboxGrid.Item componentClass={Col} colspan={24} md={6} smHidden>
+                    <FlexboxGrid.Item as={Col} colspan={24} md={6} >
                         <PieChart width={300} height={300}>
                             <Pie data={data01} dataKey="value" cx={200} cy={200} outerRadius={60} fill="#8884d8" />
                             <Pie data={data02} dataKey="value" cx={200} cy={200} innerRadius={70} outerRadius={90} fill="#82ca9d" label />
@@ -172,7 +172,7 @@ const Dashboard = () => {
                     </FlexboxGrid.Item>
                 </FlexboxGrid>
                 <FlexboxGrid justify="space-around">
-                    <FlexboxGrid.Item componentClass={Col} colspan={24} md={6}>
+                    <FlexboxGrid.Item as={Col} colspan={24} md={6}>
                         <ComposedChart
                             width={500}
                             height={300}
@@ -192,14 +192,14 @@ const Dashboard = () => {
                             {/* <Scatter dataKey="cnt" fill="red" /> */}
                         </ComposedChart>
                     </FlexboxGrid.Item>
-                    <FlexboxGrid.Item componentClass={Col} colspan={24} md={6}>
+                    <FlexboxGrid.Item as={Col} colspan={24} md={6}>
                         <PieChart width={400} height={400}>
                             <Pie dataKey="value" isAnimationActive={false} data={data04} cx={200} cy={200} outerRadius={80} fill="#8884d8" label />
                             <Pie dataKey="value" data={data05} cx={500} cy={200} innerRadius={40} outerRadius={80} fill="#82ca9d" />
                             <Tooltip />
                         </PieChart>
                     </FlexboxGrid.Item>
-                    <FlexboxGrid.Item componentClass={Col} colspan={24} md={6} smHidden>
+                    <FlexboxGrid.Item as={Col} colspan={24} md={6} >
                         <RadialBarChart width={400} height={300} cx={150} cy={150} innerRadius={20} outerRadius={140} barSize={10} data={data06}>
                             <RadialBar minAngle={15} label={{ position: 'insideStart', fill: '#fff' }} background clockWise dataKey="uv" />
                             <Legend iconSize={10} width={120} height={140} layout="vertical" verticalAlign="middle" wrapperStyle={style} />

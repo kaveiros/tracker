@@ -4,10 +4,14 @@ import LoginService from "../services/LoginService";
 import jwt_decode from "jwt-decode";
 const AuthenticatedRoute = ({ path, roles, component: Component}) => {
 
+    let decodedToken
     const token = LoginService.getCurrentUser()
-    const decodedToken = jwt_decode(token)
+    if (token) {
+        decodedToken = jwt_decode(token)
+        //console.log(decodedToken.role)
+
+    }
     console.log(roles)
-    console.log(decodedToken.role)
 
     return (
         <Route

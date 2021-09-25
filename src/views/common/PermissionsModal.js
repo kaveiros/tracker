@@ -1,6 +1,10 @@
-import {Button, Icon, Modal, Panel} from "rsuite";
+import {Button, Modal, Panel} from "rsuite";
 import React from "react";
 import {useHistory} from "react-router-dom";
+import RemindRoundIcon from '@rsuite/icons/RemindRound';
+
+import * as PropTypes from "prop-types";
+
 
 
 const PermissionsModal = () => {
@@ -16,7 +20,7 @@ const PermissionsModal = () => {
                 <Modal.Title>Σφάλμα</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                <Icon
+                <RemindRoundIcon
                     icon="remind"
                     style={{
                         color: '#ffb300',

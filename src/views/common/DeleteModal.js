@@ -1,5 +1,7 @@
 import React from "react";
-import {Button, Icon, Modal, Panel} from "rsuite";
+import {Button, Modal, Panel} from "rsuite";
+import RemindRoundIcon from '@rsuite/icons/RemindRound';
+
 
 const DeleteModal = ({showDeleteModal, hideDeleteModal, deleteRecordHandler, descriptionText}) => {
     return(
@@ -8,8 +10,7 @@ const DeleteModal = ({showDeleteModal, hideDeleteModal, deleteRecordHandler, des
                 <Modal.Title>Διαγραφή</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                <Icon
-                    icon="remind"
+                <RemindRoundIcon
                     style={{
                         color: '#ffb300',
                         fontSize: 24

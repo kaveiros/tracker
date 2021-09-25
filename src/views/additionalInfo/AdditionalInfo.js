@@ -1,5 +1,16 @@
 import React, {useEffect, useRef, useState} from 'react'
-import {Button, Input, Panel, Modal, SelectPicker, ControlLabel, Divider, List, Loader, Notification} from 'rsuite'
+import {
+    Button,
+    Input,
+    Panel,
+    Modal,
+    SelectPicker,
+    Divider,
+    List,
+    Loader,
+    Notification,
+    Form
+} from 'rsuite'
 import AdditionalInfoService from "../../services/AdditionalInfoService";
 import SectorService from "../../services/SectorService";
 import {sectorErrorNotification} from "../common/Notifications";
@@ -120,10 +131,11 @@ const AdditionalInfo = ({showModal, hideModal, uniqueVersion}) => {
             </Modal.Header>
             <Modal.Body>
                 <Panel>
-                    <ControlLabel>Από Τομέα: </ControlLabel>
+                    <Form>
+                    <Form.ControlLabel>Από Τομέα: </Form.ControlLabel>
                     <SelectPicker data={fromSectorInitialData} onChange={handleFormSector} onClean={handleFromSectorClean}/>
                     <Divider/>
-                    <ControlLabel>Προς Τομέα: </ControlLabel>
+                    <Form.ControlLabel>Προς Τομέα: </Form.ControlLabel>
                     <SelectPicker data={toSectorInitialData} onChange={handleToSector}/>
                     <Divider/>
                     <Input componentClass="textarea" value={comments} onChange={handleComments} rows={3} placeholder="Σχόλια" />
@@ -141,6 +153,7 @@ const AdditionalInfo = ({showModal, hideModal, uniqueVersion}) => {
                             </List.Item>
                         ))}
                     </List>
+                    </Form>
                 </Panel>
             </Modal.Body>
             <Modal.Footer>

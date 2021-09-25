@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react'
-import {Panel, Header, Content, Breadcrumb, Button, ButtonGroup, Notification, Icon, IconButton} from 'rsuite'
-import {Table, Column, HeaderCell, Cell} from 'rsuite-table';
+import {Panel, Header, Content, Breadcrumb, Pagination, ButtonGroup, IconButton} from 'rsuite'
+import {Table,  HeaderCell, Cell} from 'rsuite-table';
 import 'rsuite-table/dist/css/rsuite-table.css'
-import TablePagination from 'rsuite/lib/Table/TablePagination';
 import DeleteModal from "../common/DeleteModal";
 import {useHistory, useLocation} from "react-router-dom";
 import {showErrorNotification, showSuccessNotification} from "../common/Notifications";
 import WarehouseService from '../../services/WarehouseService'
+import EditIcon from "@rsuite/icons/Edit";
+import TrashIcon from "@rsuite/icons/Trash";
 
 const WareHouseTable = () => {
 
@@ -110,50 +111,50 @@ const WareHouseTable = () => {
             {error != null && <div>{error.message}</div>}
             {materials && <Content>
                 <Table autoHeight={true} data={materials} loading={loading} onRowClick={handleRow} onDataUpdated={dataChange}>
-                    <Column width={120} align="center" fixed>
+                    <Table.Column width={120} align="center" fixed>
                         <HeaderCell>Αύξων αριθμός</HeaderCell>
                         <Cell  dataKey="aa"/>
-                    </Column>
-                    <Column width={100} align="center" fixed>
+                    </Table.Column>
+                    <Table.Column width={100} align="center" fixed>
                         <HeaderCell>Κωδικός</HeaderCell>
                         <Cell dataKey="code" />
-                    </Column>
+                    </Table.Column>
 
-                    <Column width={150} fixed>
+                    <Table.Column width={150} fixed>
                         <HeaderCell>Περιγραφή</HeaderCell>
                         <Cell dataKey="description" />
-                    </Column>
+                    </Table.Column>
 
-                    <Column width={200} fixed>
+                    <Table.Column width={200} fixed>
                         <HeaderCell>Ποσότητα</HeaderCell>
                         <Cell dataKey="quantity" />
-                    </Column>
+                    </Table.Column>
 
-                    <Column width={100}>
+                    <Table.Column width={100}>
                         <HeaderCell>Τμήμα</HeaderCell>
                         <Cell dataKey="section" />
-                    </Column>
+                    </Table.Column>
 
-                    <Column width={200}>
+                    <Table.Column width={200}>
                         <HeaderCell>Τομέας</HeaderCell>
                         <Cell dataKey="sector" />
-                    </Column>
-                    <Column width={100}>
+                    </Table.Column>
+                    <Table.Column width={100}>
                         <HeaderCell>Παραλαβών</HeaderCell>
                         <Cell dataKey="nameOfPersonAccepted" />
-                    </Column>
+                    </Table.Column>
 
-                    <Column width={300}>
+                    <Table.Column width={300}>
                         <HeaderCell>Περισσότερα</HeaderCell>
                         <Cell>
                             <ButtonGroup>
-                                <IconButton color="cyan" icon={<Icon icon="edit"/>} onClick={updateRecordHandler}/>
-                                <IconButton color="red" icon={<Icon icon="trash" />} onClick={showDeleteModal}/>
+                                <IconButton color="cyan" icon={<EditIcon/>} onClick={updateRecordHandler}/>
+                                <IconButton color="red" icon={<TrashIcon/>} onClick={showDeleteModal}/>
                             </ButtonGroup>
                         </Cell>
-                    </Column>
+                    </Table.Column>
                 </Table>
-                <TablePagination
+                <Pagination
                     activePage={Number(warehousePage)}
                     first={true}
                     last={true}

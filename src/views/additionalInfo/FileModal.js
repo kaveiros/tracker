@@ -1,5 +1,7 @@
 import React from "react";
-import {Button, Icon, List, Modal, Panel} from "rsuite";
+import {Button, List, Modal, Panel} from "rsuite";
+import FileDownloadIcon from '@rsuite/icons/FileDownload';
+
 
 const FileModal = ({showModal, hideModal, files, downloadHandler}) => {
 
@@ -13,7 +15,7 @@ const FileModal = ({showModal, hideModal, files, downloadHandler}) => {
                     <List>
                     {files.map((item, index) =>(
                         <List.Item key={index} index={index}>
-                            {item.name} <Button onClick={()=>downloadHandler(item.name)}><Icon icon={"download2"}/>Λήψη</Button>
+                            {item.name} <Button onClick={()=>downloadHandler(item.name)}><FileDownloadIcon />Λήψη</Button>
                         </List.Item>
 
                     ))}

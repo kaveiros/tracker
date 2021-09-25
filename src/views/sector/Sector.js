@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react'
-import { Button, ControlLabel, Panel, Form, Row, Header,
-    Breadcrumb, Content, Col, Grid, FormGroup, FormControl} from 'rsuite'
+import { Button, Panel, Form, Row, Header,
+    Breadcrumb, Content, Col, Grid} from 'rsuite'
 
 import {VALIDATOR_REQUIRED, validate} from '../../validator/Validators'
 import TrackerMessage from "../common/TrackerMessage";
@@ -84,11 +84,11 @@ const Sector = () => {
                             <Row className="show-grid">
                                 <Col xs={24} sm={12} md={8} lg={6}></Col>
                                 <Col xs={24} sm={12} md={8} lg={12}>
-                                    <FormGroup>
-                                        <ControlLabel>Τομέας</ControlLabel>
-                                        <FormControl onChange={handleSectorChange('sector')} value={sectorState.sector}/>
+                                    <Form.Group>
+                                        <Form.ControlLabel>Τομέας</Form.ControlLabel>
+                                        <Form.Control onChange={handleSectorChange('sector')} value={sectorState.sector} name='sector'/>
                                         <Button type="submit" color="green">Αποθήκευση</Button>
-                                    </FormGroup>
+                                    </Form.Group>
                                 </Col>
                                 <Col xs={24} sm={12} md={8} lg={6}></Col>
                             </Row>

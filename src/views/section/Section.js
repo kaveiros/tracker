@@ -3,10 +3,7 @@ import {
     Button,
     Col,
     Content,
-    ControlLabel,
     Form,
-    FormControl,
-    FormGroup,
     Grid,
     Header,
     Panel,
@@ -57,15 +54,15 @@ const Section = () => {
                     <Form fluid={true} onSubmit={handleSubmit}>
                         <Grid fluid={true}>
                             <Row className="show-grid">
-                                <Col xs={24} sm={12} md={8} lg={6}></Col>
+                                <Col xs={24} sm={12} md={8} lg={6}>''</Col>
                                 <Col xs={24} sm={12} md={8} lg={12}>
-                                    <FormGroup>
-                                        <ControlLabel>Τμήμα</ControlLabel>
-                                        <FormControl onChange={handleSectionChange} />
+                                    <Form.Group>
+                                        <Form.ControlLabel>Τμήμα</Form.ControlLabel>
+                                        <Form.Control onChange={handleSectionChange} />
                                         <Button type="submit" color="green">Αποθήκευση</Button>
-                                    </FormGroup>
+                                    </Form.Group>
                                 </Col>
-                                <Col xs={24} sm={12} md={8} lg={6}></Col>
+                                <Col xs={24} sm={12} md={8} lg={6}>''</Col>
                             </Row>
                         </Grid>
                     </Form>

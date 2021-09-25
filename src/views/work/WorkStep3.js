@@ -1,9 +1,13 @@
 import React, {useState} from 'react'
 import {
-    Form, FormGroup, ControlLabel, Row, Col, Button, Icon,
+    Form, Row, Col, Button,
      Grid, ButtonToolbar, SelectPicker
 } from 'rsuite'
 import AdditionalInfo from "../additionalInfo/AdditionalInfo";
+import InfoRoundIcon from "@rsuite/icons/InfoRound";
+import CheckIcon from "@rsuite/icons/Check";
+import BlockIcon from "@rsuite/icons/Block";
+import PagePreviousIcon from "@rsuite/icons/PagePrevious";
 
 
 const WorkStep3 = (props) => {
@@ -31,36 +35,36 @@ const WorkStep3 = (props) => {
         <Form fluid={true}>
             <Grid fluid={true}>
                 <Row className="show-grid">
-                    <Col xs={24} sm={12} md={8} lg={6}></Col>
+                    <Col xs={24} sm={12} md={8} lg={6}>''</Col>
                     <Col xs={24} sm={12} md={8} lg={12}>
-                        <FormGroup>
-                            <ControlLabel>Από Τμήμα-Τομέα</ControlLabel>
+                        <Form.Group>
+                            <Form.ControlLabel>Από Τμήμα-Τομέα</Form.ControlLabel>
                             <SelectPicker  className="rs-form-control-wrapper" name="fromSector"  data={secData} />
-                        </FormGroup>
-                        <FormGroup>
-                            <ControlLabel>Από Υπεύθυνο τμήματος</ControlLabel>
+                        </Form.Group>
+                        <Form.Group>
+                            <Form.ControlLabel>Από Υπεύθυνο τμήματος</Form.ControlLabel>
                             <SelectPicker  className="rs-form-control-wrapper"  name="fromTeamleader"  data={secData} />
-                        </FormGroup>
-                        <FormGroup>
-                            <ControlLabel>πρός τμήμα-Τομέα</ControlLabel>
+                        </Form.Group>
+                        <Form.Group>
+                            <Form.ControlLabel>πρός τμήμα-Τομέα</Form.ControlLabel>
                             <SelectPicker  className="rs-form-control-wrapper"  name="toSector" data={secData} />
-                        </FormGroup>
-                        <FormGroup>
-                            <ControlLabel>Πρός Υπεύθυνο τμήματος</ControlLabel>
+                        </Form.Group>
+                        <Form.Group>
+                            <Form.ControlLabel>Πρός Υπεύθυνο τμήματος</Form.ControlLabel>
                             <SelectPicker  className="rs-form-control-wrapper"  name="toTeamleader"  data={secData} />
-                        </FormGroup>
-                        <FormGroup>
+                        </Form.Group>
+                        <Form.Group>
                             <ButtonToolbar>
-                                <Button color="violet" onClick={handleStep(2)}><Icon icon="page-previous"/>Πίσω</Button>
-                                <Button appearance="primary" color="cyan" onClick={showModalHandler}> <Icon icon="info-circle" /> Παρατηρήσεις</Button>
-                                <Button appearance="primary" color="green" onClick={handleSubmit}> <Icon icon="save" /> Υποβολή</Button>
-                                <Button appearance="primary" color="red"  onClick={handleStep(1)}><Icon icon="ban" /> Ακύρωση</Button>
+                                <Button color="violet" onClick={handleStep(2)}><PagePreviousIcon/>Πίσω</Button>
+                                <Button appearance="primary" color="cyan" onClick={showModalHandler}> <InfoRoundIcon/> Παρατηρήσεις</Button>
+                                <Button appearance="primary" color="green" onClick={handleSubmit}> <CheckIcon /> Υποβολή</Button>
+                                <Button appearance="primary" color="red"  onClick={handleStep(1)}><BlockIcon /> Ακύρωση</Button>
                             </ButtonToolbar>
-                        </FormGroup>
+                        </Form.Group>
 
 
                     </Col>
-                    <Col xs={24} sm={12} md={8} lg={6}></Col>
+                    <Col xs={24} sm={12} md={8} lg={6}>''</Col>
                 </Row>
 
             </Grid>

@@ -1,11 +1,15 @@
 import React, {useEffect, useState} from 'react'
-import { Grid, Panel, Row, Col, Input, InputGroup, Icon, Button } from 'rsuite'
+import { Grid, Panel, Row, Col, Input, InputGroup, Button, Form } from 'rsuite'
 import './login.css'
 import LoginService from '../../services/LoginService'
 import { VALIDATOR_REQUIRED, validate } from '../../validator/Validators'
 import { REQUIRED_FIELD, LOGIN_ERROR } from '../../settings/MessageSettings'
 import TrackerMessage from '../common/TrackerMessage'
 import {useHistory} from "react-router-dom";
+import DangerIcon from '@rsuite/icons/Danger';
+import GearIcon from '@rsuite/icons/Gear';
+
+
 
 const LoginComponent = () => {
 
@@ -72,13 +76,13 @@ const LoginComponent = () => {
             {loginError && <TrackerMessage type="error" description={LOGIN_ERROR} />}
             <Grid fluid>
                 <Row className="show-grid">
-                    <Col xs={8} xsOffset={16}></Col>
+                    <Col xs={8} xsOffset={16}>''</Col>
                     <Col xs={8} xsOffset={16}>
                         <Panel bordered shaded header="Tracker" className="backgroundStyle">
                             <form onSubmit={handleSubmit}>
                                 <InputGroup style={styles}>
                                     <InputGroup.Addon>
-                                        <Icon icon="avatar" />
+                                        <DangerIcon/>
                                     </InputGroup.Addon>
                                     <Input name="username" onChange={handleChange('username')} onBlur={handleBlur('validUsername', VALIDATOR_REQUIRED)} />
                                 </InputGroup>
@@ -88,7 +92,7 @@ const LoginComponent = () => {
                                 />}
                                 <InputGroup style={styles}>
                                     <InputGroup.Addon>
-                                        <Icon icon="key" />
+                                        <GearIcon  />
                                     </InputGroup.Addon>
                                     <Input name="password" type="password" onChange={handleChange('password')} onBlur={handleBlur('validPassword', VALIDATOR_REQUIRED)} />
                                 </InputGroup>
@@ -100,7 +104,7 @@ const LoginComponent = () => {
                             </form>
                         </Panel>
                     </Col>
-                    <Col xs={8} xsOffset={16}></Col>
+                    <Col xs={8} xsOffset={16}>''</Col>
                 </Row>
             </Grid>
         </div>

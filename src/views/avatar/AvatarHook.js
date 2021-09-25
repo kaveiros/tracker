@@ -1,34 +1,16 @@
 import React, {useEffect, useRef, useState} from 'react'
-import { Avatar, Whisper, Popover, Dropdown } from 'rsuite'
+import {Avatar, Whisper, Popover, Dropdown, Button} from 'rsuite'
 import jwt_decode from "jwt-decode";
 import LoginService from "../../services/LoginService";
 
+const selectedItemListener = (ev) => {
+    console.log(ev)
+}
 
+const MenuPopover = React.forwardRef(({ onSelect, renderTitle:rendertitle,  user:user, ...rest }, ref) => (
+    <Popover ref={ref} {...rest} full>
 
-
-const AvatarHook = () => {
-
-    const triggerRef = useRef(null);
-    const [user, setUser] = useState()
-
-    function handleSelectMenu(eventKey, event) {
-        console.log(eventKey);
-        triggerRef.current.hide();
-      }
-
-    useEffect(() => {
-
-        const token = LoginService.getCurrentUser()
-
-        if (token) {
-            let decoded = jwt_decode(token);
-            setUser(decoded)
-        }
-    },[])
-
-    const MenuPopover = ({ onSelect, ...rest }) => (
-        <Popover {...rest} full>
-          <Dropdown.Menu onSelect={onSelect}>
+        <Dropdown.Menu onSelect={selectedItemListener}>
             <Dropdown.Item eventKey={1}>{user.username}</Dropdown.Item>
             <Dropdown.Item eventKey={2}>{user.email}</Dropdown.Item>
             <Dropdown.Item eventKey={3}>Download As...</Dropdown.Item>
@@ -36,21 +18,44 @@ const AvatarHook = () => {
             <Dropdown.Item eventKey={5}>Export HTML</Dropdown.Item>
             <Dropdown.Item eventKey={6}>Settings</Dropdown.Item>
             <Dropdown.Item eventKey={7}>About</Dropdown.Item>
-          </Dropdown.Menu>
-        </Popover>
-      );
+        </Dropdown.Menu>
+    </Popover>
+));
+
+const AvatarHook = () => {
+
+    const [user, setUser] = useState()
+    useEffect(() => {
+
+        const token = LoginService.getCurrentUser()
+
+        if (token) {
+            let decoded = jwt_decode(token);
+            //console.log(decoded)
+            setUser(decoded)
+        }
+    },[])
+
+    const ref = React.useRef();
+    const handleSelectMenu=(eventKey) =>( event) =>{
+        console.log(event);
+        ref.current.close();
+    }
     return (
         <Whisper
-            placement="bottomEnd"
+            placement="bottomStart"
+            controlId="control-id-with-dropdown"
             trigger="click"
-            triggerRef={triggerRef}
-            speaker={<MenuPopover onSelect={handleSelectMenu} />}
+            ref={ref}
+            speaker={<MenuPopover onSelect={handleSelectMenu} user={user} />}
         >
-            <Avatar size="xs" src="https://avatars2.githubusercontent.com/u/12592949?s=460&v=4" />
+            <Avatar>File</Avatar>
         </Whisper>
+    );
 
 
-    )
+
+
 }
 
 export default AvatarHook
