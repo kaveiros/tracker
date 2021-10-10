@@ -29,7 +29,6 @@ import User from "./views/user/User";
 import UserTable from "./views/user/UserTable";
 
 function App() {
-
     return (
             <Container style={backgroundStyle}>
                 <SidebarPage />

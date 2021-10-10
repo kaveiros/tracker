@@ -19,7 +19,7 @@ export const showErrorNotification = (errorString) => {
     return (
         <Notification placement="topStart" header="Σφάλμα" duration={7000} type="error">
             <div>{errorString
-                .split('\n').map((str, i) => <p key={i}>{str}</p>)
+                // .split('\n').map((str, i) => <p key={i}>{str}</p>)
             }
             </div>
         </Notification>

@@ -1,15 +1,15 @@
 import React, {useEffect, useState} from 'react'
-import {Avatar, Whisper, Popover, Dropdown} from 'rsuite'
+import {Whisper, Popover, Dropdown} from 'rsuite'
 import jwt_decode from "jwt-decode";
-import LoginService from "../../services/LoginService";
 import DoingRoundIcon from '@rsuite/icons/DoingRound';
+import TokenService from "../../services/TokenService";
 
 
 const selectedItemListener = (ev) => {
     console.log(ev)
 }
 
-const MenuPopover = React.forwardRef(({ onSelect, renderTitle:rendertitle,  user:user, ...rest }, ref) => (
+const MenuPopover = React.forwardRef(({ onSelect, renderTitle:rendertitle,  user, ...rest }, ref) => (
     <Popover ref={ref} {...rest} full>
 
         <Dropdown.Menu onSelect={selectedItemListener}>
@@ -27,7 +27,7 @@ const MenuPopover = React.forwardRef(({ onSelect, renderTitle:rendertitle,  user
 const AvatarHook = () => {
 
     const [user, setUser] = useState()
-    const token = LoginService.getCurrentUser()
+    const token = TokenService.getCurrentUser()
 
     useEffect(() => {
         if (token) {

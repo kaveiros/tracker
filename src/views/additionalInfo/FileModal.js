@@ -6,7 +6,7 @@ import FileDownloadIcon from '@rsuite/icons/FileDownload';
 const FileModal = ({showModal, hideModal, files, downloadHandler}) => {
 
     return(
-        <Modal backdrop={"static"}  show={showModal} keyboard={true}>
+        <Modal backdrop={"static"}  open={showModal} keyboard={true}>
             <Modal.Header closeButton={false}>
                 <Modal.Title>Παρατηρήσεις</Modal.Title>
             </Modal.Header>

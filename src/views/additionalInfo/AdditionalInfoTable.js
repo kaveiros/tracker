@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import {Panel, Header, Content, Breadcrumb, Button, Notification, Pagination} from 'rsuite'
-import {  Table, HeaderCell, Cell } from 'rsuite-table';
+import {Panel, Header, Content, Breadcrumb, Button, Pagination, Table, IconButton} from 'rsuite'
 import 'rsuite-table/dist/css/rsuite-table.css'
 import AdditionalInfoService from "../../services/AdditionalInfoService";
 import FileModal from "./FileModal";
+import {showErrorNotification} from "../common/Notifications";
+import MoreIcon from '@rsuite/icons/More';
+
 
 const AdditionalInfoTable = () => {
 
@@ -16,8 +18,7 @@ const AdditionalInfoTable = () => {
     const [modal, setShowModal] = useState(false)
     const [files, setFiles] = useState()
 
-    const downloadErrorNotification = () => {Notification.error({description:"Σφάλμα στο κατέβασμα του αρχείου.",
-        placement:"topStart", duration:4000})}
+    const DOWNLOAD_ERROR = "Σφάλμα στο κατέβασμα του αρχείου."
 
     const showModalHandler = () => {
         setShowModal(true)
@@ -84,7 +85,7 @@ const AdditionalInfoTable = () => {
                 link.remove();
             })
             .catch((err)=>{
-                downloadErrorNotification()
+                showErrorNotification(DOWNLOAD_ERROR)
             })
     }
 
@@ -94,6 +95,7 @@ const AdditionalInfoTable = () => {
             <Header>
                 <Breadcrumb>
                     <Breadcrumb.Item href="/">Αρχική</Breadcrumb.Item>
+                    <Breadcrumb.Item href="/adminPage">Διαχείριση</Breadcrumb.Item>
                     <Breadcrumb.Item href="/additional-info-pages" active>Πινακας Παρατηρήσεων</Breadcrumb.Item>
                 </Breadcrumb>
             </Header>
@@ -101,23 +103,21 @@ const AdditionalInfoTable = () => {
             {infos && <Content>
                 <Table autoHeight={true}  data={infos} loading={loading} onRowClick={handleRow} >
                     <Table.Column align="center" fixed>
-                        <HeaderCell>Από τομέα</HeaderCell>
-                        <Cell dataKey="fromSector" />
+                        <Table.HeaderCell>Από τομέα</Table.HeaderCell>
+                        <Table.Cell dataKey="fromSector" />
                     </Table.Column>
                     <Table.Column  align="center" fixed>
-                        <HeaderCell>Προς τομέα</HeaderCell>
-                        <Cell dataKey="toSector" />
+                        <Table.HeaderCell>Προς τομέα</Table.HeaderCell>
+                        <Table.Cell dataKey="toSector" />
                     </Table.Column>
 
                     <Table.Column  fixed>
-                        <HeaderCell>Περιγραφή</HeaderCell>
-                        <Cell dataKey="description" />
+                        <Table.HeaderCell>Περιγραφή</Table.HeaderCell>
+                        <Table.Cell dataKey="description" />
                     </Table.Column>
-
-
                    <Table.Column width={300}>
-                            <HeaderCell>Αρχεία</HeaderCell>
-                            <Cell><Button onClick={showModalHandler}>Περισσότερα...</Button></Cell>
+                            <Table.HeaderCell>Αρχεία</Table.HeaderCell>
+                            <Table.Cell><IconButton icon={<MoreIcon/>} appearance="primary" color="green" disabled={true} onClick={showModalHandler}/></Table.Cell>
                    </Table.Column>
 
                 </Table>
@@ -129,11 +129,9 @@ const AdditionalInfoTable = () => {
                     prev={true}
                     pages={pages}
                     total={infoRecords}
-                    showInfo={false}
                     boundaryLinks={true}
-                    showLengthMenu={false}
                     onChangePage={employeeChangePage}
-                    onChangeLength={handleChangeLength}/>
+                    onChangeLimit={handleChangeLength}/>
             </Content>}
             {modal && <FileModal files={files} hideModal={hideModalHandler} showModal={modal} downloadHandler={downloadHandler}/>}
         </Panel>

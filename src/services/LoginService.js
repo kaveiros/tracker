@@ -1,4 +1,5 @@
 import {httpClient} from './http'
+import TokenService from "./TokenService";
 
 class LoginService {
 
@@ -6,16 +7,10 @@ class LoginService {
         return httpClient.post('/user/signIn', data)
     }
 
-    getCurrentUser() {
-        const userData = JSON.parse(localStorage.getItem("userData"))
-        if (userData) {
-            return userData.token
-        }
-        return null
-    }
+
 
     signOut() {
-        localStorage.removeItem("userData")
+       TokenService.removeCurrentUser()
     }
 
     checkTokenValidity(token) {

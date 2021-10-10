@@ -1,18 +1,25 @@
 import axios from 'axios'
+import TokenService from "./TokenService";
 
+/**
+ * Http client for sending json data.
+ * @type {AxiosInstance}
+ */
 export const httpClient = axios.create({
-    baseURL: "http://localhost:4000",
-    //baseURL: "https://project-tracker-api.herokuapp.com",
-    headers:{"Content-Type": "application/json"},
-    withCredentials:true
+    baseURL: process.env.REACT_APP_API_ENDPOINT,
+    headers:{"Content-Type": "application/json",
+        "Authorization": "Bearer " + TokenService.getCurrentUser()
+    }
 })
 
-
+/**
+ * Http client for submitting forms.
+ * @type {AxiosInstance}
+ */
 export const httpClientForm = axios.create({
-    baseURL: "http://localhost:4000",
-    //baseURL: "https://project-tracker-api.herokuapp.com",
+    baseURL: process.env.REACT_APP_API_ENDPOINT,
     headers: {
-        "Content-Type": "multipart/form-data"
-    },
-    withCredentials:true
+        "Content-Type": "multipart/form-data",
+        "Authorization": "Bearer " + TokenService.getCurrentUser()
+    }
 })

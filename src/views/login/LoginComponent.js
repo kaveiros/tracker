@@ -9,6 +9,7 @@ import {useHistory} from "react-router-dom";
 import OthersIcon from '@rsuite/icons/Others';
 import MemberIcon from '@rsuite/icons/Member';
 import {showErrorNotification} from "../common/Notifications";
+import TokenService from "../../services/TokenService";
 
 
 const LoginComponent = () => {
@@ -16,7 +17,7 @@ const LoginComponent = () => {
     const history = useHistory()
 
     useEffect(()=>{
-        const token = LoginService.getCurrentUser()
+        const token = TokenService.getCurrentUser()
         if (token) {
             history.replace("/")
         }
@@ -54,7 +55,7 @@ const LoginComponent = () => {
         ev.preventDefault()
         LoginService.signIn(loginForm)
             .then((response) => {
-                console.log(response)
+                //console.log(response)
                 let token = response.data.token
                 localStorage.setItem('userData',
                     JSON.stringify({
@@ -62,9 +63,9 @@ const LoginComponent = () => {
                     }))
                 history.replace("/")
             }).catch(err => {
-            let errorResponse = err.response.data
-            console.log(errorResponse)
-            toaster.push(showErrorNotification(errorResponse), {placement:"topStart"})
+            //let errorResponse = err.response.data
+            //console.log(errorResponse)
+            toaster.push(showErrorNotification(err), {placement:"topStart"})
         })
     }
 
@@ -97,7 +98,7 @@ const LoginComponent = () => {
                                     type="error"
                                     description={REQUIRED_FIELD}
                                 />}
-                                <Button color="blue" type="submit" style={styles} >Eίσοδος</Button>
+                                <Button appearance="primary" color="blue" type="submit" style={styles} >Eίσοδος</Button>
                             </form>
                         </Panel>
                     </Col>

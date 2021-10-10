@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import {Panel, Header, Content, Breadcrumb, ButtonGroup, IconButton, Pagination, Table} from 'rsuite'
-import 'rsuite-table/dist/css/rsuite-table.css'
 import SectorService from '../../services/SectorService'
 import TrashIcon from '@rsuite/icons/Trash';
 import EditIcon from '@rsuite/icons/Edit';
@@ -120,7 +119,7 @@ const SectorTable = () => {
                         <Table.Cell dataKey="createdAt" />
                     </Table.Column>
                     <Table.Column width={100}>
-                        <Table.HeaderCell>''</Table.HeaderCell>
+                        <Table.HeaderCell/>
                         <Table.Cell>
                             <ButtonGroup>
                                 <IconButton icon={<EditIcon/>} appearance="primary" color="cyan" onClick={updateRecordHandler}/>
